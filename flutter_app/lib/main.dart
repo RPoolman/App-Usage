@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'Stats.dart';
 
 void main() => runApp(MaterialApp(
   home: LandingPage(),
@@ -10,7 +12,7 @@ class LandingPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.grey[800],
       appBar: AppBar(
-        title: Text('App Tracker',style: TextStyle(color: Colors.orangeAccent,letterSpacing: 0.8)),
+        title: Text('App Tracker',style: TextStyle(color: Colors.orangeAccent,letterSpacing: 0.8, fontSize: 28, decoration: TextDecoration.underline)),
         centerTitle: true,
         backgroundColor: Colors.teal,
         elevation: 0,
@@ -21,6 +23,7 @@ class LandingPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
                   'Tracked: ',
@@ -35,6 +38,7 @@ class LandingPage extends StatelessWidget {
             ),
             SizedBox(height: 10),
             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
                   'Tracked by: ',
@@ -78,7 +82,7 @@ class LandingPage extends StatelessWidget {
                 ),
                 SizedBox(width: 10,),
                 Text(
-                  '34.3%',
+                  '31.3%',
                   style: TextStyle(
                     color: Colors.orangeAccent,
                     fontSize: 18,
@@ -93,17 +97,32 @@ class LandingPage extends StatelessWidget {
                 ),
                 SizedBox(width: 10,),
                 Text(
-                  '65.7%',
+                  '62.3',
                   style: TextStyle(
                     color: Colors.orangeAccent,
                     fontSize: 18,
                     letterSpacing: 1,
                   ),
-                )
+                ),
+                SizedBox(width: 20),
+                Icon(
+                  Icons.devices_other,
+                  color: Colors.tealAccent,
+                  size: 30,
+                ),
+                SizedBox(width: 10,),
+                Text(
+                  '-.-%',
+                  style: TextStyle(
+                    color: Colors.orangeAccent,
+                    fontSize: 18,
+                    letterSpacing: 1,
+                  ),
+                ),
               ],
             ),
             SizedBox(height: 40,),
-            Row(
+            Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Icon(
@@ -111,8 +130,25 @@ class LandingPage extends StatelessWidget {
                     color: Colors.tealAccent,
                     size: 200,
                   ),
-                ]
-            )
+                  Text(
+                    'The Icon above will change to better represent your stats.',
+                    style: TextStyle(
+                      color: Colors.orangeAccent,
+                      fontSize: 14,
+                      letterSpacing: 1,
+                    ),
+                  ),
+                  ElevatedButton(
+                    child: Text('Personal Stats'),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => StatScreen()),
+                      );
+                    },
+                  ),
+                ],
+            ),
           ],
         ),
       ),
