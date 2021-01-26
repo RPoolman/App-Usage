@@ -12,9 +12,9 @@ class LandingPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.grey[800],
       appBar: AppBar(
-        title: Text('App Tracker',style: TextStyle(color: Colors.orangeAccent,letterSpacing: 0.8, fontSize: 28, decoration: TextDecoration.underline)),
+        title: Text('App Tracker',style: TextStyle(color: Colors.grey[850],letterSpacing: 0.8, fontSize: 28,)),
         centerTitle: true,
-        backgroundColor: Colors.teal,
+        backgroundColor: Colors.orangeAccent,
         elevation: 0,
       ),
       body: Padding(
