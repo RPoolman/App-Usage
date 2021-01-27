@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:app_settings/app_settings.dart';
 import 'main.dart';
 
 class StatScreen extends StatelessWidget {
@@ -87,6 +88,10 @@ class StatScreen extends StatelessWidget {
                   onPressed: () {
                     Navigator.pop(context);
                   },
+                ),
+                ElevatedButton(
+                  onPressed: () =>  AppSettings.openLocationSettings(),
+                  child: Text('Open Location Settings'),
                 ),
               ],
             ),
