@@ -5,7 +5,7 @@ void main() => runApp(MyApp());
 
 class MyApp extends StatefulWidget {
   @override
-  _MyAppState createState() => _MyAppState();
+  _MyAppState createState() => new _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
@@ -18,9 +18,11 @@ class _MyAppState extends State<MyApp> {
 
   Future getUsageStats() async {
     try {
-      DateTime endDate = new DateTime.now();
-      DateTime startDate = endDate.subtract(Duration(days: 7));
+      DateTime initialDate = new DateTime.now();
+      DateTime endDate = initialDate.subtract(Duration(minutes: 3));
+      DateTime startDate = endDate.subtract(Duration(minutes: 30));
       List<AppUsageInfo> infoList = await AppUsage.getAppUsage(startDate, endDate);
+      print('Hope it gets fixed.');
       setState(() {
         _infos = infoList;
 
