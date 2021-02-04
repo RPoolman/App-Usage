@@ -139,6 +139,10 @@ class LandingPage extends StatelessWidget {
                     ),
                   ),
                   ElevatedButton(
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all<Color>(Colors.tealAccent),
+                      foregroundColor: MaterialStateProperty.all<Color>(Colors.grey[850]),
+                    ),
                     child: Text('Personal Stats'),
                     onPressed: () {
                       Navigator.push(
