@@ -56,7 +56,7 @@ class _MyAppState extends State<MyApp> {
       home: Scaffold(
         appBar: AppBar(
           title: const Text('App Usage Example'),
-          backgroundColor: Colors.green,
+          backgroundColor: Colors.orangeAccent,
         ),
         body: ListView.builder(
             itemCount: _infos.length,
