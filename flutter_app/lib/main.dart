@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:app_usage/app_usage.dart';
 import 'Stats.dart';
 
 void main() => runApp(MaterialApp(
@@ -7,6 +8,11 @@ void main() => runApp(MaterialApp(
 ));
 
 class LandingPage extends StatelessWidget {
+  final String appN1;
+  final String appD1;
+  final String appN2;
+  final String appD2;
+  LandingPage({Key key, @required this.appN1, @required this.appD1, @required this.appN2, @required this.appD2}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -82,7 +88,7 @@ class LandingPage extends StatelessWidget {
                 ),
                 SizedBox(width: 10,),
                 Text(
-                  '31.3%',
+                  '35.4%',
                   style: TextStyle(
                     color: Colors.orangeAccent,
                     fontSize: 18,

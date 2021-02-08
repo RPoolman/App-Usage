@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'main.dart';
 import 'pullData.dart';
 
 class StatScreen extends StatelessWidget {
@@ -88,7 +87,7 @@ class StatScreen extends StatelessWidget {
                     backgroundColor: MaterialStateProperty.all<Color>(Colors.tealAccent),
                     foregroundColor: MaterialStateProperty.all<Color>(Colors.grey[850]),
                   ),
-                  child: Text('Home Page'),
+                  child: Text('Overview'),
                   onPressed: () {
                     Navigator.pop(context);
                   },
@@ -102,7 +101,7 @@ class StatScreen extends StatelessWidget {
                                     context,
                                     MaterialPageRoute(builder: (context) => MyApp()),
                                     ); },
-                  child: Text('Usage'),
+                  child: Text('View Apps'),
                 ),
               ],
             ),
