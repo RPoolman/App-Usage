@@ -53,7 +53,7 @@ class _MyAppState extends State<MyApp> {
               }
             }),
         floatingActionButton: FloatingActionButton(
-            onPressed: getUsageStats, child: Icon(Icons.refresh)
+            onPressed: getUsageStats, child: Icon(Icons.refresh), backgroundColor: Colors.tealAccent, foregroundColor: Colors.grey[850],
         ),
     );
   }
