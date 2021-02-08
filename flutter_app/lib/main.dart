@@ -97,7 +97,7 @@ class LandingPage extends StatelessWidget {
                 ),
                 SizedBox(width: 10,),
                 Text(
-                  '62.3',
+                  '62.3%',
                   style: TextStyle(
                     color: Colors.orangeAccent,
                     fontSize: 18,
