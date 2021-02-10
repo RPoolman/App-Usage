@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:app_usage/app_usage.dart';
+import 'deviceVars.dart';
 
 void main() => runApp(MyApp());
 
@@ -10,13 +11,11 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   List<AppUsageInfo> _infos = [];
-
   @override
   void initState() {
     super.initState();
     getUsageStats();
   }
-
   void getUsageStats() async {
     try {
       DateTime endDate = new DateTime.now();
@@ -24,8 +23,33 @@ class _MyAppState extends State<MyApp> {
       List<AppUsageInfo> infoList = await AppUsage.getAppUsage(startDate, endDate);
       infoList.sort((a, b) => b.usage.inSeconds.compareTo(a.usage.inSeconds));
       setState(() {
-        _infos = infoList;  
+        _infos = infoList;
       });
+      var listLen = infoList.length;
+      switch(listLen) {
+        case 0: { GlobalData.app1Name = ""; }
+        break;
+        case 1: {
+          GlobalData.app1Name = infoList[0].appName;
+          GlobalData.app1Time = (infoList[0].usage.inMinutes~/60).toString() + ':' + (infoList[0].usage.inMinutes%60).toString().padLeft(2,'0');
+        }
+        break;
+        case 2: {
+          GlobalData.app1Name = infoList[0].appName;
+          GlobalData.app1Time = (infoList[0].usage.inMinutes~/60).toString() + ':' + (infoList[0].usage.inMinutes%60).toString().padLeft(2,'0');
+          GlobalData.app2Name = infoList[1].appName;
+          GlobalData.app2Time = (infoList[1].usage.inMinutes~/60).toString() + ':' + (infoList[1].usage.inMinutes%60).toString().padLeft(2,'0');
+        }
+        break;
+        default: {
+          GlobalData.app1Name = infoList[0].appName;
+          GlobalData.app1Time = (infoList[0].usage.inMinutes~/60).toString() + ':' + (infoList[0].usage.inMinutes%60).toString().padLeft(2,'0');
+          GlobalData.app2Name = infoList[1].appName;
+          GlobalData.app2Time = (infoList[1].usage.inMinutes~/60).toString() + ':' + (infoList[1].usage.inMinutes%60).toString().padLeft(2,'0');
+          GlobalData.app3Name = infoList[2].appName;
+          GlobalData.app3Time = (infoList[2].usage.inMinutes~/60).toString() + ':' + (infoList[2].usage.inMinutes%60).toString().padLeft(2,'0');
+        }
+      }
     } on AppUsageException catch (exception) {
       print(exception);
     }

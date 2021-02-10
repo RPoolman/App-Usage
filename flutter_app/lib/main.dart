@@ -1,18 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:app_usage/app_usage.dart';
 import 'Stats.dart';
+import 'deviceVars.dart';
 
 void main() => runApp(MaterialApp(
   home: LandingPage(),
 ));
 
 class LandingPage extends StatelessWidget {
-  final String appN1;
-  final String appD1;
-  final String appN2;
-  final String appD2;
-  LandingPage({Key key, @required this.appN1, @required this.appD1, @required this.appN2, @required this.appD2}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -82,13 +77,13 @@ class LandingPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Icon(
-                  Icons.sports_soccer,
+                  Icons.app_blocking,
                   color: Colors.tealAccent,
                   size: 30,
                 ),
                 SizedBox(width: 10,),
                 Text(
-                  '35.4%',
+                  GlobalData.app1Time,
                   style: TextStyle(
                     color: Colors.orangeAccent,
                     fontSize: 18,
@@ -97,13 +92,13 @@ class LandingPage extends StatelessWidget {
                 ),
                 SizedBox(width: 20),
                 Icon(
-                  Icons.message,
+                  Icons.app_blocking,
                   color: Colors.tealAccent,
                   size: 30,
                 ),
                 SizedBox(width: 10,),
                 Text(
-                  '62.3%',
+                  GlobalData.app2Time,
                   style: TextStyle(
                     color: Colors.orangeAccent,
                     fontSize: 18,
@@ -112,13 +107,13 @@ class LandingPage extends StatelessWidget {
                 ),
                 SizedBox(width: 20),
                 Icon(
-                  Icons.devices_other,
+                  Icons.app_blocking,
                   color: Colors.tealAccent,
                   size: 30,
                 ),
                 SizedBox(width: 10,),
                 Text(
-                  '-.-%',
+                  GlobalData.app3Time,
                   style: TextStyle(
                     color: Colors.orangeAccent,
                     fontSize: 18,
