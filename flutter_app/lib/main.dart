@@ -2,18 +2,20 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'Stats.dart';
 import 'deviceVars.dart';
+//import 'package:charts_flutter/flutter.dart'; // this line Imported
 
-void main() => runApp(MaterialApp(
-  home: LandingPage(),
-));
-
-class LandingPage extends StatelessWidget {
+void main() { runApp(MaterialApp(home: landingPage()));}
+class landingPage extends StatefulWidget {
+  @override
+  _landingPageState createState() => _landingPageState();
+}
+class _landingPageState extends State<landingPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return new Scaffold(
       backgroundColor: Colors.grey[800],
       appBar: AppBar(
-        title: Text('App Tracker',style: TextStyle(color: Colors.grey[850],letterSpacing: 0.8, fontSize: 28,)),
+        title: Text('App Tracker',style: TextStyle(color: Colors.grey[850],letterSpacing: 0.8, fontSize: 28,)), //this line TextStyle
         centerTitle: true,
         backgroundColor: Colors.orangeAccent,
         elevation: 0,
@@ -124,35 +126,35 @@ class LandingPage extends StatelessWidget {
             ),
             SizedBox(height: 40,),
             Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Icon(
-                    Icons.bar_chart,
-                    color: Colors.tealAccent,
-                    size: 200,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Icon(
+                  Icons.bar_chart,
+                  color: Colors.tealAccent,
+                  size: 200,
+                ),
+                Text(
+                  'The Icon above will change to better represent your stats.',
+                  style: TextStyle(
+                    color: Colors.orangeAccent,
+                    fontSize: 14,
+                    letterSpacing: 1,
                   ),
-                  Text(
-                    'The Icon above will change to better represent your stats.',
-                    style: TextStyle(
-                      color: Colors.orangeAccent,
-                      fontSize: 14,
-                      letterSpacing: 1,
-                    ),
+                ),
+                ElevatedButton(
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(Colors.tealAccent),
+                    foregroundColor: MaterialStateProperty.all<Color>(Colors.grey[850]),
                   ),
-                  ElevatedButton(
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all<Color>(Colors.tealAccent),
-                      foregroundColor: MaterialStateProperty.all<Color>(Colors.grey[850]),
-                    ),
-                    child: Text('Personal Stats'),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => StatScreen()),
-                      );
-                    },
-                  ),
-                ],
+                  child: Text('Personal Stats'),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => StatScreen()),
+                    );
+                  },
+                ),
+              ],
             ),
           ],
         ),

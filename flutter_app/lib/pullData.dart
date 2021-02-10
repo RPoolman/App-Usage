@@ -2,14 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:app_usage/app_usage.dart';
 import 'deviceVars.dart';
 
-void main() => runApp(MyApp());
-
-class MyApp extends StatefulWidget {
+class DeviceApps extends StatefulWidget {
   @override
-  _MyAppState createState() => _MyAppState();
+  _DeviceAppsState createState() => _DeviceAppsState();
 }
-
-class _MyAppState extends State<MyApp> {
+class _DeviceAppsState extends State<DeviceApps> {
   List<AppUsageInfo> _infos = [];
   @override
   void initState() {
@@ -54,7 +51,6 @@ class _MyAppState extends State<MyApp> {
       print(exception);
     }
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
