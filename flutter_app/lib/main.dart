@@ -16,7 +16,7 @@ class _LandingPageState extends State<LandingPage> {
     return new Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text('App Tracker',style: TextStyle(color: Colors.white,letterSpacing: 0.8, fontSize: 28,)), //this line TextStyle
+        title: Text('App Tracker',style: TextStyle(color: Colors.white,letterSpacing: 0.8, fontSize: 28,)),
         centerTitle: true,
         backgroundColor: Colors.indigo,
         elevation: 0,
