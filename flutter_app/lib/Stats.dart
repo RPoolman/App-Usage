@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'main.dart';
+import 'package:flutter_app/main.dart';
+import 'pullData.dart';
 
 class StatScreen extends StatelessWidget {
   @override
@@ -83,10 +84,26 @@ class StatScreen extends StatelessWidget {
                 ),
                 SizedBox(height: 40,),
                 ElevatedButton(
-                  child: Text('Home Page'),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(Colors.tealAccent),
+                    foregroundColor: MaterialStateProperty.all<Color>(Colors.grey[850]),
+                  ),
+                  child: Text('Overview'),
+                  onPressed: () { Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => LandingPage()),
+                                  ); },
+                ),
+                ElevatedButton(
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(Colors.tealAccent),
+                    foregroundColor: MaterialStateProperty.all<Color>(Colors.grey[850]),
+                  ),
+                  child: Text('View Apps'),
+                  onPressed: () { Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => DeviceApps()),
+                                    ); },
                 ),
               ],
             ),
