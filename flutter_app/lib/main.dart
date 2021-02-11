@@ -14,11 +14,11 @@ class _LandingPageState extends State<LandingPage> {
 
   Widget build(BuildContext context) {
     return new Scaffold(
-      backgroundColor: Colors.grey[800],
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text('App Tracker',style: TextStyle(color: Colors.grey[850],letterSpacing: 0.8, fontSize: 28,)), //this line TextStyle
+        title: Text('App Tracker',style: TextStyle(color: Colors.white,letterSpacing: 0.8, fontSize: 28,)), //this line TextStyle
         centerTitle: true,
-        backgroundColor: Colors.orangeAccent,
+        backgroundColor: Colors.indigo,
         elevation: 0,
       ),
       body:
@@ -32,12 +32,12 @@ class _LandingPageState extends State<LandingPage> {
               children: [
                 Text(
                   'Tracked: ',
-                  style: TextStyle(color: Colors.tealAccent,letterSpacing: 2.0,fontSize: 18.0,),
+                  style: TextStyle(color: Colors.blueAccent,letterSpacing: 2.0,fontSize: 18.0,),
                 ),
                 SizedBox(height: 4),
                 Text(
                   'Gerald Storm',
-                  style: TextStyle(color: Colors.orangeAccent,letterSpacing: 2.0,fontSize: 18.0,),
+                  style: TextStyle(color: Colors.redAccent,letterSpacing: 2.0,fontSize: 18.0,),
                 ),
               ],
             ),
@@ -47,12 +47,12 @@ class _LandingPageState extends State<LandingPage> {
               children: [
                 Text(
                   'Tracked by: ',
-                  style: TextStyle(color: Colors.tealAccent,letterSpacing: 2.0,fontSize: 18.0,),
+                  style: TextStyle(color: Colors.blueAccent,letterSpacing: 2.0,fontSize: 18.0,),
                 ),
                 SizedBox(height: 4),
                 Text(
                   'Ben Storm',
-                  style: TextStyle(color: Colors.orangeAccent,letterSpacing: 2.0,fontSize: 18.0,),
+                  style: TextStyle(color: Colors.redAccent,letterSpacing: 2.0,fontSize: 18.0,),
                 ),
               ],
             ),
@@ -62,14 +62,14 @@ class _LandingPageState extends State<LandingPage> {
               children: <Widget>[
                 Icon(
                   Icons.timer_sharp,
-                  color: Colors.tealAccent,
+                  color: Colors.blueAccent,
                   size: 50,
                 ),
                 SizedBox(width: 10,),
                 Text(
                   'Todays Usage: ',
                   style: TextStyle(
-                    color: Colors.orangeAccent,
+                    color: Colors.redAccent,
                     fontSize: 22,
                     letterSpacing: 1,
                   ),
@@ -82,14 +82,14 @@ class _LandingPageState extends State<LandingPage> {
               children: <Widget>[
                 Icon(
                   Icons.app_blocking,
-                  color: Colors.tealAccent,
+                  color: Colors.blueAccent,
                   size: 30,
                 ),
                 SizedBox(width: 10,),
                 Text(
                   GlobalData.app1Time,
                   style: TextStyle(
-                    color: Colors.orangeAccent,
+                    color: Colors.redAccent,
                     fontSize: 18,
                     letterSpacing: 1,
                   ),
@@ -97,14 +97,14 @@ class _LandingPageState extends State<LandingPage> {
                 SizedBox(width: 20),
                 Icon(
                   Icons.app_blocking,
-                  color: Colors.tealAccent,
+                  color: Colors.blueAccent,
                   size: 30,
                 ),
                 SizedBox(width: 10,),
                 Text(
                   GlobalData.app2Time,
                   style: TextStyle(
-                    color: Colors.orangeAccent,
+                    color: Colors.redAccent,
                     fontSize: 18,
                     letterSpacing: 1,
                   ),
@@ -112,14 +112,14 @@ class _LandingPageState extends State<LandingPage> {
                 SizedBox(width: 20),
                 Icon(
                   Icons.app_blocking,
-                  color: Colors.tealAccent,
+                  color: Colors.blueAccent,
                   size: 30,
                 ),
                 SizedBox(width: 10,),
                 Text(
                   GlobalData.app3Time,
                   style: TextStyle(
-                    color: Colors.orangeAccent,
+                    color: Colors.redAccent,
                     fontSize: 18,
                     letterSpacing: 1,
                   ),
@@ -134,15 +134,15 @@ class _LandingPageState extends State<LandingPage> {
                 Text(
                   'Graph will update once you refresh data.',
                   style: TextStyle(
-                    color: Colors.orangeAccent,
+                    color: Colors.redAccent,
                     fontSize: 14,
                     letterSpacing: 1,
                   ),
                 ),
                 ElevatedButton(
                   style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all<Color>(Colors.tealAccent),
-                    foregroundColor: MaterialStateProperty.all<Color>(Colors.grey[850]),
+                    backgroundColor: MaterialStateProperty.all<Color>(Colors.indigo),
+                    foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
                   ),
                   child: Text('Personal Stats'),
                   onPressed: () {
