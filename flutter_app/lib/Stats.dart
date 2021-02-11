@@ -91,7 +91,7 @@ class StatScreen extends StatelessWidget {
                   child: Text('Overview'),
                   onPressed: () { Navigator.push(
                                     context,
-                                    MaterialPageRoute(builder: (context) => landingPage()),
+                                    MaterialPageRoute(builder: (context) => LandingPage()),
                                   ); },
                 ),
                 ElevatedButton(

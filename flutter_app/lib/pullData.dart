@@ -23,6 +23,9 @@ class _DeviceAppsState extends State<DeviceApps> {
         _infos = infoList;
       });
       var listLen = infoList.length;
+      for(int appPos = 0; appPos < 5; appPos++) {
+        GlobalData.appsGraph[appPos] = (infoList[appPos].usage.inSeconds/3600).round();
+      }
       switch(listLen) {
         case 0: { GlobalData.app1Name = ""; }
         break;

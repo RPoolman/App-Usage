@@ -2,15 +2,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'Stats.dart';
 import 'deviceVars.dart';
-//import 'package:charts_flutter/flutter.dart'; // this line Imported
+import 'dataChart.dart';
 
-void main() { runApp(MaterialApp(home: landingPage()));}
-class landingPage extends StatefulWidget {
+void main() { runApp(MaterialApp(home: LandingPage()));}
+class LandingPage extends StatefulWidget {
   @override
-  _landingPageState createState() => _landingPageState();
+  _LandingPageState createState() => _LandingPageState();
 }
-class _landingPageState extends State<landingPage> {
+class _LandingPageState extends State<LandingPage> {
   @override
+
   Widget build(BuildContext context) {
     return new Scaffold(
       backgroundColor: Colors.grey[800],
@@ -20,7 +21,8 @@ class _landingPageState extends State<landingPage> {
         backgroundColor: Colors.orangeAccent,
         elevation: 0,
       ),
-      body: Padding(
+      body:
+      Padding(
         padding: EdgeInsets.fromLTRB(30.0, 40.0, 30.0, 0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -128,13 +130,9 @@ class _landingPageState extends State<landingPage> {
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Icon(
-                  Icons.bar_chart,
-                  color: Colors.tealAccent,
-                  size: 200,
-                ),
+                SizedBox(height:250, child: PointsLineChart(PointsLineChart.createSampleData(), animate: false)),
                 Text(
-                  'The Icon above will change to better represent your stats.',
+                  'Graph will update once you refresh data.',
                   style: TextStyle(
                     color: Colors.orangeAccent,
                     fontSize: 14,

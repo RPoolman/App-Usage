@@ -7,4 +7,6 @@ class GlobalData {
   static String app1Time = "";
   static String app2Time = "";
   static String app3Time = "";
+  //int variables for timing(only applicable to graph now);
+  static List<int> appsGraph = [1,2,3,4,5];
 }
