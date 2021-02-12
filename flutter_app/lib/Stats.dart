@@ -6,11 +6,11 @@ class StatScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[800],
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text('App Tracker',style: TextStyle(color: Colors.grey[850],letterSpacing: 0.8, fontSize: 28,)),
+        title: Text('App Tracker',style: TextStyle(color: Colors.white,letterSpacing: 0.8, fontSize: 28,)),
         centerTitle: true,
-        backgroundColor: Colors.orangeAccent,
+        backgroundColor: Colors.indigo,
         elevation: 0,
       ),
       body: Padding(
@@ -25,12 +25,12 @@ class StatScreen extends StatelessWidget {
                   children: [
                     Text(
                       'Gerald Storm',
-                      style: TextStyle(color: Colors.orangeAccent,letterSpacing: 2.0,fontSize: 22.0,),
+                      style: TextStyle(color: Colors.indigo,letterSpacing: 2.0,fontSize: 22.0,),
                     ),
                     SizedBox(height: 20),
                     Icon(
                       Icons.timer_sharp,
-                      color: Colors.tealAccent,
+                      color: Colors.redAccent,
                       size: 50,
                     ),
                   ],
@@ -46,7 +46,7 @@ class StatScreen extends StatelessWidget {
                     Text(
                       'Daily Usage: ',
                       style: TextStyle(
-                        color: Colors.orangeAccent,
+                        color: Colors.indigo,
                         fontSize: 18,
                         letterSpacing: 1,
                       ),
@@ -54,7 +54,7 @@ class StatScreen extends StatelessWidget {
                     Flexible(child: Text(
                       'Daily usage will consist of a dropdown box that contains a list of all(or atleast top 10) the applications that are in use, you can open the drop down to display what app you want to see.',
                       style: TextStyle(
-                        color: Colors.orangeAccent,
+                        color: Colors.indigo,
                         fontSize: 16,
                         letterSpacing: 1,
                       ),
@@ -67,7 +67,7 @@ class StatScreen extends StatelessWidget {
                     Text(
                       'Weekly Usage: ',
                       style: TextStyle(
-                        color: Colors.orangeAccent,
+                        color: Colors.indigo,
                         fontSize: 18,
                         letterSpacing: 1,
                       ),
@@ -75,7 +75,7 @@ class StatScreen extends StatelessWidget {
                     Flexible(child: Text(
                       'Weekly usage is yet to be defined as to what exactly it will display and show.',
                       style: TextStyle(
-                        color: Colors.orangeAccent,
+                        color: Colors.indigo,
                         fontSize: 16,
                         letterSpacing: 1,
                       ),
@@ -85,8 +85,8 @@ class StatScreen extends StatelessWidget {
                 SizedBox(height: 40,),
                 ElevatedButton(
                   style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all<Color>(Colors.tealAccent),
-                    foregroundColor: MaterialStateProperty.all<Color>(Colors.grey[850]),
+                    backgroundColor: MaterialStateProperty.all<Color>(Colors.indigo),
+                    foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
                   ),
                   child: Text('Overview'),
                   onPressed: () { Navigator.push(
@@ -96,8 +96,8 @@ class StatScreen extends StatelessWidget {
                 ),
                 ElevatedButton(
                   style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all<Color>(Colors.tealAccent),
-                    foregroundColor: MaterialStateProperty.all<Color>(Colors.grey[850]),
+                    backgroundColor: MaterialStateProperty.all<Color>(Colors.indigo),
+                    foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
                   ),
                   child: Text('View Apps'),
                   onPressed: () { Navigator.push(

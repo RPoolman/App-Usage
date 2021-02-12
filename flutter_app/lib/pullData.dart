@@ -57,11 +57,11 @@ class _DeviceAppsState extends State<DeviceApps> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.grey[800],
+        backgroundColor: Colors.white,
         appBar: AppBar(
-          title: Text('App Tracker',style: TextStyle(color: Colors.grey[850],letterSpacing: 0.8, fontSize: 28,)),
+          title: Text('App Tracker',style: TextStyle(color: Colors.white,letterSpacing: 0.8, fontSize: 28,)),
           centerTitle: true,
-          backgroundColor: Colors.orangeAccent,
+          backgroundColor: Colors.indigo,
           elevation: 0,
         ),
         body:
@@ -70,13 +70,13 @@ class _DeviceAppsState extends State<DeviceApps> {
             itemBuilder: (context, index) {
               if ((_infos[index].usage.inMinutes%60) > 5) {
                 return ListTile(
-                    title: Text(_infos[index].appName, style: TextStyle(color: Colors.orangeAccent,letterSpacing: 1.5,fontSize: 18.0,),),
-                    trailing: Text((_infos[index].usage.inMinutes~/60).toString() + ':' + (_infos[index].usage.inMinutes%60).toString().padLeft(2,'0'),style: TextStyle(color: Colors.tealAccent,letterSpacing: 1.5,fontSize: 18.0,),),
+                    title: Text(_infos[index].appName, style: TextStyle(color: Colors.indigo,letterSpacing: 1.5,fontSize: 18.0,),),
+                    trailing: Text((_infos[index].usage.inMinutes~/60).toString() + ':' + (_infos[index].usage.inMinutes%60).toString().padLeft(2,'0'),style: TextStyle(color: Colors.redAccent,letterSpacing: 1.5,fontSize: 18.0,),),
                 );
               }
             }),
         floatingActionButton: FloatingActionButton(
-            onPressed: getUsageStats, child: Icon(Icons.refresh), backgroundColor: Colors.tealAccent, foregroundColor: Colors.grey[850],
+            onPressed: getUsageStats, child: Icon(Icons.refresh), backgroundColor: Colors.redAccent, foregroundColor: Colors.white,
         ),
     );
   }
