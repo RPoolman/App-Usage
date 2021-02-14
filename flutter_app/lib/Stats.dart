@@ -13,8 +13,35 @@ class StatScreen extends StatelessWidget {
         backgroundColor: Colors.indigo,
         elevation: 0,
       ),
+      bottomNavigationBar: BottomAppBar(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            IconButton(icon: Icon(Icons.home), onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => LandingPage()),
+              );},
+            ),
+            SizedBox(width: 20,),
+            IconButton(icon: Icon(Icons.person), onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => StatScreen()),
+              );},
+            ),
+            SizedBox(width: 20,),
+            IconButton(icon: Icon(Icons.list_alt), onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => DeviceApps()),
+              );},
+            ),
+          ],
+        ),
+      ),
       body: Padding(
-        padding: EdgeInsets.fromLTRB(30.0, 40.0, 30.0, 0),
+        padding: EdgeInsets.fromLTRB(30.0, 30.0, 30.0, 0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -80,35 +107,6 @@ class StatScreen extends StatelessWidget {
                         letterSpacing: 1,
                       ),
                     ),)
-                  ],
-                ),
-                SizedBox(height: 40,),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    ElevatedButton(
-                      style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all<Color>(Colors.indigo),
-                        foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-                      ),
-                      child: Text('Overview'),
-                      onPressed: () { Navigator.push(
-                                        context,
-                                        MaterialPageRoute(builder: (context) => LandingPage()),
-                                      ); },
-                    ),
-                    SizedBox( width: 50,),
-                    ElevatedButton(
-                      style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all<Color>(Colors.indigo),
-                        foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-                      ),
-                      child: Text('View Apps'),
-                      onPressed: () { Navigator.push(
-                                        context,
-                                        MaterialPageRoute(builder: (context) => DeviceApps()),
-                                        ); },
-                    ),
                   ],
                 ),
               ],

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:app_usage/app_usage.dart';
+import 'package:flutter_app/main.dart';
 import 'deviceVars.dart';
 import 'Stats.dart';
 
@@ -65,11 +66,39 @@ class _DeviceAppsState extends State<DeviceApps> {
           backgroundColor: Colors.indigo,
           elevation: 0,
         ),
+      bottomNavigationBar: BottomAppBar(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            IconButton(icon: Icon(Icons.home), onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => LandingPage()),
+              );},
+            ),
+            SizedBox(width: 20,),
+            IconButton(icon: Icon(Icons.person), onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => StatScreen()),
+              );},
+            ),
+            SizedBox(width: 20,),
+            IconButton(icon: Icon(Icons.list_alt), onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => DeviceApps()),
+              );},
+            ),
+          ],
+        ),
+      ),
         body:
         ListView.builder(
+          padding: EdgeInsets.fromLTRB(30.0, 30.0, 30.0, 0),
             itemCount: _infos.length,
             itemBuilder: (context, index) {
-              if ((_infos[index].usage.inSeconds%60) > 5) {
+              if ((_infos[index].usage.inMinutes) > 5) {
                 return ListTile(
                     title: Text(_infos[index].appName, style: TextStyle(color: Colors.indigo,letterSpacing: 1.5,fontSize: 18.0,),),
                     trailing: Text((_infos[index].usage.inMinutes~/60).toString() + ':' + (_infos[index].usage.inMinutes%60).toString().padLeft(2,'0'),style: TextStyle(color: Colors.redAccent,letterSpacing: 1.5,fontSize: 18.0,),),
