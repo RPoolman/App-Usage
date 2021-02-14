@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:app_usage/app_usage.dart';
 import 'deviceVars.dart';
+import 'Stats.dart';
 
 class DeviceApps extends StatefulWidget {
   @override
@@ -68,16 +69,20 @@ class _DeviceAppsState extends State<DeviceApps> {
         ListView.builder(
             itemCount: _infos.length,
             itemBuilder: (context, index) {
-              if ((_infos[index].usage.inMinutes%60) > 5) {
+              if ((_infos[index].usage.inSeconds%60) > 5) {
                 return ListTile(
                     title: Text(_infos[index].appName, style: TextStyle(color: Colors.indigo,letterSpacing: 1.5,fontSize: 18.0,),),
                     trailing: Text((_infos[index].usage.inMinutes~/60).toString() + ':' + (_infos[index].usage.inMinutes%60).toString().padLeft(2,'0'),style: TextStyle(color: Colors.redAccent,letterSpacing: 1.5,fontSize: 18.0,),),
                 );
               }
-            }),
-        floatingActionButton: FloatingActionButton(
-            onPressed: getUsageStats, child: Icon(Icons.refresh), backgroundColor: Colors.redAccent, foregroundColor: Colors.white,
-        ),
+            },),
+      floatingActionButton: FloatingActionButton(
+        onPressed:
+        getUsageStats,
+        child: Icon(Icons.refresh),
+        backgroundColor: Colors.redAccent,
+        foregroundColor: Colors.white,
+      ),
     );
   }
 }

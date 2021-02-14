@@ -83,27 +83,33 @@ class StatScreen extends StatelessWidget {
                   ],
                 ),
                 SizedBox(height: 40,),
-                ElevatedButton(
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all<Color>(Colors.indigo),
-                    foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-                  ),
-                  child: Text('Overview'),
-                  onPressed: () { Navigator.push(
-                                    context,
-                                    MaterialPageRoute(builder: (context) => LandingPage()),
-                                  ); },
-                ),
-                ElevatedButton(
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all<Color>(Colors.indigo),
-                    foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-                  ),
-                  child: Text('View Apps'),
-                  onPressed: () { Navigator.push(
-                                    context,
-                                    MaterialPageRoute(builder: (context) => DeviceApps()),
-                                    ); },
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ElevatedButton(
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all<Color>(Colors.indigo),
+                        foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                      ),
+                      child: Text('Overview'),
+                      onPressed: () { Navigator.push(
+                                        context,
+                                        MaterialPageRoute(builder: (context) => LandingPage()),
+                                      ); },
+                    ),
+                    SizedBox( width: 50,),
+                    ElevatedButton(
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all<Color>(Colors.indigo),
+                        foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                      ),
+                      child: Text('View Apps'),
+                      onPressed: () { Navigator.push(
+                                        context,
+                                        MaterialPageRoute(builder: (context) => DeviceApps()),
+                                        ); },
+                    ),
+                  ],
                 ),
               ],
             ),

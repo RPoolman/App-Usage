@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'Stats.dart';
 import 'deviceVars.dart';
 import 'dataChart.dart';
-import 'pullData.dart';
 
 void main() { runApp(MaterialApp(home: LandingPage()));}
 class LandingPage extends StatefulWidget {
@@ -130,12 +129,14 @@ class _LandingPageState extends State<LandingPage> {
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                SizedBox(
-                    height:250,
-                    child: PointsLineChart(
+                Padding(
+                  padding: EdgeInsets.all(20),
+                  child: SizedBox(
+                      height:250,
+                      child: PointsLineChart(
                         PointsLineChart.createSampleData(), animate: false,
-                    ),
-
+                      ),
+                  ),
                 ),
                 Text(
                   'Graph will update once you refresh data.',
@@ -145,6 +146,7 @@ class _LandingPageState extends State<LandingPage> {
                     letterSpacing: 1,
                   ),
                 ),
+                SizedBox(height: 10,),
                 ElevatedButton(
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all<Color>(Colors.indigo),
