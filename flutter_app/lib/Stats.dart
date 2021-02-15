@@ -1,8 +1,17 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/main.dart';
+
 import 'pullData.dart';
 
-class StatScreen extends StatelessWidget {
+import 'deviceVars.dart';
+
+class StatScreen extends StatefulWidget {
+  @override
+  _StatScreenState createState() => _StatScreenState();
+}
+
+class _StatScreenState extends State<StatScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,24 +33,24 @@ class StatScreen extends StatelessWidget {
               );},
             ),
             SizedBox(width: 20,),
-            IconButton(icon: Icon(Icons.person), onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => StatScreen()),
-              );},
-            ),
-            SizedBox(width: 20,),
             IconButton(icon: Icon(Icons.list_alt), onPressed: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => DeviceApps()),
               );},
             ),
+            SizedBox(width: 20,),
+            IconButton(icon: Icon(Icons.person), onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => StatScreen()),
+              );},
+            ),
           ],
         ),
       ),
       body: Padding(
-        padding: EdgeInsets.fromLTRB(30.0, 30.0, 30.0, 0),
+          padding: EdgeInsets.fromLTRB(30.0, 30.0, 30.0, 0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -66,32 +75,26 @@ class StatScreen extends StatelessWidget {
             ),
             SizedBox(height: 20),
             Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                Row(
-                  children: [
-                    Text(
-                      'Daily Usage: ',
-                      style: TextStyle(
-                        color: Colors.indigo,
-                        fontSize: 18,
-                        letterSpacing: 1,
-                      ),
-                    ),
-                    Flexible(child: Text(
-                      'Daily usage will consist of a dropdown box that contains a list of all(or atleast top 10) the applications that are in use, you can open the drop down to display what app you want to see.',
-                      style: TextStyle(
-                        color: Colors.indigo,
-                        fontSize: 16,
-                        letterSpacing: 1,
-                      ),
-                    ),)
-                  ],
+                Text(
+                  'Daily Usage: ',
+                  style: TextStyle(
+                    color: Colors.indigo,
+                    fontSize: 18,
+                    letterSpacing: 1,
+                  ),
+                ),
+                Text(
+                  GlobalData.app1Time,
+                  style: TextStyle( color: Colors.indigo, fontSize: 16, letterSpacing: 1, ),
+                ),
+                Text(
+                  GlobalData.app2Time,
+                  style: TextStyle( color: Colors.indigo, fontSize: 16, letterSpacing: 1, ),
                 ),
                 SizedBox(height: 30,),
-                Row(
-                  children: [
-                    Text(
+                Text(
                       'Weekly Usage: ',
                       style: TextStyle(
                         color: Colors.indigo,
@@ -99,16 +102,10 @@ class StatScreen extends StatelessWidget {
                         letterSpacing: 1,
                       ),
                     ),
-                    Flexible(child: Text(
-                      'Weekly usage is yet to be defined as to what exactly it will display and show.',
-                      style: TextStyle(
-                        color: Colors.indigo,
-                        fontSize: 16,
-                        letterSpacing: 1,
-                      ),
-                    ),)
-                  ],
-                ),
+                Text(
+                    'Trying to populate this correctly.',
+                    style: TextStyle( color: Colors.indigo, fontSize: 16, letterSpacing: 1, ),
+                  ),
               ],
             ),
           ],
