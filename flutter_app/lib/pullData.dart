@@ -9,7 +9,7 @@ class DeviceApps extends StatefulWidget {
   _DeviceAppsState createState() => _DeviceAppsState();
 }
 class _DeviceAppsState extends State<DeviceApps> {
-  List<AppUsageInfo> _infos = [];
+  List<AppUsageInfo> _infosDay = [];
   @override
   void initState() {
     super.initState();
@@ -18,35 +18,35 @@ class _DeviceAppsState extends State<DeviceApps> {
   void getUsageStats() async {
     try {
       DateTime endDate = new DateTime.now();
-      DateTime startDate = endDate.subtract(Duration(hours: 24));
-      List<AppUsageInfo> infoList = await AppUsage.getAppUsage(startDate, endDate);
-      infoList.sort((a, b) => b.usage.inSeconds.compareTo(a.usage.inSeconds));
+      DateTime dailyDate = endDate.subtract(new Duration(days: 1));
+      List<AppUsageInfo> infoDayList = await AppUsage.getAppUsage(dailyDate, endDate);
+      infoDayList.sort((a, b) => b.usage.inSeconds.compareTo(a.usage.inSeconds));
       setState(() {
-        _infos = infoList;
+        _infosDay = infoDayList;
       });
-      var listLen = infoList.length;
+      var listLen = infoDayList.length;
       switch(listLen) {
         case 0: { GlobalData.app1Name = ""; }
         break;
         case 1: {
-          GlobalData.app1Name = infoList[0].appName;
-          GlobalData.app1Time = (infoList[0].usage.inMinutes~/60).toString() + ':' + (infoList[0].usage.inMinutes%60).toString().padLeft(2,'0');
+          GlobalData.app1Name = infoDayList[0].appName;
+          GlobalData.app1Time = (infoDayList[0].usage.inHours).toString() + ':' + (infoDayList[0].usage.inMinutes%60).toString().padLeft(2,'0');
         }
         break;
         case 2: {
-          GlobalData.app1Name = infoList[0].appName;
-          GlobalData.app1Time = (infoList[0].usage.inMinutes~/60).toString() + ':' + (infoList[0].usage.inMinutes%60).toString().padLeft(2,'0');
-          GlobalData.app2Name = infoList[1].appName;
-          GlobalData.app2Time = (infoList[1].usage.inMinutes~/60).toString() + ':' + (infoList[1].usage.inMinutes%60).toString().padLeft(2,'0');
+          GlobalData.app1Name = infoDayList[0].appName;
+          GlobalData.app1Time = (infoDayList[0].usage.inHours).toString() + ':' + (infoDayList[0].usage.inMinutes%60).toString().padLeft(2,'0');
+          GlobalData.app2Name = infoDayList[1].appName;
+          GlobalData.app2Time = (infoDayList[1].usage.inHours).toString() + ':' + (infoDayList[1].usage.inMinutes%60).toString().padLeft(2,'0');
         }
         break;
         default: {
-          GlobalData.app1Name = infoList[0].appName;
-          GlobalData.app1Time = (infoList[0].usage.inMinutes~/60).toString() + ':' + (infoList[0].usage.inMinutes%60).toString().padLeft(2,'0');
-          GlobalData.app2Name = infoList[1].appName;
-          GlobalData.app2Time = (infoList[1].usage.inMinutes~/60).toString() + ':' + (infoList[1].usage.inMinutes%60).toString().padLeft(2,'0');
-          GlobalData.app3Name = infoList[2].appName;
-          GlobalData.app3Time = (infoList[2].usage.inMinutes~/60).toString() + ':' + (infoList[2].usage.inMinutes%60).toString().padLeft(2,'0');
+          GlobalData.app1Name = infoDayList[0].appName;
+          GlobalData.app1Time = (infoDayList[0].usage.inHours).toString() + ':' + (infoDayList[0].usage.inMinutes%60).toString().padLeft(2,'0');
+          GlobalData.app2Name = infoDayList[1].appName;
+          GlobalData.app2Time = (infoDayList[1].usage.inHours).toString() + ':' + (infoDayList[1].usage.inMinutes%60).toString().padLeft(2,'0');
+          GlobalData.app3Name = infoDayList[2].appName;
+          GlobalData.app3Time = (infoDayList[2].usage.inHours).toString() + ':' + (infoDayList[2].usage.inMinutes%60).toString().padLeft(2,'0');
         }
       }
     } on AppUsageException catch (exception) {
@@ -93,12 +93,12 @@ class _DeviceAppsState extends State<DeviceApps> {
         body:
         ListView.builder(
           padding: EdgeInsets.fromLTRB(30.0, 30.0, 30.0, 0),
-            itemCount: _infos.length,
+            itemCount: _infosDay.length,
             itemBuilder: (context, index) {
-              if ((_infos[index].usage.inMinutes) > 5) {
+              if ((_infosDay[index].usage.inMinutes) > 5) {
                 return ListTile(
-                    title: Text(_infos[index].appName, style: TextStyle(color: Colors.indigo,letterSpacing: 1.5,fontSize: 18.0,),),
-                    trailing: Text((_infos[index].usage.inMinutes~/60).toString() + ':' + (_infos[index].usage.inMinutes%60).toString().padLeft(2,'0'),style: TextStyle(color: Colors.redAccent,letterSpacing: 1.5,fontSize: 18.0,),),
+                    title: Text(_infosDay[index].appName, style: TextStyle(color: Colors.indigo,letterSpacing: 1.5,fontSize: 18.0,),),
+                    trailing: Text((_infosDay[index].usage.inHours).toString() + ':' + (_infosDay[index].usage.inMinutes%60).toString().padLeft(2,'0'),style: TextStyle(color: Colors.redAccent,letterSpacing: 1.5,fontSize: 18.0,),),
                 );
               }
             },),
