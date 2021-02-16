@@ -24,6 +24,9 @@ class _DeviceAppsState extends State<DeviceApps> {
       setState(() {
         _infosDay = infoDayList;
       });
+      for(int i = 0; i < 5; i++){
+        GlobalData.appsGraph[i] = infoDayList[i].usage.inHours;
+      }
       var listLen = infoDayList.length;
       switch(listLen) {
         case 0: { GlobalData.app1Name = ""; }
