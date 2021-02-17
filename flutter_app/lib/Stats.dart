@@ -86,11 +86,27 @@ class _StatScreenState extends State<StatScreen> {
                   ),
                 ),
                 Text(
-                  GlobalData.app1Time,
+                  GlobalData.applicationList[0],
                   style: TextStyle( color: Colors.indigo, fontSize: 16, letterSpacing: 1, ),
                 ),
                 Text(
-                  GlobalData.app2Time,
+                  GlobalData.applicationList[1],
+                  style: TextStyle( color: Colors.indigo, fontSize: 16, letterSpacing: 1, ),
+                ),
+                Text(
+                  GlobalData.applicationList[2],
+                  style: TextStyle( color: Colors.indigo, fontSize: 16, letterSpacing: 1, ),
+                ),
+                Text(
+                  GlobalData.applicationList[3],
+                  style: TextStyle( color: Colors.indigo, fontSize: 16, letterSpacing: 1, ),
+                ),
+                Text(
+                  GlobalData.applicationList[4],
+                  style: TextStyle( color: Colors.indigo, fontSize: 16, letterSpacing: 1, ),
+                ),
+                Text(
+                  GlobalData.applicationList[5],
                   style: TextStyle( color: Colors.indigo, fontSize: 16, letterSpacing: 1, ),
                 ),
                 SizedBox(height: 30,),

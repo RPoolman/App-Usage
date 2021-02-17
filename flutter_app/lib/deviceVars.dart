@@ -10,5 +10,5 @@ class GlobalData {
   //int variables for timing(only applicable to graph now);
   static List<int> appsGraph = [1,2,3,4,5];
   //below list used to populate extra screen
-  static List<String> applicationList = ['x','y'];
+  static List<String> applicationList = [];
 }
