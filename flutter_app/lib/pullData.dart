@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:app_usage/app_usage.dart';
 import 'package:flutter_app/main.dart';
+
 import 'deviceVars.dart';
 import 'Stats.dart';
 
@@ -12,8 +13,10 @@ class _DeviceAppsState extends State<DeviceApps> {
   List<AppUsageInfo> _infosDay = [];
   @override
   void initState() {
-    super.initState();
+print('RIKUS');
     getUsageStats();
+
+print('RIKUS');
   }
   void getUsageStats() async {
     try {
@@ -27,9 +30,11 @@ class _DeviceAppsState extends State<DeviceApps> {
       for(int i = 0; i < 5; i++){
         GlobalData.appsGraph[i] = infoDayList[i].usage.inHours;
       }
-      for(int k = 0; k > 0; k++){
+      for(int k = 0; k < infoDayList.length; k++){
         GlobalData.applicationList.add((infoDayList[k].usage.inHours).toString() + ':' + (infoDayList[k].usage.inMinutes%60).toString().padLeft(2,'0'));
+        print(GlobalData.applicationList[0]);
       }
+      print(GlobalData.applicationList[0]);
       var listLen = infoDayList.length;
       switch(listLen) {
         case 0: { GlobalData.app1Name = ""; }
