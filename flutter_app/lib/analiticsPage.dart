@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/main.dart';
+import 'package:flutter_app/homePage.dart';
 
-import 'pullData.dart';
+import 'deviceDataPage.dart';
 
 import 'deviceVars.dart';
 
