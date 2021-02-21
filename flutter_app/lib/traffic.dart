@@ -6,6 +6,6 @@ class Traffic extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //return home or authentication screen
-    return LandingPage();
+    return Authentication();
   }
 }
