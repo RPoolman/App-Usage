@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/homePage.dart';
+import 'package:flutter_app/screens/homePage.dart';
 
 import 'deviceDataPage.dart';
 
-import 'deviceVars.dart';
+import 'package:flutter_app/classes/deviceVars.dart';
 
 class StatScreen extends StatefulWidget {
   @override

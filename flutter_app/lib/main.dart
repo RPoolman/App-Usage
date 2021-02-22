@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'traffic.dart';
+import 'package:flutter_app/models/user.dart';
+import 'package:flutter_app/services/servicesAuth.dart';
+import 'package:provider/provider.dart';
+import 'services/traffic.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,6 +35,7 @@ class _ApptrackerState extends State<Apptracker> {
     super.initState();
   }
   @override
+
   Widget build(BuildContext context) {
     if(_error) {
       print('was nice knowing you');
@@ -39,8 +43,11 @@ class _ApptrackerState extends State<Apptracker> {
     if (!_initialized) {
       print('waiting...');
     }
-    return MaterialApp(
-      home: Traffic(),
+    return StreamProvider<User>.value(
+      // value: AuthService().signedInUser,
+      child: MaterialApp(
+        home: Traffic(),
+      ),
     );
   }
 }

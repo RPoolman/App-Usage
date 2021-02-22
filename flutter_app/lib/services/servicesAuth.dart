@@ -1,15 +1,23 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_app/models/user.dart';
 
 class AuthService {
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  //signing in with email/password
+
+  User _userFromFirebase(User firebaseUser){
+    return firebaseUser != null ? User(uid: firebaseUser.uid) : null;
+  }
+
+  Stream<User> get signedInUser {
+    return _auth.authStateChanges().map(_userFromFirebase);
+  }
+
   Future signInEmailPass() async {
     try {
-    //try this code
       UserCredential result = await _auth.signInWithEmailAndPassword(email: "test@test.com", password: "admin12345");
       User currentUser = result.user;
-      return currentUser;
+      return _userFromFirebase(currentUser);
     } on FirebaseAuthException catch(e) {
       if (e.code == 'user-not-found') {
         print('No user found for that email.');
@@ -23,4 +31,14 @@ class AuthService {
   //signing in with number
 
   //register with number
+
+  //signOut
+  Future signOut() async {//this method name is unique from the one below, they do not touch the same areas
+    try {
+      return await _auth.signOut();
+    } catch(e) {
+      print(e.toString());
+      return null;
+    }
+  }
 }

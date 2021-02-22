@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:app_usage/app_usage.dart';
-import 'package:flutter_app/homePage.dart';
-
-import 'deviceVars.dart';
+import 'package:flutter_app/screens/homePage.dart';
+import 'package:flutter_app/classes/deviceVars.dart';
 import 'analiticsPage.dart';
 
 class DeviceApps extends StatefulWidget {

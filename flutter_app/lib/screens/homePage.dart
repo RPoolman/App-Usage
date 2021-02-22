@@ -1,17 +1,21 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/services/servicesAuth.dart';
 
 import 'deviceDataPage.dart';
 import 'analiticsPage.dart';
 
-import 'deviceVars.dart';
-import 'dataChart.dart';
+import 'package:flutter_app/classes/deviceVars.dart';
+import 'package:flutter_app/classes/dataChart.dart';
 
 class LandingPage extends StatefulWidget {
   @override
   _LandingPageState createState() => _LandingPageState();
 }
 class _LandingPageState extends State<LandingPage> {
+
+  final AuthService _auth = AuthService();
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -21,6 +25,15 @@ class _LandingPageState extends State<LandingPage> {
         centerTitle: true,
         backgroundColor: Colors.indigo,
         elevation: 0,
+        actions: <Widget>[
+          FlatButton.icon(
+              onPressed: () async {
+                await _auth.signOut();
+              },
+              icon: Icon(Icons.person, color: Colors.white,),
+              label: Text('Logout', style: TextStyle(color: Colors.white)),
+          )
+        ],
       ),
       bottomNavigationBar: BottomAppBar(
         child: Row(
