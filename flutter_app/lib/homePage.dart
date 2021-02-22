@@ -106,6 +106,7 @@ class _LandingPageState extends State<LandingPage> {
             ),
             SizedBox(height: 20),
             Row(
+              //implement a listview builder with horizontal scrollable axis to ensure that data can be fully seen, follow steps used in deviceDataPage when generating a list view.
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Column(

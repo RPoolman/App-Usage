@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:app_usage/app_usage.dart';
 import 'package:flutter_app/homePage.dart';
 
-
 import 'deviceVars.dart';
 import 'analiticsPage.dart';
 
