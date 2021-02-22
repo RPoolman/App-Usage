@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/servicesAuth.dart';
 
-class SignIn extends StatefulWidget {
+class Register extends StatefulWidget {
   @override
-  _SignInState createState() => _SignInState();
+  _RegisterState createState() => _RegisterState();
 }
 
-class _SignInState extends State<SignIn> {
+class _RegisterState extends State<Register> {
 
   final AuthService _auth = AuthService();
 
-  String email = '';
+  String parentEmail = '';
+  String childEmail = '';
   String password = '';
 
   @override
@@ -20,7 +21,7 @@ class _SignInState extends State<SignIn> {
       appBar: AppBar(
         backgroundColor: Colors.indigo,
         elevation: 0.0,
-        title: Text('Sign in to AppTracker'),
+        title: Text('SignUp for AppTracker'),
       ),
       body: Container(
         padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
@@ -28,10 +29,17 @@ class _SignInState extends State<SignIn> {
           child: Column(
             children: <Widget>[
               SizedBox(height: 20.0),
-              Text('Enter your email below:',style: TextStyle(fontSize: 20),),
+              Text('Enter the Parents email below:',style: TextStyle(fontSize: 20),),
               TextFormField(
                 onChanged: (value){
-                  setState(() { email = value;});
+                  setState(() { parentEmail = value;});
+                },
+              ),
+              SizedBox(height: 20.0),
+              Text('Enter the Childs email below:',style: TextStyle(fontSize: 20),),
+              TextFormField(
+                onChanged: (value){
+                  setState(() { childEmail = value;});
                 },
               ),
               SizedBox(height: 20.0),
@@ -46,11 +54,12 @@ class _SignInState extends State<SignIn> {
               RaisedButton(
                   color: Colors.blue,
                   child: Text(
-                    'Sign In',
+                    'Register',
                     style: TextStyle(color: Colors.white),
                   ),
                   onPressed: () async {
-                    print(email);
+                    print(parentEmail);
+                    print(childEmail);
                     print(password);
                   }
               )
