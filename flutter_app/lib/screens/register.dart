@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/services/servicesAuth.dart';
 
 class Register extends StatefulWidget {
+
+  final Function view;
+  Register({ this.view });
+
   @override
   _RegisterState createState() => _RegisterState();
 }
@@ -22,6 +26,15 @@ class _RegisterState extends State<Register> {
         backgroundColor: Colors.indigo,
         elevation: 0.0,
         title: Text('SignUp for AppTracker'),
+        actions: <Widget>[
+          FlatButton.icon(
+            onPressed: () async {
+              widget.view();
+            },
+            icon: Icon(Icons.person, color: Colors.white,),
+            label: Text('Sign In', style: TextStyle(color: Colors.white)),
+          )
+        ],
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -59,9 +72,6 @@ class _RegisterState extends State<Register> {
                       style: TextStyle(color: Colors.white),
                     ),
                     onPressed: () async {
-                      print(parentEmail);
-                      print(childEmail);
-                      print(password);
                     }
                 )
               ],

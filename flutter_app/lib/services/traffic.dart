@@ -9,7 +9,6 @@ class Traffic extends StatelessWidget {
   Widget build(BuildContext context) {
 
     final currentUser = Provider.of<User>(context);
-    return LandingPage();
     if(currentUser == null) {
       return Authentication();
     } else {

@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/services/servicesAuth.dart';
 
 class SignIn extends StatefulWidget {
+
+  final Function view;
+  SignIn({ this.view });
+
   @override
   _SignInState createState() => _SignInState();
 }
@@ -21,6 +25,15 @@ class _SignInState extends State<SignIn> {
         backgroundColor: Colors.indigo,
         elevation: 0.0,
         title: Text('Sign in to AppTracker'),
+        actions: <Widget>[
+          FlatButton.icon(
+            onPressed: () async {
+              widget.view();
+            },
+            icon: Icon(Icons.person, color: Colors.white,),
+            label: Text('Register', style: TextStyle(color: Colors.white)),
+          )
+        ],
       ),
       body: Container(
         padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
@@ -50,8 +63,6 @@ class _SignInState extends State<SignIn> {
                     style: TextStyle(color: Colors.white),
                   ),
                   onPressed: () async {
-                    print(email);
-                    print(password);
                   }
               )
             ],

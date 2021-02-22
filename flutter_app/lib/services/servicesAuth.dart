@@ -5,19 +5,19 @@ class AuthService {
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  User _userFromFirebase(User firebaseUser){
-    return firebaseUser != null ? User(uid: firebaseUser.uid) : null;
-  }
+  // User _userFromFirebase(User firebaseUser){
+  //   return firebaseUser != null ? User(uid: firebaseUser.uid) : null;
+  // }
 
-  Stream<User> get signedInUser {
-    return _auth.authStateChanges().map(_userFromFirebase);
-  }
+  // Stream<User> get signedInUser {
+  //   return _auth.authStateChanges().map(_userFromFirebase);
+  // }
 
   Future signInEmailPass() async {
     try {
       UserCredential result = await _auth.signInWithEmailAndPassword(email: "test@test.com", password: "admin12345");
-      User currentUser = result.user;
-      return _userFromFirebase(currentUser);
+      // User currentUser = result.user;
+      // return _userFromFirebase(currentUser);
     } on FirebaseAuthException catch(e) {
       if (e.code == 'user-not-found') {
         print('No user found for that email.');
