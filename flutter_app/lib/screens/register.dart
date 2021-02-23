@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/screens/homePage.dart';
 import 'package:flutter_app/services/servicesAuth.dart';
 
 class Register extends StatefulWidget {
@@ -12,11 +14,12 @@ class Register extends StatefulWidget {
 
 class _RegisterState extends State<Register> {
 
-  final AuthService _auth = AuthService();
+  final AuthService _auth = new AuthService();
+  final _formKey = GlobalKey<FormState>();
 
-  String parentEmail = '';
-  String childEmail = '';
+  String mainEmail = '';
   String password = '';
+  String error = '';
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +28,7 @@ class _RegisterState extends State<Register> {
       appBar: AppBar(
         backgroundColor: Colors.indigo,
         elevation: 0.0,
-        title: Text('SignUp for AppTracker'),
+        title: Text('Register for AppTracker'),
         actions: <Widget>[
           FlatButton.icon(
             onPressed: () async {
@@ -40,25 +43,21 @@ class _RegisterState extends State<Register> {
         child: Container(
           padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
           child: Form(
+            key: _formKey,
             child: Column(
               children: <Widget>[
                 SizedBox(height: 20.0),
-                Text('Enter the Parents email below:',style: TextStyle(fontSize: 20),),
+                Text('Enter the your email below:',style: TextStyle(fontSize: 20),),
                 TextFormField(
+                  validator: (val) => val.isEmpty ? 'Please enter a valid email...' : null,
                   onChanged: (value){
-                    setState(() { parentEmail = value;});
-                  },
-                ),
-                SizedBox(height: 20.0),
-                Text('Enter the Childs email below:',style: TextStyle(fontSize: 20),),
-                TextFormField(
-                  onChanged: (value){
-                    setState(() { childEmail = value;});
+                    setState(() { mainEmail = value;});
                   },
                 ),
                 SizedBox(height: 20.0),
                 Text('Enter your password below:',style: TextStyle(fontSize: 20),),
                 TextFormField(
+                  validator: (val) => val.length < 6 ? 'Please enter a password that is 6 characters long' : null,
                   obscureText: true,
                   onChanged: (value){
                     setState(() { password = value;});
@@ -72,8 +71,20 @@ class _RegisterState extends State<Register> {
                       style: TextStyle(color: Colors.white),
                     ),
                     onPressed: () async {
+                      if(_formKey.currentState.validate()) {
+                        dynamic result = await _auth.registerWithEmailPassword(mainEmail, password);
+                        if(result == null) {
+                          setState(() => error = 'Please supply a valid email.');
+                        }
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=> LandingPage()));
+                      }
                     }
-                )
+                ),
+                SizedBox(height: 12.0,),
+                Text(
+                  error,
+                  style: TextStyle(color: Colors.red, fontSize: 14.0),
+                ),
               ],
             ),
           ),

@@ -5,29 +5,38 @@ class AuthService {
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  // User _userFromFirebase(User firebaseUser){
-  //   return firebaseUser != null ? User(uid: firebaseUser.uid) : null;
-  // }
+  UserApptracker _userFromFirebaseUser(User firebaseUser){
+    return firebaseUser != null ? UserApptracker(uid: firebaseUser.uid) : null;
+  }
 
-  // Stream<User> get signedInUser {
-  //   return _auth.authStateChanges().map(_userFromFirebase);
+  Stream<UserApptracker> get signedInUser {
+    return _auth.authStateChanges().map(_userFromFirebaseUser);
+  }
+  //
+  // Future signInEmailPass() async {
+  //   try {
+  //     UserCredential result = await _auth.signInWithEmailAndPassword(email: "test@test.com", password: "admin12345");
+  //     User currentUser = result.user;
+  //     return _userFromFirebaseUser(currentUser);
+  //   } on FirebaseAuthException catch(e) {
+  //     if (e.code == 'user-not-found') {
+  //       print('No user found for that email.');
+  //     } else if (e.code == 'wrong-password') {
+  //       print('Wrong password provided for that user.');
+  //     }
+  //   }
   // }
-
-  Future signInEmailPass() async {
+  //register email/password
+  Future registerWithEmailPassword(String emailIn, String passwordIn) async {
     try {
-      UserCredential result = await _auth.signInWithEmailAndPassword(email: "test@test.com", password: "admin12345");
-      // User currentUser = result.user;
-      // return _userFromFirebase(currentUser);
+      UserCredential result = await _auth.createUserWithEmailAndPassword(email: emailIn, password: passwordIn);
+      User currentUser = result.user;
+      return _userFromFirebaseUser(currentUser);
     } on FirebaseAuthException catch(e) {
-      if (e.code == 'user-not-found') {
-        print('No user found for that email.');
-      } else if (e.code == 'wrong-password') {
-        print('Wrong password provided for that user.');
-      }
+      print(e.toString());
+      return null;
     }
   }
-  //register email/password
-
   //signing in with number
 
   //register with number

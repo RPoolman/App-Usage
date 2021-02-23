@@ -43,7 +43,7 @@ class _ApptrackerState extends State<Apptracker> {
     if (!_initialized) {
       print('waiting...');
     }
-    return StreamProvider<User>.value(
+    return StreamProvider<UserApptracker>.value(
       // value: AuthService().signedInUser,
       child: MaterialApp(
         home: Traffic(),

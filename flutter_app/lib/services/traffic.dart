@@ -8,7 +8,9 @@ class Traffic extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    final currentUser = Provider.of<User>(context);
+    final currentUser = Provider.of<UserApptracker>(context);
+
+    print(currentUser);
     if(currentUser == null) {
       return Authentication();
     } else {
