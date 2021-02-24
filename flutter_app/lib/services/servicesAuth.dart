@@ -12,20 +12,20 @@ class AuthService {
   Stream<UserApptracker> get signedInUser {
     return _auth.authStateChanges().map(_userFromFirebaseUser);
   }
-  //
-  // Future signInEmailPass() async {
-  //   try {
-  //     UserCredential result = await _auth.signInWithEmailAndPassword(email: "test@test.com", password: "admin12345");
-  //     User currentUser = result.user;
-  //     return _userFromFirebaseUser(currentUser);
-  //   } on FirebaseAuthException catch(e) {
-  //     if (e.code == 'user-not-found') {
-  //       print('No user found for that email.');
-  //     } else if (e.code == 'wrong-password') {
-  //       print('Wrong password provided for that user.');
-  //     }
-  //   }
-  // }
+  //signin email/password
+  Future signInEmailPass() async {
+    try {
+      UserCredential result = await _auth.signInWithEmailAndPassword(email: "test@test.com", password: "admin12345");
+      User currentUser = result.user;
+      return _userFromFirebaseUser(currentUser);
+    } on FirebaseAuthException catch(e) {
+      if (e.code == 'user-not-found') {
+        print('No user found for that email.');
+      } else if (e.code == 'wrong-password') {
+        print('Wrong password provided for that user.');
+      }
+    }
+  }
   //register email/password
   Future registerWithEmailPassword(String emailIn, String passwordIn) async {
     try {
