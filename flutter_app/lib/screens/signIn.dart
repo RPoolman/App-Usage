@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/services/servicesAuth.dart';
+import 'package:flutter_app/shared/loading.dart';
 
 class SignIn extends StatefulWidget {
 
@@ -14,6 +15,7 @@ class _SignInState extends State<SignIn> {
 
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
+  bool loading = false;
 
   String email = '';
   String password = '';
@@ -21,7 +23,7 @@ class _SignInState extends State<SignIn> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return loading ? Loading() : Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.indigo,
@@ -46,6 +48,9 @@ class _SignInState extends State<SignIn> {
               SizedBox(height: 20.0),
               Text('Enter your email below:',style: TextStyle(fontSize: 20),),
               TextFormField(
+                decoration: InputDecoration(
+                  hintText: 'Enter your email here',
+                ),
                 validator: (val) => val.isEmpty ? 'Please enter a valid email...' : null,
                 onChanged: (value){
                   setState(() { email = value;});
@@ -54,6 +59,9 @@ class _SignInState extends State<SignIn> {
               SizedBox(height: 20.0),
               Text('Enter your password below:',style: TextStyle(fontSize: 20),),
               TextFormField(
+                decoration: InputDecoration(
+                  hintText: 'Enter your password here',
+                ),
                 validator: (val) => val.length < 6 ? 'Please enter a password that is 6 characters long' : null,
                 obscureText: true,
                 onChanged: (value){
@@ -69,10 +77,14 @@ class _SignInState extends State<SignIn> {
                   ),
                   onPressed: () async {
                     if(_formKey.currentState.validate()) {
-                      print('valid');
-                      // if(result == null) {
-                      //   setState(() => error = 'Please supply a valid email.');
-                      // }
+                      setState(() => loading = true);
+                      dynamic result = await _auth.signInEmailPassword(email, password);
+                      if(result == null) {
+                        setState(() {
+                          error = 'Could not sign you in with those credentials.';
+                          loading = false;
+                        });
+                      }
                     }
                   }
               ),

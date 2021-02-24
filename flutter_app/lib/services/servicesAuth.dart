@@ -13,17 +13,14 @@ class AuthService {
     return _auth.authStateChanges().map(_userFromFirebaseUser);
   }
   //signin email/password
-  Future signInEmailPass() async {
+  Future signInEmailPassword(String emailIn, String passwordIn) async {
     try {
-      UserCredential result = await _auth.signInWithEmailAndPassword(email: "test@test.com", password: "admin12345");
+      UserCredential result = await _auth.signInWithEmailAndPassword(email: emailIn, password: passwordIn);
       User currentUser = result.user;
       return _userFromFirebaseUser(currentUser);
     } on FirebaseAuthException catch(e) {
-      if (e.code == 'user-not-found') {
-        print('No user found for that email.');
-      } else if (e.code == 'wrong-password') {
-        print('Wrong password provided for that user.');
-      }
+      print(e.toString());
+      return null;
     }
   }
   //register email/password
