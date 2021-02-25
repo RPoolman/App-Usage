@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/screens/signIn.dart';
 import 'package:flutter_app/services/servicesAuth.dart';
 
 import 'deviceDataPage.dart';
@@ -28,7 +29,10 @@ class _LandingPageState extends State<LandingPage> {
         actions: <Widget>[
           FlatButton.icon(
               onPressed: () async {
-                await _auth.signOut();
+                await _auth.signMeOut();
+                if(_auth.signMeOut() != null) {
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=> SignIn()));
+                }
               },
               icon: Icon(Icons.person, color: Colors.white,),
               label: Text('Logout', style: TextStyle(color: Colors.white)),

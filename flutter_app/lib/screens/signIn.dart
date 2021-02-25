@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/screens/homePage.dart';
 import 'package:flutter_app/services/servicesAuth.dart';
 import 'package:flutter_app/shared/loading.dart';
 
@@ -78,12 +79,16 @@ class _SignInState extends State<SignIn> {
                   onPressed: () async {
                     if(_formKey.currentState.validate()) {
                       setState(() => loading = true);
-                      dynamic result = await _auth.signInEmailPassword(email, password);
+                      dynamic result = await _auth.signMeInEmailPassword(email, password);
                       if(result == null) {
                         setState(() {
                           error = 'Could not sign you in with those credentials.';
                           loading = false;
                         });
+                      } else {
+                        print(result);
+                        loading = false;
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=> LandingPage()));
                       }
                     }
                   }

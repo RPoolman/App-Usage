@@ -13,7 +13,7 @@ class AuthService {
     return _auth.authStateChanges().map(_userFromFirebaseUser);
   }
   //signin email/password
-  Future signInEmailPassword(String emailIn, String passwordIn) async {
+  Future signMeInEmailPassword(String emailIn, String passwordIn) async {
     try {
       UserCredential result = await _auth.signInWithEmailAndPassword(email: emailIn, password: passwordIn);
       User currentUser = result.user;
@@ -24,7 +24,7 @@ class AuthService {
     }
   }
   //register email/password
-  Future registerWithEmailPassword(String emailIn, String passwordIn) async {
+  Future registerMeWithEmailPassword(String emailIn, String passwordIn) async {
     try {
       UserCredential result = await _auth.createUserWithEmailAndPassword(email: emailIn, password: passwordIn);
       User currentUser = result.user;
@@ -39,7 +39,8 @@ class AuthService {
   //register with number
 
   //signOut
-  Future signOut() async {//this method name is unique from the one below, they do not touch the same areas
+  //this method name is unique from the one below, they do not touch the same areas
+  Future signMeOut() async {
     try {
       return await _auth.signOut();
     } catch(e) {
