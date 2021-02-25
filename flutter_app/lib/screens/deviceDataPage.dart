@@ -73,23 +73,26 @@ class _DeviceAppsState extends State<DeviceApps> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             IconButton(icon: Icon(Icons.home), onPressed: () {
-              Navigator.push(
+              Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(builder: (context) => LandingPage()),
+                      (route) => false
               );},
             ),
             SizedBox(width: 20,),
             IconButton(icon: Icon(Icons.list_alt), onPressed: () {
-              Navigator.push(
+              Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(builder: (context) => DeviceApps()),
+                      (route) => false
               );},
             ),
             SizedBox(width: 20,),
             IconButton(icon: Icon(Icons.person), onPressed: () {
-              Navigator.push(
+              Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(builder: (context) => StatScreen()),
+                      (route) => false
               );},
             ),
           ],
