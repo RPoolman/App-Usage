@@ -88,7 +88,9 @@ class _SignInState extends State<SignIn> {
                       } else {
                         print(result);
                         loading = false;
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=> LandingPage()));
+                        widget.view();
+                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => LandingPage()));
+                        // Navigator.push(context, MaterialPageRoute(builder: (context)=> LandingPage()));
                       }
                     }
                   }

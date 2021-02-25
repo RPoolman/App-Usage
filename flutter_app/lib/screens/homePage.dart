@@ -31,7 +31,8 @@ class _LandingPageState extends State<LandingPage> {
               onPressed: () async {
                 await _auth.signMeOut();
                 if(_auth.signMeOut() != null) {
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=> SignIn()));
+                  Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=> SignIn()), (route) => false);
+                  //Navigator.push(context, MaterialPageRoute(builder: (context)=> SignIn()));
                 }
               },
               icon: Icon(Icons.person, color: Colors.white,),

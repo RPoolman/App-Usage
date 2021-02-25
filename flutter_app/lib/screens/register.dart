@@ -86,9 +86,11 @@ class _RegisterState extends State<Register> {
                           setState(() {
                             error = 'Please supply a valid email.';
                             loading = false;
-                            });
+                          });
+                        } else {
+                          setState(() => loading = false);
+                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => LandingPage()));
                         }
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=> LandingPage()));
                       }
                     }
                 ),
