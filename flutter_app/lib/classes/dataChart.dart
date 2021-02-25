@@ -32,7 +32,8 @@ class PointsLineChart extends StatelessWidget {
     return [
       new charts.Series<LinearApps, int>(
         id: 'Usage',
-        colorFn: (_, __) => charts.MaterialPalette.teal.shadeDefault,
+        fillColorFn: (LinearApps series, _) => charts.MaterialPalette.red.shadeDefault,
+        colorFn: (_, __) => charts.MaterialPalette.blue.shadeDefault,
         measureFn: (LinearApps time, _) => time.appDur,
         domainFn: (LinearApps number, _) => number.appNo,
         data: data,
