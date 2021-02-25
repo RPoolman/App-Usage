@@ -49,7 +49,7 @@ class _RegisterState extends State<Register> {
             child: Column(
               children: <Widget>[
                 SizedBox(height: 20.0),
-                Text('Enter the your email below:',style: TextStyle(fontSize: 20),),
+                Text('Enter your email below to REGISTER:',style: TextStyle(fontSize: 20),),
                 TextFormField(
                   decoration: InputDecoration(
                     hintText: 'Enter your email here',
