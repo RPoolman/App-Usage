@@ -5,11 +5,11 @@ class AuthService {
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  User _userFromFirebase(User firebaseUser){
-    return firebaseUser != null ? User(uid: firebaseUser.uid) : null;
+  AppUser _userFromFirebase(User firebaseUser){
+    return firebaseUser != null ? AppUser(uid: firebaseUser.uid) : null;
   }
 
-  Stream<User> get signedInUser {
+  Stream<AppUser> get signedInUser {
     return _auth.authStateChanges().map(_userFromFirebase);
   }
 
