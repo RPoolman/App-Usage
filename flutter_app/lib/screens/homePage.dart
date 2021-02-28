@@ -1,3 +1,4 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/services/servicesAuth.dart';
@@ -14,7 +15,11 @@ class LandingPage extends StatefulWidget {
 }
 class _LandingPageState extends State<LandingPage> {
 
+  String messageTitle = "Empty";
+  String notificationAlert = "alert";
   final AuthService _auth = AuthService();
+
+  final FirebaseMessaging _myMessage = FirebaseMessaging.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -72,12 +77,12 @@ class _LandingPageState extends State<LandingPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'Tracked: ',
+                  notificationAlert,
                   style: TextStyle(color: Colors.blueAccent,letterSpacing: 2.0,fontSize: 18.0,),
                 ),
                 SizedBox(height: 4),
                 Text(
-                  'Gerald Storm',
+                  messageTitle,
                   style: TextStyle(color: Colors.redAccent,letterSpacing: 2.0,fontSize: 18.0,),
                 ),
               ],

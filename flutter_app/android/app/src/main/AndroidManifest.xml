@@ -8,6 +8,7 @@
         tools:ignore="ProtectedPermissions" />
 <!--google this shit-->
    <application
+        android:name=".Application"
         android:label="flutter_app"
         android:icon="@mipmap/ic_launcher">
         <activity
