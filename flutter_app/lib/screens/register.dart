@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/screens/homePage.dart';
 import 'package:flutter_app/services/servicesAuth.dart';
 import 'package:flutter_app/shared/loading.dart';
+import 'package:flutter_app/classes/deviceExtrapolation.dart';
 
 class Register extends StatefulWidget {
 
@@ -89,6 +90,7 @@ class _RegisterState extends State<Register> {
                           });
                         } else {
                           setState(() => loading = false);
+                          DeviceData.getUsageStats();
                           Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => LandingPage()));
                         }
                       }

@@ -3,20 +3,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/screens/signIn.dart';
 import 'package:flutter_app/services/servicesAuth.dart';
 
-import 'deviceDataPage.dart';
-import 'analiticsPage.dart';
+import 'package:flutter_app/screens/deviceDataPage.dart';
+import 'package:flutter_app/screens/analiticsPage.dart';
 
 import 'package:flutter_app/classes/deviceVars.dart';
 import 'package:flutter_app/classes/dataChart.dart';
+import 'package:flutter_app/classes/deviceExtrapolation.dart';
 
 class LandingPage extends StatefulWidget {
   @override
   _LandingPageState createState() => _LandingPageState();
 }
 class _LandingPageState extends State<LandingPage> {
-
   final AuthService _auth = AuthService();
-
+  @override
+  void initState() { DeviceData.getUsageStats(); }
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
