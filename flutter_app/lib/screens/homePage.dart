@@ -1,26 +1,24 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/screens/signIn.dart';
 import 'package:flutter_app/services/servicesAuth.dart';
 
-import 'deviceDataPage.dart';
-import 'analiticsPage.dart';
+import 'package:flutter_app/screens/deviceDataPage.dart';
+import 'package:flutter_app/screens/analiticsPage.dart';
 
 import 'package:flutter_app/classes/deviceVars.dart';
 import 'package:flutter_app/classes/dataChart.dart';
+import 'package:flutter_app/classes/deviceExtrapolation.dart';
 
 class LandingPage extends StatefulWidget {
   @override
   _LandingPageState createState() => _LandingPageState();
 }
 class _LandingPageState extends State<LandingPage> {
-
-  String messageTitle = "Empty";
-  String notificationAlert = "alert";
   final AuthService _auth = AuthService();
-
-  final FirebaseMessaging _myMessage = FirebaseMessaging.instance;
-
+  @override
+  void initState() { DeviceData.getUsageStats(); }
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -33,7 +31,11 @@ class _LandingPageState extends State<LandingPage> {
         actions: <Widget>[
           FlatButton.icon(
               onPressed: () async {
-                await _auth.signOut();
+                await _auth.signMeOut();
+                if(_auth.signMeOut() != null) {
+                  Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=> SignIn()), (route) => false);
+                  //Navigator.push(context, MaterialPageRoute(builder: (context)=> SignIn()));
+                }
               },
               icon: Icon(Icons.person, color: Colors.white,),
               label: Text('Logout', style: TextStyle(color: Colors.white)),
@@ -45,23 +47,26 @@ class _LandingPageState extends State<LandingPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             IconButton(icon: Icon(Icons.home), onPressed: () {
-              Navigator.push(
+              Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(builder: (context) => LandingPage()),
+                      (route) => false
               );},
             ),
             SizedBox(width: 20,),
             IconButton(icon: Icon(Icons.list_alt), onPressed: () {
-              Navigator.push(
+              Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(builder: (context) => DeviceApps()),
+                      (route) => false
               );},
             ),
             SizedBox(width: 20,),
             IconButton(icon: Icon(Icons.person), onPressed: () {
-              Navigator.push(
+              Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(builder: (context) => StatScreen()),
+                      (route) => false
               );},
             ),
           ],

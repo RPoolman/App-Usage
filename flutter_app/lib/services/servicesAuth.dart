@@ -5,35 +5,42 @@ class AuthService {
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  AppUser _userFromFirebase(User firebaseUser){
-    return firebaseUser != null ? AppUser(uid: firebaseUser.uid) : null;
+  UserApptracker _userFromFirebaseUser(User firebaseUser){
+    return firebaseUser != null ? UserApptracker(uid: firebaseUser.uid) : null;
   }
 
-  Stream<AppUser> get signedInUser {
-    return _auth.authStateChanges().map(_userFromFirebase);
+  Stream<UserApptracker> get signedInUser {
+    return _auth.authStateChanges().map(_userFromFirebaseUser);
   }
-
-  Future signInEmailPass() async {
+  //signin email/password
+  Future signMeInEmailPassword(String emailIn, String passwordIn) async {
     try {
-      UserCredential result = await _auth.signInWithEmailAndPassword(email: "test@test.com", password: "admin12345");
+      UserCredential result = await _auth.signInWithEmailAndPassword(email: emailIn, password: passwordIn);
       User currentUser = result.user;
-      return _userFromFirebase(currentUser);
+      return _userFromFirebaseUser(currentUser);
     } on FirebaseAuthException catch(e) {
-      if (e.code == 'user-not-found') {
-        print('No user found for that email.');
-      } else if (e.code == 'wrong-password') {
-        print('Wrong password provided for that user.');
-      }
+      print(e.toString());
+      return null;
     }
   }
   //register email/password
-
+  Future registerMeWithEmailPassword(String emailIn, String passwordIn) async {
+    try {
+      UserCredential result = await _auth.createUserWithEmailAndPassword(email: emailIn, password: passwordIn);
+      User currentUser = result.user;
+      return _userFromFirebaseUser(currentUser);
+    } on FirebaseAuthException catch(e) {
+      print(e.toString());
+      return null;
+    }
+  }
   //signing in with number
 
   //register with number
 
   //signOut
-  Future signOut() async {//this method name is unique from the one below, they do not touch the same areas
+  //this method name is unique from the one below, they do not touch the same areas
+  Future signMeOut() async {
     try {
       return await _auth.signOut();
     } catch(e) {
