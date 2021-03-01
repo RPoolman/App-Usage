@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/screens/signIn.dart';
+
 import 'package:flutter_app/services/servicesAuth.dart';
 
+import 'package:flutter_app/screens/signIn.dart';
 import 'package:flutter_app/screens/deviceDataPage.dart';
 import 'package:flutter_app/screens/analiticsPage.dart';
 
@@ -17,7 +18,9 @@ class LandingPage extends StatefulWidget {
 class _LandingPageState extends State<LandingPage> {
   final AuthService _auth = AuthService();
   @override
-  void initState() { DeviceData.getUsageStats(); }
+  void initState() {
+    DeviceData.getUsageStats();
+  }
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
