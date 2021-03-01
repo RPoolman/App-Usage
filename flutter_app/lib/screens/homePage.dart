@@ -82,12 +82,12 @@ class _LandingPageState extends State<LandingPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  notificationAlert,
+                  "Well",
                   style: TextStyle(color: Colors.blueAccent,letterSpacing: 2.0,fontSize: 18.0,),
                 ),
                 SizedBox(height: 4),
                 Text(
-                  messageTitle,
+                  "Shit",
                   style: TextStyle(color: Colors.redAccent,letterSpacing: 2.0,fontSize: 18.0,),
                 ),
               ],
