@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_app/models/user.dart';
 import 'package:flutter_app/services/servicesAuth.dart';
+import 'package:flutter_app/shared/loading.dart';
 import 'package:provider/provider.dart';
 import 'services/traffic.dart';
 
@@ -17,6 +18,7 @@ class Apptracker extends StatefulWidget {
 class _ApptrackerState extends State<Apptracker> {
   bool _initialized = false;
   bool _error = false;
+  bool loading = false;
   void initializeFlutterFire() async {
     try {
       await Firebase.initializeApp();
@@ -37,16 +39,17 @@ class _ApptrackerState extends State<Apptracker> {
   @override
 
   Widget build(BuildContext context) {
+    loading = true;
     if(_error) {
-      print('was nice knowing you');
+      loading = false;
     }
     if (!_initialized) {
-      print('waiting...');
+      loading = true;
     }
-    return StreamProvider<User>.value(
+    return StreamProvider<UserApptracker>.value(
       // value: AuthService().signedInUser,
       child: MaterialApp(
-        home: Traffic(),
+        home: _initialized ? Traffic() : loading ? Loading() : Traffic(),
       ),
     );
   }

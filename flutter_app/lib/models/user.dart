@@ -1,6 +1,6 @@
-class User {
+class UserApptracker {
   final String uid;
 
-  User({this.uid});
+  UserApptracker({this.uid});
 
 }
