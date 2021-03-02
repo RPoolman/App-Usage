@@ -3,7 +3,13 @@ import 'package:flutter_app/screens/homePage.dart';
 import 'package:flutter_app/services/servicesAuth.dart';
 import 'package:flutter_app/shared/loading.dart';
 import 'package:flutter_app/classes/deviceExtrapolation.dart';
-import 'package:flutter_app/classes/deviceVars.dart';
+import 'package:flutter_app/classes/pushNotifications.dart';
+
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 
 class SignIn extends StatefulWidget {
 
@@ -16,8 +22,10 @@ class SignIn extends StatefulWidget {
 
 class _SignInState extends State<SignIn> {
 
+  final FirebaseFirestore _db = FirebaseFirestore.instance;
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
+
   bool loading = false;
 
   String email = '';

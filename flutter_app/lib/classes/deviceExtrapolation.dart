@@ -13,7 +13,7 @@ class DeviceData {
 
       infosDay = infoDayList;
       for(int i = 0; i < 5; i++){
-        GlobalData.appsGraph[i] = infoDayList[i].usage.inHours;
+        GlobalData.appsGraph[i] = infoDayList[i].usage.inMinutes;
       }
       for(int k = 0; k < infoDayList.length; k++){
         GlobalData.applicationList.add((infoDayList[k].usage.inHours).toString() + ':' + (infoDayList[k].usage.inMinutes%60).toString().padLeft(2,'0'));

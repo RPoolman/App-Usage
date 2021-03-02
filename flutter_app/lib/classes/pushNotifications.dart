@@ -1,12 +1,13 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter_app/classes/deviceVars.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class DeviceNotify {
 
   FirebaseMessaging messaging = FirebaseMessaging.instance;
+  NotificationSettings settings;
 
   void getUserPer() async {
-    NotificationSettings settings = await messaging.requestPermission(
+    settings = await messaging.requestPermission(
       alert: true,
       announcement: false,
       badge: true,
@@ -15,9 +16,10 @@ class DeviceNotify {
       provisional: false,
       sound: true,
     );
+    showUserPerGranted();
   }
   void showUserPerGranted() {
-    // print('User granted permission: ${settings.authorizationStatus}');
+    print('User granted permission: ${settings.authorizationStatus}');
   }
 
 }
