@@ -35,8 +35,17 @@ class _LandingPageState extends State<LandingPage> {
               onPressed: () async {
                 await _auth.signMeOut();
                 if(_auth.signMeOut() != null) {
-                  Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=> SignIn()), (route) => false);
-                  //Navigator.push(context, MaterialPageRoute(builder: (context)=> SignIn()));
+                  AlertDialog(
+                    title: Text("Signing Out?"),
+                    content: Text("Are you sure you want to sign out?"),
+                    actions: [
+                      FlatButton(onPressed: (){}, child: Text("No")),
+                      FlatButton(onPressed: (){
+                        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=> SignIn()), (route) => false);
+                      }, child: Text("Yes")),
+                    ],
+                    elevation: 24.0,
+                  );
                 }
               },
               icon: Icon(Icons.person, color: Colors.white,),
