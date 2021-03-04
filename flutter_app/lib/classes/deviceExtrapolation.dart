@@ -6,11 +6,11 @@ class DeviceData {
 
   static void getUsageStats() async {
     try {
+      print('IM SLEEPING');
       DateTime endDate = new DateTime.now();
       DateTime dailyDate = endDate.subtract(new Duration(days: 1));
       List<AppUsageInfo> infoDayList = await AppUsage.getAppUsage(dailyDate, endDate);
       infoDayList.sort((a, b) => b.usage.inSeconds.compareTo(a.usage.inSeconds));
-
       infosDay = infoDayList;
       for(int i = 0; i < 5; i++){
         GlobalData.appsGraph[i] = infoDayList[i].usage.inHours;
