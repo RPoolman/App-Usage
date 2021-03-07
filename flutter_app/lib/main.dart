@@ -37,7 +37,7 @@ void backgroundFetchHeadlessTask(HeadlessTask task) async {
 
   if (taskId == 'flutter_background_fetch') {
     BackgroundFetch.scheduleTask(TaskConfig(
-        taskId: "rikus-task",
+        taskId: "apptracking-task",
         delay: 5000,
         periodic: false,
         forceAlarmManager: false,
@@ -62,10 +62,7 @@ class _ApptrackerState extends State<Apptracker> {
   bool _initialized = false;
   bool _error = false;
   bool loading = false;
-  bool _enabled = true;
-  int _status = 0;
   List<String> _events = [];
-
 
   void initializeFlutterFire() async {
     try {
@@ -86,6 +83,8 @@ class _ApptrackerState extends State<Apptracker> {
     initPlatformState();
   }
   Future<void> initPlatformState() async {
+    DeviceData.getUsageStats();
+    print('called in future -> ${GlobalData.app2Time}');
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String json = prefs.getString(EVENTS_KEY);
     if (json != null) {
@@ -107,11 +106,8 @@ class _ApptrackerState extends State<Apptracker> {
         requiredNetworkType: NetworkType.NONE,
       ), _onBackgroundFetch, _onBackgroundFetchTimeout);
       print('[BackgroundFetch] configure success: $status');
-      setState(() {
-        _status = status;
-      });
       BackgroundFetch.scheduleTask(TaskConfig(
-          taskId: "rikus-task",
+          taskId: "apptracking-task",
           delay: 10000,
           periodic: true,
           forceAlarmManager: true,
@@ -120,33 +116,32 @@ class _ApptrackerState extends State<Apptracker> {
       ));
     } catch(e) {
       print('[BackgroundFetch] configure ERROR: $e');
-      setState(() {
-        _status = e;
-      });
     }
     if (!mounted) return;
   }
   void _onBackgroundFetch(String taskId) async {
-    print('******************************************GETTING');
+    //work in this method
+    print('*****************************reference point for task called.');
+    DeviceData.getUsageStats();
+    print('called in func -> ${GlobalData.app2Time}');
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    DateTime timestamp = new DateTime.now();
-    print("[BackgroundFetch] Event received: $taskId");
     setState(() {
-      _events.insert(0, "$taskId@${timestamp.toString()}");
+      DeviceData.getUsageStats();
+      print('called in state -> ${GlobalData.app2Time}');
     });
     prefs.setString(EVENTS_KEY, jsonEncode(_events));
-    if (taskId == "rikus-task") {
+    if (taskId == "apptracking-task") {
       BackgroundFetch.configure(BackgroundFetchConfig(
           minimumFetchInterval: 3,
           stopOnTerminate: false,
           forceAlarmManager: true
       ), (String taskId) async {
         DeviceData.getUsageStats();
+        print('in config -> ${GlobalData.app2Time}');
         BackgroundFetch.finish(taskId);
       }, (String taskId) async {  BackgroundFetch.finish(taskId);  });
-
       BackgroundFetch.scheduleTask(TaskConfig(
-          taskId: "rikus-task",
+          taskId: "apptracking-task",
           delay: 10000,       // milliseconds
           periodic: true
       ));
@@ -157,42 +152,8 @@ class _ApptrackerState extends State<Apptracker> {
     print("[BackgroundFetch] TIMEOUT: $taskId");
     BackgroundFetch.finish(taskId);
   }
-  void _onClickEnable(enabled) {
-    print('***********************************************ENABLE');
-    setState(() {
-      _enabled = enabled;
-    });
-    if (enabled) {
-      BackgroundFetch.start().then((int status) {
-        print('[BackgroundFetch] start success: $status');
-      }).catchError((e) {
-        print('[BackgroundFetch] start FAILURE: $e');
-      });
-    } else {
-      BackgroundFetch.stop().then((int status) {
-        print('[BackgroundFetch] stop success: $status');
-      });
-    }
-  }
-  void _onClickStatus() async {
-    print('***********************************************STATUS');
-    int status = await BackgroundFetch.status;
-    print('[BackgroundFetch] status: $status');
-    setState(() {
-      _status = status;
-    });
-  }
-  void _onClickClear() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.remove(EVENTS_KEY);
-    setState(() {
-      _events = [];
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    const EMPTY_TEXT = Center(child: Text('Waiting for fetch events.  Simulate one.\n [Android] \$ ./scripts/simulate-fetch\n [iOS] XCode->Debug->Simulate Background Fetch'));
     loading = true;
     if(_error) {
       loading = false;
@@ -201,46 +162,9 @@ class _ApptrackerState extends State<Apptracker> {
       loading = true;
     }
     return StreamProvider<UserApptracker>.value(
-      // value: AuthService().signedInUser,
+      value: AuthService().signedInUser,
       child: MaterialApp(
-        home: new Scaffold(
-          appBar: new AppBar(
-              title: const Text('BackgroundFetch Example', style: TextStyle(color: Colors.black)),
-              backgroundColor: Colors.amberAccent,
-              brightness: Brightness.light,
-              actions: <Widget>[
-                Switch(value: _enabled, onChanged: _onClickEnable),
-              ]
-          ),
-          body: (_events.isEmpty) ? EMPTY_TEXT : Container(
-            child: new ListView.builder(
-                itemCount: _events.length,
-                itemBuilder: (BuildContext context, int index) {
-                  List<String> event = _events[index].split("@");
-                  return InputDecorator(
-                      decoration: InputDecoration(
-                          contentPadding: EdgeInsets.only(left: 5.0, top: 5.0, bottom: 5.0),
-                          labelStyle: TextStyle(color: Colors.blue, fontSize: 20.0),
-                          labelText: "[${event[0].toString()}]"
-                      ),
-                      child: new Text(event[1], style: TextStyle(color: Colors.black, fontSize: 16.0))
-                  );
-                }
-            ),
-          ),
-          bottomNavigationBar: BottomAppBar(
-              child: Container(
-                  padding: EdgeInsets.only(left: 5.0, right:5.0),
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        RaisedButton(onPressed: _onClickStatus, child: Text('Status: $_status')),
-                        RaisedButton(onPressed: _onClickClear, child: Text('Clear'))
-                      ]
-                  )
-              )
-          ),
-        ),
+        home: _initialized ? Traffic() : loading ? Loading() : Traffic(),
       ),
     );
   }

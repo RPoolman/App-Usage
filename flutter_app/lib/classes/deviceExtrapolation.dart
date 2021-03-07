@@ -6,16 +6,21 @@ class DeviceData {
 
   static void getUsageStats() async {
     try {
-      print('IM SLEEPING');
       DateTime endDate = new DateTime.now();
       DateTime dailyDate = endDate.subtract(new Duration(days: 1));
       List<AppUsageInfo> infoDayList = await AppUsage.getAppUsage(dailyDate, endDate);
       infoDayList.sort((a, b) => b.usage.inSeconds.compareTo(a.usage.inSeconds));
+      for (int x = 0; x < infoDayList.length; x++) {
+        if (infoDayList[x].appName == 'flutter_app') {
+          infoDayList.removeAt(x);
+        }
+      }
       infosDay = infoDayList;
       for(int i = 0; i < 5; i++){
         GlobalData.appsGraph[i] = infoDayList[i].usage.inHours;
       }
       for(int k = 0; k < infoDayList.length; k++){
+        GlobalData.applicationNameList.add(infoDayList[k].appName);
         GlobalData.applicationList.add((infoDayList[k].usage.inHours).toString() + ':' + (infoDayList[k].usage.inMinutes%60).toString().padLeft(2,'0'));
       }
       var listLen = infoDayList.length;

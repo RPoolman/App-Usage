@@ -1,9 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/classes/deviceExtrapolation.dart';
 import 'package:flutter_app/screens/homePage.dart';
-
-import 'deviceDataPage.dart';
-
+import 'package:flutter_app/screens/deviceDataPage.dart';
 import 'package:flutter_app/classes/deviceVars.dart';
 
 class StatScreen extends StatefulWidget {
@@ -12,6 +11,7 @@ class StatScreen extends StatefulWidget {
 }
 
 class _StatScreenState extends State<StatScreen> {
+  String chosenVal = "Select an Application";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,7 +55,7 @@ class _StatScreenState extends State<StatScreen> {
       body: Padding(
           padding: EdgeInsets.fromLTRB(30.0, 30.0, 30.0, 0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -78,46 +78,46 @@ class _StatScreenState extends State<StatScreen> {
             ),
             SizedBox(height: 20),
             Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Text(
                   'Daily Usage: ',
                   style: TextStyle(
                     color: Colors.indigo,
-                    fontSize: 18,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
                     letterSpacing: 1,
                   ),
                 ),
-                Text(
-                  GlobalData.applicationList[0],
-                  style: TextStyle( color: Colors.indigo, fontSize: 16, letterSpacing: 1, ),
-                ),
-                Text(
-                  GlobalData.applicationList[1],
-                  style: TextStyle( color: Colors.indigo, fontSize: 16, letterSpacing: 1, ),
-                ),
-                Text(
-                  GlobalData.applicationList[2],
-                  style: TextStyle( color: Colors.indigo, fontSize: 16, letterSpacing: 1, ),
-                ),
-                Text(
-                  GlobalData.applicationList[3],
-                  style: TextStyle( color: Colors.indigo, fontSize: 16, letterSpacing: 1, ),
-                ),
-                Text(
-                  GlobalData.applicationList[4],
-                  style: TextStyle( color: Colors.indigo, fontSize: 16, letterSpacing: 1, ),
-                ),
-                Text(
-                  GlobalData.applicationList[5],
-                  style: TextStyle( color: Colors.indigo, fontSize: 16, letterSpacing: 1, ),
-                ),
+                // DropdownButton (
+                //       value: chosenVal,
+                //       icon: Icon(Icons.arrow_downward),
+                //       iconSize: 24,
+                //       elevation: 16,
+                //       style: TextStyle(color: Colors.redAccent),
+                //       underline: Container(
+                //         height: 2,
+                //         color: Colors.indigo,
+                //       ),
+                //       onChanged: (String newValue) {
+                //         setState(() {
+                //           chosenVal = newValue;
+                //         });
+                //       },
+                //       items: GlobalData.applicationNameList
+                //           .map((app) {
+                //         return DropdownMenuItem(
+                //           value: app,
+                //           child: new Text(app,style: TextStyle(color: Colors.redAccent),),
+                //         );
+                //       }).toList(),
+                //     ),
                 SizedBox(height: 30,),
                 Text(
                       'Weekly Usage: ',
                       style: TextStyle(
                         color: Colors.indigo,
-                        fontSize: 18,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
                         letterSpacing: 1,
                       ),
                     ),
