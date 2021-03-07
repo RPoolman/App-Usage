@@ -35,11 +35,11 @@ void backgroundFetchHeadlessTask(HeadlessTask task) async {
   events.insert(0, "$taskId@$timestamp [Headless]");
   prefs.setString(EVENTS_KEY, jsonEncode(events));
 
-  if (taskId == 'flutter_background_fetch') {
+  if (taskId == "apptracking-task") {
     BackgroundFetch.scheduleTask(TaskConfig(
         taskId: "apptracking-task",
         delay: 5000,
-        periodic: false,
+        periodic: true,
         forceAlarmManager: false,
         stopOnTerminate: false,
         enableHeadless: true
@@ -84,7 +84,6 @@ class _ApptrackerState extends State<Apptracker> {
   }
   Future<void> initPlatformState() async {
     DeviceData.getUsageStats();
-    print('called in future -> ${GlobalData.app2Time}');
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String json = prefs.getString(EVENTS_KEY);
     if (json != null) {
@@ -132,9 +131,9 @@ class _ApptrackerState extends State<Apptracker> {
     prefs.setString(EVENTS_KEY, jsonEncode(_events));
     if (taskId == "apptracking-task") {
       BackgroundFetch.configure(BackgroundFetchConfig(
-          minimumFetchInterval: 3,
-          stopOnTerminate: false,
-          forceAlarmManager: true
+        minimumFetchInterval: 3,
+        enableHeadless: true,
+        stopOnTerminate: false
       ), (String taskId) async {
         DeviceData.getUsageStats();
         print('in config -> ${GlobalData.app2Time}');
