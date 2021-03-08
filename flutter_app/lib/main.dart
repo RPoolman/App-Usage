@@ -18,33 +18,26 @@ import 'services/traffic.dart';
 
 const EVENTS_KEY = "fetch_events";
 
+// This "Headless Task" is run when app is terminated
 void backgroundFetchHeadlessTask(HeadlessTask task) async {
   String taskId = task.taskId;
   bool timeout = task.timeout;
   if (timeout) {
+    print("[BackgroundFetch] Headless task timed-out: $taskId");
     BackgroundFetch.finish(taskId);
     return;
   }
-  DateTime timestamp = DateTime.now();
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  List<String> events = [];
-  String json = prefs.getString(EVENTS_KEY);
-  if (json != null) {
-    events = jsonDecode(json).cast<String>();
-  }
-  events.insert(0, "$taskId@$timestamp [Headless]");
-  prefs.setString(EVENTS_KEY, jsonEncode(events));
-
-  if (taskId == "apptracking-task") {
+  print("[BackgroundFetch] Headless event received: $taskId");
+  if (taskId == 'flutter_background_fetch') {
     BackgroundFetch.scheduleTask(TaskConfig(
-        taskId: "apptracking-task",
+        taskId: "com.example.flutter_app",
         delay: 5000,
-        periodic: true,
+        periodic: false,
         forceAlarmManager: false,
         stopOnTerminate: false,
         enableHeadless: true
     ));
-   }
+  }
   BackgroundFetch.finish(taskId);
 }
 
@@ -122,12 +115,8 @@ class _ApptrackerState extends State<Apptracker> {
     //work in this method
     print('*****************************reference point for task called.');
     DeviceData.getUsageStats();
-    print('called in func -> ${GlobalData.app2Time}');
+    print('called in func -> ${GlobalData.app1Time}');
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    setState(() {
-      DeviceData.getUsageStats();
-      print('called in state -> ${GlobalData.app2Time}');
-    });
     prefs.setString(EVENTS_KEY, jsonEncode(_events));
     if (taskId == "apptracking-task") {
       BackgroundFetch.configure(BackgroundFetchConfig(
