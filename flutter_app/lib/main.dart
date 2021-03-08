@@ -27,22 +27,10 @@ void backgroundFetchHeadlessTask(HeadlessTask task) async {
     BackgroundFetch.finish(taskId);
     return;
   }
-  print("[BackgroundFetch] Headless event received: $taskId");
-  if (taskId == 'flutter_background_fetch') {
-    BackgroundFetch.scheduleTask(TaskConfig(
-        taskId: "com.example.flutter_app",
-        delay: 5000,
-        periodic: false,
-        forceAlarmManager: false,
-        stopOnTerminate: false,
-        enableHeadless: true
-    ));
-  }
   BackgroundFetch.finish(taskId);
 }
 
 void main() {
-  WidgetsFlutterBinding.ensureInitialized();
   runApp(Apptracker());
   BackgroundFetch.registerHeadlessTask(backgroundFetchHeadlessTask);
 }
@@ -76,17 +64,9 @@ class _ApptrackerState extends State<Apptracker> {
     initPlatformState();
   }
   Future<void> initPlatformState() async {
-    DeviceData.getUsageStats();
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String json = prefs.getString(EVENTS_KEY);
-    if (json != null) {
-      setState(() {
-        _events = jsonDecode(json).cast<String>();
-      });
-    }
     try {
       int status = await BackgroundFetch.configure(BackgroundFetchConfig(
-        minimumFetchInterval: 1,
+        minimumFetchInterval: 3,
         forceAlarmManager: false,
         stopOnTerminate: false,
         startOnBoot: true,
@@ -100,44 +80,41 @@ class _ApptrackerState extends State<Apptracker> {
       print('[BackgroundFetch] configure success: $status');
       BackgroundFetch.scheduleTask(TaskConfig(
           taskId: "apptracking-task",
-          delay: 10000,
+          delay: 30000,
           periodic: true,
-          forceAlarmManager: true,
           stopOnTerminate: false,
-          enableHeadless: true
+          enableHeadless: true,
+          forceAlarmManager: true,
       ));
     } catch(e) {
       print('[BackgroundFetch] configure ERROR: $e');
     }
-    if (!mounted) return;
+    // if (!mounted) return;
   }
   void _onBackgroundFetch(String taskId) async {
-    //work in this method
-    print('*****************************reference point for task called.');
-    DeviceData.getUsageStats();
-    print('called in func -> ${GlobalData.app1Time}');
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString(EVENTS_KEY, jsonEncode(_events));
+    //shit happens in here... but not my shit.
+    DateTime timestamp = new DateTime.now();
+    print("[BackgroundFetch] Event received: $taskId");
+    setState(() {
+      print("Fired at: ${timestamp.toString()}");
+      DeviceData.endDate = timestamp;
+      DeviceData.getUsageStats();
+      print("App time: ${GlobalData.applicationList[0]}");
+    });
     if (taskId == "apptracking-task") {
-      BackgroundFetch.configure(BackgroundFetchConfig(
-        minimumFetchInterval: 3,
-        enableHeadless: true,
-        stopOnTerminate: false
-      ), (String taskId) async {
-        DeviceData.getUsageStats();
-        print('in config -> ${GlobalData.app2Time}');
-        BackgroundFetch.finish(taskId);
-      }, (String taskId) async {  BackgroundFetch.finish(taskId);  });
       BackgroundFetch.scheduleTask(TaskConfig(
-          taskId: "apptracking-task",
-          delay: 10000,       // milliseconds
-          periodic: true
+        taskId: "apptracking-task",
+        delay: 30000,
+        periodic: true,
+        stopOnTerminate: false,
+        enableHeadless: true,
+        forceAlarmManager: true,
       ));
+      setState(() {DeviceData.getUsageStats();});
     }
     BackgroundFetch.finish(taskId);
   }
   void _onBackgroundFetchTimeout(String taskId) {
-    print("[BackgroundFetch] TIMEOUT: $taskId");
     BackgroundFetch.finish(taskId);
   }
   @override
