@@ -26,13 +26,13 @@ dependencies:
   app_settings: 4.0.4
   app_usage: 1.2.0
   charts_flutter: 0.9.0
-  firebase_auth: 0.20.0
+  firebase_auth: 0.20.0+1
   cloud_firestore: 0.16.0
   firebase_core: 0.7.0
   provider: 4.3.3
   flutter_spinkit: 4.1.2
   background_fetch: 0.7.1
-  shared_preferences: 0.5.12
+  shared_preferences: 0.5.12+4
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

@@ -1,9 +1,8 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
-
 import 'package:firebase_core/firebase_core.dart';
-
 import 'package:flutter_app/models/user.dart';
 import 'package:flutter_app/services/servicesAuth.dart';
 import 'package:flutter_app/shared/loading.dart';
@@ -26,6 +25,15 @@ void backgroundFetchHeadlessTask(HeadlessTask task) async {
     BackgroundFetch.finish(taskId);
     return;
   }
+  DateTime timestamp = DateTime.now();
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  List<String> events = [];
+  String json = prefs.getString(EVENTS_KEY);
+  if (json != null) {
+    events = jsonDecode(json).cast<String>();
+  }
+  events.insert(0, "$taskId@$timestamp [Headless]");
+  prefs.setString(EVENTS_KEY, jsonEncode(events));
 
   if (taskId == "apptracking-task") {
     BackgroundFetch.scheduleTask(TaskConfig(
@@ -34,7 +42,7 @@ void backgroundFetchHeadlessTask(HeadlessTask task) async {
         periodic: true,
         forceAlarmManager: false,
         stopOnTerminate: false,
-        enableHeadless: true,
+        enableHeadless: true
     ));
    }
   BackgroundFetch.finish(taskId);
@@ -76,6 +84,13 @@ class _ApptrackerState extends State<Apptracker> {
   }
   Future<void> initPlatformState() async {
     DeviceData.getUsageStats();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String json = prefs.getString(EVENTS_KEY);
+    if (json != null) {
+      setState(() {
+        _events = jsonDecode(json).cast<String>();
+      });
+    }
     try {
       int status = await BackgroundFetch.configure(BackgroundFetchConfig(
         minimumFetchInterval: 1,
@@ -121,17 +136,13 @@ class _ApptrackerState extends State<Apptracker> {
         stopOnTerminate: false
       ), (String taskId) async {
         DeviceData.getUsageStats();
-        print('tester1 -> ${GlobalData.app2Time}');
+        print('in config -> ${GlobalData.app2Time}');
         BackgroundFetch.finish(taskId);
-      }, (String taskId) async {
-        DeviceData.getUsageStats();
-        print('tester2 -> ${GlobalData.app2Time}');
-        BackgroundFetch.finish(taskId);
-      });
+      }, (String taskId) async {  BackgroundFetch.finish(taskId);  });
       BackgroundFetch.scheduleTask(TaskConfig(
           taskId: "apptracking-task",
           delay: 10000,       // milliseconds
-          periodic: true,
+          periodic: true
       ));
     }
     BackgroundFetch.finish(taskId);
