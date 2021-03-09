@@ -1,5 +1,4 @@
 import 'package:app_usage/app_usage.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_app/classes/deviceVars.dart';
 
 class DeviceData {
