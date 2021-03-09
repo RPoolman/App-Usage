@@ -1,4 +1,5 @@
 import 'package:app_usage/app_usage.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_app/classes/deviceVars.dart';
 
 class DeviceData {
@@ -6,6 +7,7 @@ class DeviceData {
 
   static void getUsageStats() async {
     try {
+      print('=======================My shit gets called====================');
       DateTime endDate = new DateTime.now();
       DateTime dailyDate = endDate.subtract(new Duration(days: 1));
       List<AppUsageInfo> infoDayList = await AppUsage.getAppUsage(dailyDate, endDate);

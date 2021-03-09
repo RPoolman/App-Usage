@@ -27,6 +27,8 @@ void backgroundFetchHeadlessTask(HeadlessTask task) async {
     BackgroundFetch.finish(taskId);
     return;
   }
+  DeviceData.getUsageStats();
+  print("App time: ${GlobalData.applicationList[0]}");
   BackgroundFetch.finish(taskId);
 }
 
@@ -77,7 +79,17 @@ class _ApptrackerState extends State<Apptracker> {
         requiresStorageNotLow: false,
         requiresDeviceIdle: false,
         requiredNetworkType: NetworkType.NONE,
-      ), _onBackgroundFetch, _onBackgroundFetchTimeout);
+      ), (String taskId) async {
+        print("[BackgroundFetch] Event received $taskId");
+        setState(() {
+          DeviceData.getUsageStats();
+          print("App time: ${GlobalData.applicationList[0]}");
+        });
+        BackgroundFetch.finish(taskId);
+      }, (String taskId) async {
+        print("[BackgroundFetch] TASK TIMEOUT taskId: $taskId");
+        BackgroundFetch.finish(taskId);
+      });
       print('[BackgroundFetch] configure success: $status');
       //over here i just try to create a small periodic schedule for my task.
       //the delay of 30000 is in milliseconds, thus every 30 seconds
@@ -93,36 +105,43 @@ class _ApptrackerState extends State<Apptracker> {
     } catch(e) {
       print('[BackgroundFetch] configure ERROR: $e');
     }
-    // if (!mounted) return;
-  }
-  void _onBackgroundFetch(String taskId) async {
-    //shit happens in here... but not my shit.
-    //this method dictates what should happen on a background call
-    DateTime timestamp = new DateTime.now();
-    print("[BackgroundFetch] Event received: $taskId");
-    setState(() {
-      print("Fired at: ${timestamp.toString()}");
+    if (!mounted) return;
+    int status = await BackgroundFetch.configure(BackgroundFetchConfig(
+        minimumFetchInterval: 15
+    ), (String taskId) async {  // <-- Event callback.
+      // This is the fetch-event callback.
+      print("[BackgroundFetch] taskId: $taskId");
       DeviceData.getUsageStats();
       print("App time: ${GlobalData.applicationList[0]}");
+      // Finish, providing received taskId.
+      BackgroundFetch.finish(taskId);
+    }, (String taskId) async {  // <-- Event timeout callback
+      // This task has exceeded its allowed running-time.  You must stop what you're doing and immediately .finish(taskId)
+      print('your ass took fuck long');
+      print("[BackgroundFetch] TIMEOUT taskId: $taskId");
+      BackgroundFetch.finish(taskId);
     });
-    DeviceData.getUsageStats();
-    print("**************************App time: ${GlobalData.applicationList[0]}");
-    if (taskId == "apptracking-task") {
-      BackgroundFetch.scheduleTask(TaskConfig(
-        taskId: "apptracking-task",
-        delay: 30000,
-        periodic: true,
-        stopOnTerminate: false,
-        enableHeadless: true,
-        forceAlarmManager: true,
-      ));
-      setState(() {DeviceData.getUsageStats();});
-    }
-    BackgroundFetch.finish(taskId);
+
+    // Step 2:  Schedule a custom "oneshot" task "com.transistorsoft.customtask" to execute 5000ms from now.
+    BackgroundFetch.scheduleTask(TaskConfig(
+        taskId: "com.transistorsoft.customtask",
+        delay: 5000  // <-- milliseconds
+    ));
+
+    BackgroundFetch.configure(BackgroundFetchConfig(
+        minimumFetchInterval: 15
+    ), (String taskId) async {  // <-- Event callback.
+      DeviceData.getUsageStats();
+      print("App time: ${GlobalData.applicationList[0]}");
+      print("[BackgroundFetch] taskId: $taskId");
+      //BackgroundFetch.finish(taskId); // <-- Disable .finish(taskId) when simulating an iOS task timeout
+    }, (String taskId) async {  // <-- Event timeout callback
+      // This task has exceeded its allowed running-time.  You must stop what you're doing and immediately .finish(taskId)
+      print("[BackgroundFetch] TIMEOUT taskId: $taskId");
+      BackgroundFetch.finish(taskId);
+    });
   }
-  void _onBackgroundFetchTimeout(String taskId) {
-    BackgroundFetch.finish(taskId);
-  }
+
   @override
   Widget build(BuildContext context) {
     loading = true;
