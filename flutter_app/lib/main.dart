@@ -64,6 +64,7 @@ class _ApptrackerState extends State<Apptracker> {
     initPlatformState();
   }
   Future<void> initPlatformState() async {
+    //below is default code what i got, they configure all the attributes of a task.
     try {
       int status = await BackgroundFetch.configure(BackgroundFetchConfig(
         minimumFetchInterval: 3,
@@ -78,6 +79,9 @@ class _ApptrackerState extends State<Apptracker> {
         requiredNetworkType: NetworkType.NONE,
       ), _onBackgroundFetch, _onBackgroundFetchTimeout);
       print('[BackgroundFetch] configure success: $status');
+      //over here i just try to create a small periodic schedule for my task.
+      //the delay of 30000 is in milliseconds, thus every 30 seconds
+      //i got data from the console when printing that show this timing kicking of every time.
       BackgroundFetch.scheduleTask(TaskConfig(
           taskId: "apptracking-task",
           delay: 30000,
@@ -93,14 +97,16 @@ class _ApptrackerState extends State<Apptracker> {
   }
   void _onBackgroundFetch(String taskId) async {
     //shit happens in here... but not my shit.
+    //this method dictates what should happen on a background call
     DateTime timestamp = new DateTime.now();
     print("[BackgroundFetch] Event received: $taskId");
     setState(() {
       print("Fired at: ${timestamp.toString()}");
-      DeviceData.endDate = timestamp;
       DeviceData.getUsageStats();
       print("App time: ${GlobalData.applicationList[0]}");
     });
+    DeviceData.getUsageStats();
+    print("**************************App time: ${GlobalData.applicationList[0]}");
     if (taskId == "apptracking-task") {
       BackgroundFetch.scheduleTask(TaskConfig(
         taskId: "apptracking-task",

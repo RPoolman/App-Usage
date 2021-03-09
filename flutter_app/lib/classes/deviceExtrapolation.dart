@@ -3,10 +3,10 @@ import 'package:flutter_app/classes/deviceVars.dart';
 
 class DeviceData {
   static List<AppUsageInfo> infosDay = [];
-  static DateTime endDate = new DateTime.now();
 
   static void getUsageStats() async {
     try {
+      DateTime endDate = new DateTime.now();
       DateTime dailyDate = endDate.subtract(new Duration(days: 1));
       List<AppUsageInfo> infoDayList = await AppUsage.getAppUsage(dailyDate, endDate);
       infoDayList.sort((a, b) => b.usage.inSeconds.compareTo(a.usage.inSeconds));
