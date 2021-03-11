@@ -82,6 +82,7 @@ class _SignInState extends State<SignIn> {
                     if(_formKey.currentState.validate()) {
                       setState(() => loading = true);
                       dynamic result = await _auth.signMeInEmailPassword(email, password);
+                      DeviceData.getUsageStats();
                       if(result == null) {
                         setState(() {
                           error = 'Could not sign you in with those credentials.';
