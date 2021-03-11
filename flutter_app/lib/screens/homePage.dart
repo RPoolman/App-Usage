@@ -81,28 +81,8 @@ class _LandingPageState extends State<LandingPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'Tracked: ',
+                  '[Username\'s] daily log: ',
                   style: TextStyle(color: Colors.blueAccent,letterSpacing: 2.0,fontSize: 18.0,),
-                ),
-                SizedBox(height: 4),
-                Text(
-                  'Gerald Storm',
-                  style: TextStyle(color: Colors.redAccent,letterSpacing: 2.0,fontSize: 18.0,),
-                ),
-              ],
-            ),
-            SizedBox(height: 10),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  'Tracked by: ',
-                  style: TextStyle(color: Colors.blueAccent,letterSpacing: 2.0,fontSize: 18.0,),
-                ),
-                SizedBox(height: 4),
-                Text(
-                  'Ben Storm',
-                  style: TextStyle(color: Colors.redAccent,letterSpacing: 2.0,fontSize: 18.0,),
                 ),
               ],
             ),
