@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_app/models/user.dart';
+import 'package:flutter_app/services/database.dart';
 
 class AuthService {
 
@@ -28,16 +29,16 @@ class AuthService {
     try {
       UserCredential result = await _auth.createUserWithEmailAndPassword(email: emailIn, password: passwordIn);
       User currentUser = result.user;
+
+      //create new document for the user with the uid
+      await DatabaseService(uid: currentUser.uid).updateUserData('John', 'Derrik', ['nodata','notimedata']);
+
       return _userFromFirebaseUser(currentUser);
     } on FirebaseAuthException catch(e) {
       print(e.toString());
       return null;
     }
   }
-  //signing in with number
-
-  //register with number
-
   //signOut
   //this method name is unique from the one below, they do not touch the same areas
   Future signMeOut() async {

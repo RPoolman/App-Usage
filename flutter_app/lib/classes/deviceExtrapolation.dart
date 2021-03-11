@@ -17,6 +17,7 @@ class DeviceData {
       }
       for(int k = 0; k < infoDayList.length; k++){
         GlobalData.applicationList.add((infoDayList[k].usage.inHours).toString() + ':' + (infoDayList[k].usage.inMinutes%60).toString().padLeft(2,'0'));
+        GlobalData.applicationNameList.add(infoDayList[k].appName);
       }
       var listLen = infoDayList.length;
       switch(listLen) {
