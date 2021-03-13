@@ -30,8 +30,15 @@ class AuthService {
       UserCredential result = await _auth.createUserWithEmailAndPassword(email: emailIn, password: passwordIn);
       User currentUser = result.user;
 
-      //create new document for the user with the uid
-      await DatabaseService(uid: currentUser.uid).updateUserData('John', 'Derrik', ['nodata','notimedata']);
+      // List<String> times = GlobalData.applicationList;
+      // List<String> apps = GlobalData.applicationNameList;
+      // List<String> apptimes;
+      //   USER SOMEWHERE ELSE
+      // for(int i = 0; i < times.length; i++) {
+      //   apptimes.add(apps[i] + " -> " + times[i]);
+      // }
+
+      DatabaseService(uid: currentUser.uid).updateUserData('John', 'Derrik', null);
 
       return _userFromFirebaseUser(currentUser);
     } on FirebaseAuthException catch(e) {
