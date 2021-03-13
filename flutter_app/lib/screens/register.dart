@@ -1,8 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
 import 'package:flutter_app/screens/homePage.dart';
+
 import 'package:flutter_app/services/servicesAuth.dart';
+import 'package:flutter_app/services/database.dart';
+
 import 'package:flutter_app/shared/loading.dart';
+
+import 'package:flutter_app/classes/deviceVars.dart';
 import 'package:flutter_app/classes/deviceExtrapolation.dart';
 
 class Register extends StatefulWidget {
@@ -89,8 +95,17 @@ class _RegisterState extends State<Register> {
                             loading = false;
                           });
                         } else {
-                          setState(() => loading = false);
+                          setState(() {
+                            loading = false;
+                          });
                           DeviceData.getUsageStats();
+                          List<String> times = GlobalData.applicationList;
+                          List<String> apps = GlobalData.applicationNameList;
+                          List<String> apptimes = [];
+                          for(int i = 0; i < times.length; i++) {
+                            apptimes.add(apps[i] + " -> " + times[i]);
+                          }
+                          DatabaseService(uid: GlobalData.loggedInUserID).updateUserData('ged', 'dfg', apptimes);
                           Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => LandingPage()));
                         }
                       }

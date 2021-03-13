@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_app/models/user.dart';
-import 'package:flutter_app/services/database.dart';
+import 'package:flutter_app/classes/deviceVars.dart';
 
 class AuthService {
 
@@ -18,9 +18,13 @@ class AuthService {
     try {
       UserCredential result = await _auth.signInWithEmailAndPassword(email: emailIn, password: passwordIn);
       User currentUser = result.user;
+
+      GlobalData.loggedInUserID = currentUser.uid;
+
       return _userFromFirebaseUser(currentUser);
     } on FirebaseAuthException catch(e) {
       print(e.toString());
+      GlobalData.loggedInUserID = null;
       return null;
     }
   }
@@ -30,19 +34,12 @@ class AuthService {
       UserCredential result = await _auth.createUserWithEmailAndPassword(email: emailIn, password: passwordIn);
       User currentUser = result.user;
 
-      // List<String> times = GlobalData.applicationList;
-      // List<String> apps = GlobalData.applicationNameList;
-      // List<String> apptimes;
-      //   USER SOMEWHERE ELSE
-      // for(int i = 0; i < times.length; i++) {
-      //   apptimes.add(apps[i] + " -> " + times[i]);
-      // }
-
-      DatabaseService(uid: currentUser.uid).updateUserData('John', 'Derrik', null);
+      GlobalData.loggedInUserID = currentUser.uid;
 
       return _userFromFirebaseUser(currentUser);
     } on FirebaseAuthException catch(e) {
       print(e.toString());
+      GlobalData.loggedInUserID = null;
       return null;
     }
   }

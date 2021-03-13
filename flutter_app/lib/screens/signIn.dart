@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/screens/homePage.dart';
-import 'package:flutter_app/services/servicesAuth.dart';
-import 'package:flutter_app/shared/loading.dart';
-import 'package:flutter_app/classes/deviceExtrapolation.dart';
+
 import 'package:flutter_app/classes/deviceVars.dart';
+import 'package:flutter_app/classes/deviceExtrapolation.dart';
+
+import 'package:flutter_app/screens/homePage.dart';
+
+import 'package:flutter_app/services/servicesAuth.dart';
+import 'package:flutter_app/services/database.dart';
+
+import 'package:flutter_app/shared/loading.dart';
 
 class SignIn extends StatefulWidget {
 
@@ -90,6 +95,14 @@ class _SignInState extends State<SignIn> {
                       } else {
                         loading = false;
                         DeviceData.getUsageStats();
+                        List<String> times = GlobalData.applicationList;
+                        List<String> apps = GlobalData.applicationNameList;
+                        List<String> apptimes = [];
+                        for(int i = 0; i < times.length; i++) {
+                          apptimes.add(apps[i] + " -> " + times[i]);
+                        }
+                        DatabaseService(uid: GlobalData.loggedInUserID).updateUserData('Signal', 'Strength', apptimes);
+
                         Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => LandingPage()));
                       }
                     }

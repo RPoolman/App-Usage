@@ -1,4 +1,6 @@
 class GlobalData {
+  //user id to link to what to save
+  static String loggedInUserID;
   //string variables for other screens
   static String app1Name = "";
   static String app2Name = "";

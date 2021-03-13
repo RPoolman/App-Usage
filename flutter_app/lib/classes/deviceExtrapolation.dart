@@ -6,12 +6,14 @@ class DeviceData {
 
   static void getUsageStats() async {
     try {
+
       DateTime endDate = new DateTime.now();
       DateTime dailyDate = endDate.subtract(new Duration(days: 1));
       List<AppUsageInfo> infoDayList = await AppUsage.getAppUsage(dailyDate, endDate);
       infoDayList.sort((a, b) => b.usage.inSeconds.compareTo(a.usage.inSeconds));
 
       infosDay = infoDayList;
+
       for(int i = 0; i < 5; i++){
         GlobalData.appsGraph[i] = infoDayList[i].usage.inHours;
       }
@@ -19,6 +21,7 @@ class DeviceData {
         GlobalData.applicationList.add((infoDayList[k].usage.inHours).toString() + ':' + (infoDayList[k].usage.inMinutes%60).toString().padLeft(2,'0'));
         GlobalData.applicationNameList.add(infoDayList[k].appName);
       }
+
       var listLen = infoDayList.length;
       switch(listLen) {
         case 0: { GlobalData.app1Name = ""; }
