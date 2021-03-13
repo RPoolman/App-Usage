@@ -86,7 +86,7 @@ class _LandingPageState extends State<LandingPage> {
                 ),
                 SizedBox(height: 4),
                 Text(
-                  'Gerald Storm',
+                  GlobalData.userTrackedName,
                   style: TextStyle(color: Colors.redAccent,letterSpacing: 2.0,fontSize: 18.0,),
                 ),
               ],
@@ -101,7 +101,7 @@ class _LandingPageState extends State<LandingPage> {
                 ),
                 SizedBox(height: 4),
                 Text(
-                  'Ben Storm',
+                  GlobalData.userTrackingName,
                   style: TextStyle(color: Colors.redAccent,letterSpacing: 2.0,fontSize: 18.0,),
                 ),
               ],

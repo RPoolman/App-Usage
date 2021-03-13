@@ -1,4 +1,8 @@
 class GlobalData {
+
+  static String userTrackedName = '';
+  static String userTrackingName = '';
+
   //string variables for other screens
   static String app1Name = "";
   static String app2Name = "";
