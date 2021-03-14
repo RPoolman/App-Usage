@@ -3,10 +3,8 @@ import 'package:flutter_app/classes/deviceVars.dart';
 
 class DeviceData {
   static List<AppUsageInfo> infosDay = [];
-
   static void getUsageStats() async {
     try {
-
       DateTime endDate = new DateTime.now();
       DateTime dailyDate = endDate.subtract(new Duration(days: 1));
       List<AppUsageInfo> infoDayList = await AppUsage.getAppUsage(dailyDate, endDate);
@@ -22,6 +20,9 @@ class DeviceData {
       for(int i = 0; i < 5; i++){
         GlobalData.appsGraphHours[i] = (infoDayList[i].usage.inSeconds/3600).round();
       }
+      //the for loop below might not get called, yet the method is called.
+      //printing out from within the loop prints out the line twice with something in between the calls
+      //uid=10136(com.example.flutter_app) 1.ui identical 6 lines -> got printed between them.
       for(int k = 0; k < infoDayList.length; k++){
         GlobalData.applicationList.add((infoDayList[k].usage.inHours).toString() + ':' + (infoDayList[k].usage.inMinutes%60).toString().padLeft(2,'0'));
         GlobalData.applicationNameList.add(infoDayList[k].appName);
@@ -51,6 +52,35 @@ class DeviceData {
           GlobalData.app3Name = infoDayList[2].appName;
           GlobalData.app3Time = (infoDayList[2].usage.inHours).toString() + ':' + (infoDayList[2].usage.inMinutes%60).toString().padLeft(2,'0');
         }
+      }
+    } on AppUsageException catch (exception) {
+      print(exception);
+    }
+  }
+  static void refreshUsageStats() async {
+    try {
+      DateTime endDate = new DateTime.now();
+      DateTime dailyDate = endDate.subtract(new Duration(days: 1));
+      List<AppUsageInfo> infoDayList = await AppUsage.getAppUsage(
+          dailyDate, endDate);
+      infoDayList.sort((a, b) =>
+          b.usage.inSeconds.compareTo(a.usage.inSeconds));
+
+      infosDay = infoDayList;
+
+      for (int x = 0; x < infoDayList.length; x++) {
+        if (infoDayList[x].appName == "flutter_app") {
+          infoDayList.removeAt(x);
+        }
+      }
+      GlobalData.applicationList = [];
+      GlobalData.applicationNameList = [];
+      for (int k = 0; k < infoDayList.length; k++) {
+        GlobalData.applicationList.add(
+            (infoDayList[k].usage.inHours).toString() + ':' +
+                (infoDayList[k].usage.inMinutes % 60).toString().padLeft(
+                    2, '0'));
+        GlobalData.applicationNameList.add(infoDayList[k].appName);
       }
     } on AppUsageException catch (exception) {
       print(exception);

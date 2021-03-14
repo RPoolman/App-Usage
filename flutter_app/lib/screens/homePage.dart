@@ -12,7 +12,6 @@ import 'package:flutter_app/screens/analiticsPage.dart';
 
 import 'package:flutter_app/classes/deviceVars.dart';
 import 'package:flutter_app/classes/dataChart.dart';
-import 'package:flutter_app/classes/deviceExtrapolation.dart';
 
 class LandingPage extends StatefulWidget {
   @override
@@ -20,8 +19,6 @@ class LandingPage extends StatefulWidget {
 }
 class _LandingPageState extends State<LandingPage> {
   final AuthService _auth = AuthService();
-  @override
-  void initState() {  DeviceData.getUsageStats();  }
   @override
   Widget build(BuildContext context) {
     return StreamProvider<QuerySnapshot>.value(

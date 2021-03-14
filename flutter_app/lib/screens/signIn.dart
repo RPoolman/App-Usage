@@ -88,7 +88,6 @@ class _SignInState extends State<SignIn> {
                     if(_formKey.currentState.validate()) {
                       setState(() => loading = true);
                       dynamic result = await _auth.signMeInEmailPassword(email, password);
-                      DeviceData.getUsageStats();
                       if(result == null) {
                         setState(() {
                           error = 'Could not sign you in with those credentials.';
@@ -96,26 +95,23 @@ class _SignInState extends State<SignIn> {
                         });
                       } else {
                         loading = false;
-                        DeviceData.getUsageStats();
-
-                        return new StreamBuilder<DocumentSnapshot>(
-                          stream: FirebaseFirestore.instance
-                              .collection('users')
-                              .doc(GlobalData.loggedInUserID)
-                              .snapshots(),
-                          builder: (context, snapshot) {
-                          if (!snapshot.hasData) {
-                            return new Text("Loading");
-                          } else {
-                            Map<String, dynamic> documentFields = snapshot.data.data();
-                            GlobalData.userTrackedName =  documentFields["username"];
-                            GlobalData.userTrackingName = documentFields["usertrackname"];
-                          }
-                        });
+                        await DeviceData.getUsageStats();
+                        // return new StreamBuilder<DocumentSnapshot>(
+                        //   stream: FirebaseFirestore.instance
+                        //       .collection('users')
+                        //       .doc(GlobalData.loggedInUserID)
+                        //       .snapshots(),
+                        //   builder: (context, snapshot) {
+                        //   if (!snapshot.hasData) {
+                        //     return new Text("Loading");
+                        //   } else {
+                        //     Map<String, dynamic> documentFields = snapshot.data.data();
+                        //     GlobalData.userTrackedName =  documentFields["username"];
+                        //     GlobalData.userTrackingName = documentFields["usertrackname"];
+                        //     return null;
+                        //   }
+                        // });
                         }
-
-                      // DatabaseService(uid: GlobalData.loggedInUserID).updateUserData(GlobalData.userTrackingName, GlobalData.userTrackedName, apptimes);
-
                         Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => LandingPage()));
                       }
                     }

@@ -64,7 +64,7 @@ class _DeviceAppsState extends State<DeviceApps> {
             },),
       floatingActionButton: FloatingActionButton(
         onPressed:
-        DeviceData.getUsageStats,
+        DeviceData.refreshUsageStats,
         child: Icon(Icons.refresh),
         backgroundColor: Colors.redAccent,
         foregroundColor: Colors.white,

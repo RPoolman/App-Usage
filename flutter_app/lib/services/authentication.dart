@@ -17,8 +17,6 @@ class _AuthenticationState extends State<Authentication> {
 
   @override
   Widget build(BuildContext context) {
-
-    DeviceData.getUsageStats();
     if(userSignIn) {
       return SignIn(view: toggleView);
     } else {
