@@ -3,7 +3,6 @@ import 'package:flutter_app/screens/homePage.dart';
 import 'package:flutter_app/services/servicesAuth.dart';
 import 'package:flutter_app/shared/loading.dart';
 import 'package:flutter_app/classes/deviceExtrapolation.dart';
-import 'package:flutter_app/classes/deviceVars.dart';
 
 class SignIn extends StatefulWidget {
 
@@ -82,6 +81,7 @@ class _SignInState extends State<SignIn> {
                     if(_formKey.currentState.validate()) {
                       setState(() => loading = true);
                       dynamic result = await _auth.signMeInEmailPassword(email, password);
+                      DeviceData.getUsageStats();
                       if(result == null) {
                         setState(() {
                           error = 'Could not sign you in with those credentials.';

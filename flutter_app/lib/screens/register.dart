@@ -27,18 +27,18 @@ class _RegisterState extends State<Register> {
   @override
   Widget build(BuildContext context) {
     return loading ? Loading() : Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.blue,
       appBar: AppBar(
-        backgroundColor: Colors.indigo,
+        backgroundColor: Colors.white,
         elevation: 0.0,
-        title: Text('Register for AppTracker'),
+        title: Text('Register for AppTracker',style: TextStyle(color: Colors.indigo),),
         actions: <Widget>[
           FlatButton.icon(
             onPressed: () async {
               widget.view();
             },
-            icon: Icon(Icons.person, color: Colors.white,),
-            label: Text('Sign In', style: TextStyle(color: Colors.white)),
+            icon: Icon(Icons.person, color: Colors.indigo,),
+            label: Text('Sign In', style: TextStyle(color: Colors.indigo)),
           )
         ],
       ),
@@ -50,7 +50,7 @@ class _RegisterState extends State<Register> {
             child: Column(
               children: <Widget>[
                 SizedBox(height: 20.0),
-                Text('Enter your email below to REGISTER:',style: TextStyle(fontSize: 20),),
+                Text('Enter your email below to register:',style: TextStyle(fontSize: 20),),
                 TextFormField(
                   decoration: InputDecoration(
                     hintText: 'Enter your email here',
@@ -74,7 +74,7 @@ class _RegisterState extends State<Register> {
                 ),
                 SizedBox(height: 20.0),
                 RaisedButton(
-                    color: Colors.blue,
+                    color: Colors.indigo,
                     child: Text(
                       'Register',
                       style: TextStyle(color: Colors.white),

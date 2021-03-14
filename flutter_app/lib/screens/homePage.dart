@@ -81,28 +81,8 @@ class _LandingPageState extends State<LandingPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'Tracked: ',
+                  '[Username\'s] daily log: ',
                   style: TextStyle(color: Colors.blueAccent,letterSpacing: 2.0,fontSize: 18.0,),
-                ),
-                SizedBox(height: 4),
-                Text(
-                  'Gerald Storm',
-                  style: TextStyle(color: Colors.redAccent,letterSpacing: 2.0,fontSize: 18.0,),
-                ),
-              ],
-            ),
-            SizedBox(height: 10),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  'Tracked by: ',
-                  style: TextStyle(color: Colors.blueAccent,letterSpacing: 2.0,fontSize: 18.0,),
-                ),
-                SizedBox(height: 4),
-                Text(
-                  'Ben Storm',
-                  style: TextStyle(color: Colors.redAccent,letterSpacing: 2.0,fontSize: 18.0,),
                 ),
               ],
             ),
@@ -127,103 +107,105 @@ class _LandingPageState extends State<LandingPage> {
               ],
             ),
             SizedBox(height: 20),
-            Row(
-              //implement a listview builder with horizontal scrollable axis to ensure that data can be fully seen, follow steps used in deviceDataPage when generating a list view.
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Column(
-                  children: [
-                    Text(
-                      GlobalData.app1Name,
-                      style: TextStyle(
-                        color: Colors.redAccent,
-                        fontSize: 18,
-                        letterSpacing: 1,
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+               mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Column(
+                    children: [
+                      Text(
+                        GlobalData.app1Name,
+                        style: TextStyle(
+                          color: Colors.redAccent,
+                          fontSize: 18,
+                          letterSpacing: 1,
+                        ),
                       ),
-                    ),
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.app_blocking,
-                          color: Colors.blueAccent,
-                          size: 30,
-                        ),
-                        SizedBox(width: 10,),
-                        Text(
-                          GlobalData.app1Time,
-                          style: TextStyle(
-                            color: Colors.redAccent,
-                            fontSize: 18,
-                            letterSpacing: 1,
+                      Row(
+                        children: [
+                          Icon(
+                            Icons.app_blocking,
+                            color: Colors.blueAccent,
+                            size: 30,
                           ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-                SizedBox(width: 20),
-                Column(
-                  children: [
-                    Text(
-                      GlobalData.app2Name,
-                      style: TextStyle(
-                        color: Colors.redAccent,
-                        fontSize: 18,
-                        letterSpacing: 1,
+                          SizedBox(width: 10,),
+                          Text(
+                            GlobalData.app1Time,
+                            style: TextStyle(
+                              color: Colors.redAccent,
+                              fontSize: 18,
+                              letterSpacing: 1,
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.app_blocking,
-                          color: Colors.blueAccent,
-                          size: 30,
+                    ],
+                  ),
+                  SizedBox(width: 20),
+                  Column(
+                    children: [
+                      Text(
+                        GlobalData.app2Name,
+                        style: TextStyle(
+                          color: Colors.redAccent,
+                          fontSize: 18,
+                          letterSpacing: 1,
                         ),
-                        SizedBox(width: 10,),
-                        Text(
-                          GlobalData.app2Time,
-                          style: TextStyle(
-                            color: Colors.redAccent,
-                            fontSize: 18,
-                            letterSpacing: 1,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-                SizedBox(width: 20),
-                Column(
-                  children: [
-                    Text(
-                      GlobalData.app3Name,
-                      style: TextStyle(
-                        color: Colors.redAccent,
-                        fontSize: 18,
-                        letterSpacing: 1,
                       ),
-                    ),
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.app_blocking,
-                          color: Colors.blueAccent,
-                          size: 30,
-                        ),
-                        SizedBox(width: 10,),
-                        Text(
-                          GlobalData.app3Time,
-                          style: TextStyle(
-                            color: Colors.redAccent,
-                            fontSize: 18,
-                            letterSpacing: 1,
+                      Row(
+                        children: [
+                          Icon(
+                            Icons.app_blocking,
+                            color: Colors.blueAccent,
+                            size: 30,
                           ),
+                          SizedBox(width: 10,),
+                          Text(
+                            GlobalData.app2Time,
+                            style: TextStyle(
+                              color: Colors.redAccent,
+                              fontSize: 18,
+                              letterSpacing: 1,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  SizedBox(width: 20),
+                  Column(
+                    children: [
+                      Text(
+                        GlobalData.app3Name,
+                        style: TextStyle(
+                          color: Colors.redAccent,
+                          fontSize: 18,
+                          letterSpacing: 1,
                         ),
-                      ],
-                    ),
-                  ],
-                ),
-              ],
+                      ),
+                      Row(
+                        children: [
+                          Icon(
+                            Icons.app_blocking,
+                            color: Colors.blueAccent,
+                            size: 30,
+                          ),
+                          SizedBox(width: 10,),
+                          Text(
+                            GlobalData.app3Time,
+                            style: TextStyle(
+                              color: Colors.redAccent,
+                              fontSize: 18,
+                              letterSpacing: 1,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
             SizedBox(height: 40,),
             Column(
