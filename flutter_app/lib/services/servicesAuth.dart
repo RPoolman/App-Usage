@@ -13,7 +13,6 @@ class AuthService {
   Stream<UserApptracker> get signedInUser {
     return _auth.authStateChanges().map(_userFromFirebaseUser);
   }
-  //signin email/password
   Future signMeInEmailPassword(String emailIn, String passwordIn) async {
     try {
       UserCredential result = await _auth.signInWithEmailAndPassword(email: emailIn, password: passwordIn);
@@ -28,7 +27,6 @@ class AuthService {
       return null;
     }
   }
-  //register email/password
   Future registerMeWithEmailPassword(String emailIn, String passwordIn) async {
     try {
       UserCredential result = await _auth.createUserWithEmailAndPassword(email: emailIn, password: passwordIn);
@@ -43,8 +41,6 @@ class AuthService {
       return null;
     }
   }
-  //signOut
-  //this method name is unique from the one below, they do not touch the same areas
   Future signMeOut() async {
     try {
       return await _auth.signOut();

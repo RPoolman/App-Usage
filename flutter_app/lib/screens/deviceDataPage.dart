@@ -55,7 +55,7 @@ class _DeviceAppsState extends State<DeviceApps> {
           padding: EdgeInsets.fromLTRB(30.0, 30.0, 30.0, 0),
             itemCount: DeviceData.infosDay.length,
             itemBuilder: (context, index) {
-              if ((DeviceData.infosDay[index].usage.inMinutes) > 5) {
+              if ((DeviceData.infosDay[index].usage.inMinutes) > 1) {
                 return ListTile(
                     title: Text(DeviceData.infosDay[index].appName, style: TextStyle(color: Colors.indigo,letterSpacing: 1.5,fontSize: 18.0,),),
                     trailing: Text((DeviceData.infosDay[index].usage.inHours).toString() + ':' + (DeviceData.infosDay[index].usage.inMinutes%60).toString().padLeft(2,'0'),style: TextStyle(color: Colors.redAccent,letterSpacing: 1.5,fontSize: 18.0,),),

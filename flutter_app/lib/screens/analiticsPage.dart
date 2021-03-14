@@ -55,16 +55,18 @@ class _StatScreenState extends State<StatScreen> {
       body: Padding(
           padding: EdgeInsets.fromLTRB(30.0, 30.0, 30.0, 0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Column(
-                  children: [
-                    Text(
-                      'Gerald Storm',
-                      style: TextStyle(color: Colors.indigo,letterSpacing: 2.0,fontSize: 22.0,),
+                  children: <Widget>[
+                    Flexible(
+                      child: Text(
+                        GlobalData.userTrackedName + '\'s usage thus far:',
+                        style: TextStyle(color: Colors.indigo,letterSpacing: 2.0,fontSize: 22.0,),
+                      ),
                     ),
                     SizedBox(height: 20),
                     Icon(
@@ -78,46 +80,24 @@ class _StatScreenState extends State<StatScreen> {
             ),
             SizedBox(height: 20),
             Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Text(
                   'Daily Usage: ',
                   style: TextStyle(
                     color: Colors.indigo,
-                    fontSize: 18,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
                     letterSpacing: 1,
                   ),
-                ),
-                Text(
-                  GlobalData.applicationList[0],
-                  style: TextStyle( color: Colors.indigo, fontSize: 16, letterSpacing: 1, ),
-                ),
-                Text(
-                  GlobalData.applicationList[1],
-                  style: TextStyle( color: Colors.indigo, fontSize: 16, letterSpacing: 1, ),
-                ),
-                Text(
-                  GlobalData.applicationList[2],
-                  style: TextStyle( color: Colors.indigo, fontSize: 16, letterSpacing: 1, ),
-                ),
-                Text(
-                  GlobalData.applicationList[3],
-                  style: TextStyle( color: Colors.indigo, fontSize: 16, letterSpacing: 1, ),
-                ),
-                Text(
-                  GlobalData.applicationList[4],
-                  style: TextStyle( color: Colors.indigo, fontSize: 16, letterSpacing: 1, ),
-                ),
-                Text(
-                  GlobalData.applicationList[5],
-                  style: TextStyle( color: Colors.indigo, fontSize: 16, letterSpacing: 1, ),
                 ),
                 SizedBox(height: 30,),
                 Text(
                       'Weekly Usage: ',
                       style: TextStyle(
                         color: Colors.indigo,
-                        fontSize: 18,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
                         letterSpacing: 1,
                       ),
                     ),

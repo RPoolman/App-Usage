@@ -47,95 +47,67 @@ class _LandingPageState extends State<LandingPage> {
             )
           ],
         ),
-        bottomNavigationBar: BottomAppBar(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              IconButton(icon: Icon(Icons.home), onPressed: () {
-                Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(builder: (context) => LandingPage()),
-                        (route) => false
-                );},
-              ),
-              SizedBox(width: 20,),
-              IconButton(icon: Icon(Icons.list_alt), onPressed: () {
-                Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(builder: (context) => DeviceApps()),
-                        (route) => false
-                );},
-              ),
-              SizedBox(width: 20,),
-              IconButton(icon: Icon(Icons.person), onPressed: () {
-                Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(builder: (context) => StatScreen()),
-                        (route) => false
-                );},
-              ),
-            ],
-          ),
-        ),
-        body:
-        Padding(
-          padding: EdgeInsets.fromLTRB(30.0, 30.0, 30.0, 0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Tracked: ',
-                    style: TextStyle(color: Colors.blueAccent,letterSpacing: 2.0,fontSize: 18.0,),
+      ),
+      body:
+      Padding(
+        padding: EdgeInsets.fromLTRB(30.0, 30.0, 30.0, 0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Tracked: ',
+                  style: TextStyle(color: Colors.blueAccent,letterSpacing: 2.0,fontSize: 18.0,),
+                ),
+                SizedBox(height: 4),
+                Text(
+                  GlobalData.userTrackedName,
+                  style: TextStyle(color: Colors.redAccent,letterSpacing: 2.0,fontSize: 18.0,),
+                ),
+              ],
+            ),
+            SizedBox(height: 10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Tracked by: ',
+                  style: TextStyle(color: Colors.blueAccent,letterSpacing: 2.0,fontSize: 18.0,),
+                ),
+                SizedBox(height: 4),
+                Text(
+                  GlobalData.userTrackingName,
+                  style: TextStyle(color: Colors.redAccent,letterSpacing: 2.0,fontSize: 18.0,),
+                ),
+              ],
+            ),
+            SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Icon(
+                  Icons.timer_sharp,
+                  color: Colors.blueAccent,
+                  size: 50,
+                ),
+                SizedBox(width: 10,),
+                Text(
+                  'Most Used Apps',
+                  style: TextStyle(
+                    color: Colors.redAccent,
+                    fontSize: 22,
+                    letterSpacing: 1,
                   ),
-                  SizedBox(height: 4),
-                  Text(
-                    'Gerald Storm',
-                    style: TextStyle(color: Colors.redAccent,letterSpacing: 2.0,fontSize: 18.0,),
-                  ),
-                ],
-              ),
-              SizedBox(height: 10),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Tracked by: ',
-                    style: TextStyle(color: Colors.blueAccent,letterSpacing: 2.0,fontSize: 18.0,),
-                  ),
-                  SizedBox(height: 4),
-                  Text(
-                    'Ben Storm',
-                    style: TextStyle(color: Colors.redAccent,letterSpacing: 2.0,fontSize: 18.0,),
-                  ),
-                ],
-              ),
-              SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Icon(
-                    Icons.timer_sharp,
-                    color: Colors.blueAccent,
-                    size: 50,
-                  ),
-                  SizedBox(width: 10,),
-                  Text(
-                    'Most Used Apps',
-                    style: TextStyle(
-                      color: Colors.redAccent,
-                      fontSize: 22,
-                      letterSpacing: 1,
-                    ),
-                  )
-                ],
-              ),
-              SizedBox(height: 20),
-              Row(
-                //implement a listview builder with horizontal scrollable axis to ensure that data can be fully seen, follow steps used in deviceDataPage when generating a list view.
-                mainAxisAlignment: MainAxisAlignment.center,
+                )
+              ],
+            ),
+            SizedBox(height: 20),
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+               mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Column(
                     children: [
@@ -231,17 +203,17 @@ class _LandingPageState extends State<LandingPage> {
                   ),
                 ],
               ),
-              SizedBox(height: 40,),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Padding(
-                    padding: EdgeInsets.all(10),
-                    child: SizedBox(
-                      height:250,
-                      child: PointsLineChart(
-                        PointsLineChart.createSampleData(), animate: false,
-                      ),
+            ),
+            SizedBox(height: 40,),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Padding(
+                  padding: EdgeInsets.all(10),
+                  child: SizedBox(
+                    height:250,
+                    child: PointsLineChart(
+                      PointsLineChart.createSampleData(), animate: false,
                     ),
                   ),
                 ],
