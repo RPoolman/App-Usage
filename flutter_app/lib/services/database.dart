@@ -6,7 +6,7 @@ class DatabaseService {
   DatabaseService({ this.uid });
 
   //collection reference
-  final CollectionReference userCollection = FirebaseFirestore.instance.collection('users');
+  static CollectionReference userCollection = FirebaseFirestore.instance.collection('users');
 
   Future updateUserData(String uName, String uTName, List<String> appTimes) async {
     return await userCollection.doc(uid).set({
@@ -14,10 +14,10 @@ class DatabaseService {
       'usertrackname':uTName,
       'applicationsList':appTimes
     },
-    SetOptions(merge: true),);
+      SetOptions(merge: true),);
   }
   
-  //get the data stream
+  //get snapshot
   Stream<QuerySnapshot> get userShot {
     return userCollection.snapshots();
   }

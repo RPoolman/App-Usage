@@ -47,7 +47,36 @@ class _LandingPageState extends State<LandingPage> {
             )
           ],
         ),
-      ),
+        bottomNavigationBar: BottomAppBar(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              IconButton(icon: Icon(Icons.home), onPressed: () {
+                Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (context) => LandingPage()),
+                        (route) => false
+                );},
+              ),
+              SizedBox(width: 20,),
+              IconButton(icon: Icon(Icons.list_alt), onPressed: () {
+                Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (context) => DeviceApps()),
+                        (route) => false
+                );},
+              ),
+              SizedBox(width: 20,),
+              IconButton(icon: Icon(Icons.person), onPressed: () {
+                Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (context) => StatScreen()),
+                        (route) => false
+                );},
+              ),
+            ],
+          ),
+        ),
       body:
       Padding(
         padding: EdgeInsets.fromLTRB(30.0, 30.0, 30.0, 0),
@@ -216,7 +245,7 @@ class _LandingPageState extends State<LandingPage> {
                       PointsLineChart.createSampleData(), animate: false,
                     ),
                   ),
-                ],
+                ),],
               ),
             ],
           ),

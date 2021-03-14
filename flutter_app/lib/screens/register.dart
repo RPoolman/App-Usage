@@ -150,7 +150,7 @@ class _RegisterState extends State<Register> {
                           for(int i = 0; i < times.length; i++) {
                             apptimes.add(apps[i] + " -> " + times[i]);
                           }
-                          DatabaseService(uid: GlobalData.loggedInUserID).updateUserData('ged', 'dfg', apptimes);
+                          DatabaseService(uid: GlobalData.loggedInUserID).updateUserData(GlobalData.userTrackingName, GlobalData.userTrackedName, apptimes);
                           Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => LandingPage()));
                         }
                       }

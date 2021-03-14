@@ -62,11 +62,9 @@ class _StatScreenState extends State<StatScreen> {
               children: [
                 Column(
                   children: <Widget>[
-                    Flexible(
-                      child: Text(
-                        GlobalData.userTrackedName + '\'s usage thus far:',
-                        style: TextStyle(color: Colors.indigo,letterSpacing: 2.0,fontSize: 22.0,),
-                      ),
+                    Text(
+                      GlobalData.userTrackedName + '\'s usage thus far:',
+                      style: TextStyle(color: Colors.indigo,letterSpacing: 2.0,fontSize: 22.0,),
                     ),
                     SizedBox(height: 20),
                     Icon(

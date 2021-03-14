@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-import 'package:flutter_app/classes/deviceVars.dart';
 import 'package:flutter_app/classes/deviceExtrapolation.dart';
+import 'package:flutter_app/classes/deviceVars.dart';
 
 import 'package:flutter_app/screens/homePage.dart';
 
-import 'package:flutter_app/services/servicesAuth.dart';
 import 'package:flutter_app/services/database.dart';
+import 'package:flutter_app/services/servicesAuth.dart';
 
 import 'package:flutter_app/shared/loading.dart';
-import 'package:flutter_app/classes/deviceExtrapolation.dart';
 
 class SignIn extends StatefulWidget {
 
@@ -97,18 +97,28 @@ class _SignInState extends State<SignIn> {
                       } else {
                         loading = false;
                         DeviceData.getUsageStats();
-                        List<String> times = GlobalData.applicationList;
-                        List<String> apps = GlobalData.applicationNameList;
-                        List<String> apptimes = [];
-                        for(int i = 0; i < times.length; i++) {
-                          apptimes.add(apps[i] + " -> " + times[i]);
+
+                        return new StreamBuilder<DocumentSnapshot>(
+                          stream: FirebaseFirestore.instance
+                              .collection('users')
+                              .doc(GlobalData.loggedInUserID)
+                              .snapshots(),
+                          builder: (context, snapshot) {
+                          if (!snapshot.hasData) {
+                            return new Text("Loading");
+                          } else {
+                            Map<String, dynamic> documentFields = snapshot.data.data();
+                            GlobalData.userTrackedName =  documentFields["username"];
+                            GlobalData.userTrackingName = documentFields["usertrackname"];
+                          }
+                        });
                         }
-                        DatabaseService(uid: GlobalData.loggedInUserID).updateUserData('Signal', 'Strength', apptimes);
+
+                      // DatabaseService(uid: GlobalData.loggedInUserID).updateUserData(GlobalData.userTrackingName, GlobalData.userTrackedName, apptimes);
 
                         Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => LandingPage()));
                       }
                     }
-                  }
               ),
               SizedBox(height: 12.0,),
               Text(
