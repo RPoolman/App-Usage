@@ -13,7 +13,8 @@ class DatabaseService {
       'username':uName,
       'usertrackname':uTName,
       'applicationsList':appTimes
-    });
+    },
+    SetOptions(merge: true),);
   }
   
   //get the data stream
