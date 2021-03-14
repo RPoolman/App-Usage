@@ -53,10 +53,13 @@ class _RegisterState extends State<Register> {
             child: Column(
               children: <Widget>[
                 SizedBox(height: 20.0),
-                Text('Enter your name:',style: TextStyle(fontSize: 20),),
+                Text('Enter your name below:',style: TextStyle(fontSize: 20, color: Colors.white),),
                 TextFormField(
+                  style: TextStyle(color: Colors.white),
                   decoration: InputDecoration(
+                    hintStyle: TextStyle(color: Colors.white70),
                     hintText: 'Enter the parents name here',
+                    fillColor: Colors.white,
                   ),
                   validator: (val) => val.isEmpty ? 'A name is needed' : null,
                   onChanged: (value){
@@ -64,10 +67,13 @@ class _RegisterState extends State<Register> {
                   },
                 ),
                 SizedBox(height: 20.0),
-                Text('Enter your childs name here:',style: TextStyle(fontSize: 20),),
+                Text('Enter your child\'s name below:',style: TextStyle(fontSize: 20, color: Colors.white),),
                 TextFormField(
+                  style: TextStyle(color: Colors.white),
                   decoration: InputDecoration(
-                    hintText: 'Your childs name here',
+                    hintStyle: TextStyle(color: Colors.white70),
+                    hintText: 'Enter the child\'s name here',
+                    fillColor: Colors.white,
                   ),
                   validator: (val) => val.isEmpty ? 'A name is needed' : null,
                   onChanged: (value){
@@ -75,10 +81,13 @@ class _RegisterState extends State<Register> {
                   },
                 ),
                 SizedBox(height: 20.0),
-                Text('Enter your email below to REGISTER:',style: TextStyle(fontSize: 20),),
+                Text('Enter your email below to register:',style: TextStyle(fontSize: 20, color: Colors.white),),
                 TextFormField(
+                  style: TextStyle(color: Colors.white),
                   decoration: InputDecoration(
+                    hintStyle: TextStyle(color: Colors.white70),
                     hintText: 'Enter your email here',
+                    fillColor: Colors.white,
                   ),
                   validator: (val){
                                     Pattern pattern =
@@ -97,10 +106,12 @@ class _RegisterState extends State<Register> {
                   },
                 ),
                 SizedBox(height: 20.0),
-                Text('Enter your password below:',style: TextStyle(fontSize: 20),),
+                Text('Enter your password below:',style: TextStyle(fontSize: 20, color: Colors.white),),
                 TextFormField(
                   decoration: InputDecoration(
+                    hintStyle: TextStyle(color: Colors.white70),
                     hintText: 'Enter your password here',
+                    fillColor: Colors.white,
                   ),
                   validator: (val) => val.length < 6 ? 'Please enter a password that is 6 characters long' : null,
                   obscureText: true,
