@@ -63,7 +63,7 @@ class _StatScreenState extends State<StatScreen> {
                 Column(
                   children: [
                     Text(
-                      '[Username]',
+                      GlobalData.userTrackedName + '\'s usage thus far:',
                       style: TextStyle(color: Colors.indigo,letterSpacing: 2.0,fontSize: 22.0,),
                     ),
                     SizedBox(height: 20),
