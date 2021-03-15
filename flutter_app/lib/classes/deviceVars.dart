@@ -1,10 +1,9 @@
 class GlobalData {
   //user id to link to what to save
   static String loggedInUserID;
-
+  //getting the users names who have been registered for the application
   static String userTrackedName = '';
   static String userTrackingName = '';
-
   //string variables for other screens
   static String app1Name = "";
   static String app2Name = "";
@@ -18,6 +17,7 @@ class GlobalData {
   //below list used to populate extra screen
   static List<String> applicationList = [];
   static List<String> applicationNameList = [];
-
+  //getting the total amount of daily hours the user spent
+  static int totalAmountOnPhoneTodayHours = 0;
   static String totalAmountOnPhoneToday;
 }

@@ -240,7 +240,7 @@ class _LandingPageState extends State<LandingPage> {
                 Padding(
                   padding: EdgeInsets.all(10),
                   child: SizedBox(
-                    height:300,
+                    height:250,
                     child: PointsLineChart(
                       PointsLineChart.createSampleData(), animate: false,
                     ),
