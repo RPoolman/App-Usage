@@ -5,6 +5,7 @@ import 'package:flutter_app/screens/homePage.dart';
 import 'deviceDataPage.dart';
 
 import 'package:flutter_app/classes/deviceVars.dart';
+import 'package:flutter_app/classes/dataAssesment.dart';
 
 class StatScreen extends StatefulWidget {
   @override
@@ -12,6 +13,11 @@ class StatScreen extends StatefulWidget {
 }
 
 class _StatScreenState extends State<StatScreen> {
+  @override
+  void initState() {
+    UserUsageAssesment.getUserHours();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -105,13 +111,29 @@ class _StatScreenState extends State<StatScreen> {
                 ),
                 SizedBox(height: 20),
                 Text(
-                  'Your total amount spent on your phone today is:',
+                  'You fall in the bracket of: ',
                   style: TextStyle(
                     color: Colors.indigo,
                     fontSize: 18,
                     letterSpacing: 1,
                   ),
                 ),
+                Text(
+                  UserUsageAssesment.usageResult,
+                  style: TextStyle(
+                    color: Colors.redAccent,
+                    fontSize: 22,
+                    letterSpacing: 1,
+                  ),
+                ),
+                Text(
+                  UserUsageAssesment.resultDescription,
+                  style: TextStyle(
+                    color: Colors.indigo,
+                    fontSize: 18,
+                    letterSpacing: 1,
+                  ),
+                )
               ],
             ),
           ],

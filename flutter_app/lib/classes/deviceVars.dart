@@ -18,6 +18,6 @@ class GlobalData {
   static List<String> applicationList = [];
   static List<String> applicationNameList = [];
   //getting the total amount of daily hours the user spent
-  static int totalAmountOnPhoneTodayHours;
+  static int totalAmountOnPhoneTodayHours = 0;
   static String totalAmountOnPhoneToday;
 }
