@@ -1,7 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
 import 'package:flutter_app/screens/homePage.dart';
+
 import 'package:flutter_app/services/servicesAuth.dart';
+import 'package:flutter_app/services/database.dart';
+
 import 'package:flutter_app/shared/loading.dart';
 import 'package:flutter_app/classes/deviceVars.dart';
 import 'package:flutter_app/classes/deviceExtrapolation.dart';
@@ -51,6 +55,7 @@ class _RegisterState extends State<Register> {
           child: Form(
             key: _formKey,
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 SizedBox(height: 20.0),
                 Text('Enter your name below:',style: TextStyle(fontSize: 20, color: Colors.white),),
@@ -63,7 +68,13 @@ class _RegisterState extends State<Register> {
                   ),
                   validator: (val) => val.isEmpty ? 'A name is needed' : null,
                   onChanged: (value){
-                    setState(() { GlobalData.userTrackingName = value.toString(); });
+                    setState(() {
+                      for(int x = 0; x < value.length; x++) {
+                        if(x == 0) {
+                          GlobalData.userTrackingName = value[x].toUpperCase().toString();
+                        } else { GlobalData.userTrackingName += value[x].toLowerCase().toString(); }
+                      }
+                    });
                   },
                 ),
                 SizedBox(height: 20.0),
@@ -77,7 +88,13 @@ class _RegisterState extends State<Register> {
                   ),
                   validator: (val) => val.isEmpty ? 'A name is needed' : null,
                   onChanged: (value){
-                    setState(() { GlobalData.userTrackedName = value.toString(); });
+                    setState(() {
+                      for(int x = 0; x < value.length; x++) {
+                        if(x == 0) {
+                          GlobalData.userTrackedName = value[x].toUpperCase().toString();
+                        } else { GlobalData.userTrackedName += value[x].toLowerCase().toString(); }
+                      }
+                    });
                   },
                 ),
                 SizedBox(height: 20.0),
@@ -128,16 +145,26 @@ class _RegisterState extends State<Register> {
                     ),
                     onPressed: () async {
                       if(_formKey.currentState.validate()) {
-                        setState(() => loading = true);
-                        dynamic result = await _auth.registerMeWithEmailPassword(mainEmail, password);
+                          setState(() => loading = true);
+                          dynamic result = await _auth.registerMeWithEmailPassword(mainEmail, password);
                         if(result == null) {
                           setState(() {
                             error = 'Please supply a valid email.';
                             loading = false;
                           });
                         } else {
-                          setState(() => loading = false);
-                          DeviceData.getUsageStats();
+                          setState(() {
+                            loading = false;
+                          });
+                          await DeviceData.getUsageStats();
+                          List<String> times = GlobalData.applicationList;
+                          List<String> apps = GlobalData.applicationNameList;
+                          List<String> apptimes = [];
+                          for(int i = 0; i < times.length; i++) {
+                            apptimes.add(apps[i] + " -> " + times[i]);
+                          }
+                          DatabaseService(uid: GlobalData.loggedInUserID).updateUserData(GlobalData.userTrackingName, GlobalData.userTrackedName, apptimes);
+                          print(GlobalData.userTrackingName);
                           Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => LandingPage()));
                         }
                       }

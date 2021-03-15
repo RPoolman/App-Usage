@@ -1,4 +1,6 @@
 class GlobalData {
+  //user id to link to what to save
+  static String loggedInUserID;
 
   static String userTrackedName = '';
   static String userTrackingName = '';
@@ -15,4 +17,7 @@ class GlobalData {
   static List<int> appsGraphHours = [1,2,3,4,5];
   //below list used to populate extra screen
   static List<String> applicationList = [];
+  static List<String> applicationNameList = [];
+
+  static String totalAmountOnPhoneToday;
 }

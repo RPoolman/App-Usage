@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/screens/homePage.dart';
-import 'package:flutter_app/services/servicesAuth.dart';
-import 'package:flutter_app/shared/loading.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'package:flutter_app/classes/deviceExtrapolation.dart';
+
+import 'package:flutter_app/screens/homePage.dart';
+
+import 'package:flutter_app/services/servicesAuth.dart';
+
+import 'package:flutter_app/shared/loading.dart';
 
 class SignIn extends StatefulWidget {
 
@@ -17,12 +22,18 @@ class _SignInState extends State<SignIn> {
 
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
+  final userCol = FirebaseFirestore.instance.collection('users');
   bool loading = false;
 
   String email = '';
   String password = '';
   String error = '';
 
+  @override
+  void initState() {
+    DeviceData.getUsageStats();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return loading ? Loading() : Scaffold(
@@ -67,7 +78,7 @@ class _SignInState extends State<SignIn> {
                 validator: (val) => val.length < 6 ? 'Please enter a password that is 6 characters long' : null,
                 obscureText: true,
                 onChanged: (value){
-                  setState(() { password = value;});
+                  setState(() {password = value;});
                 },
               ),
               SizedBox(height: 20.0),
@@ -79,21 +90,23 @@ class _SignInState extends State<SignIn> {
                   ),
                   onPressed: () async {
                     if(_formKey.currentState.validate()) {
-                      setState(() => loading = true);
+                      setState(() {
+                        loading = true;
+                      });
                       dynamic result = await _auth.signMeInEmailPassword(email, password);
-                      DeviceData.getUsageStats();
                       if(result == null) {
                         setState(() {
                           error = 'Could not sign you in with those credentials.';
                           loading = false;
                         });
                       } else {
-                        loading = false;
-                        DeviceData.getUsageStats();
+                        setState(() {
+                          loading = false;
+                        });
+                      }
                         Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => LandingPage()));
                       }
                     }
-                  }
               ),
               SizedBox(height: 12.0,),
               Text(

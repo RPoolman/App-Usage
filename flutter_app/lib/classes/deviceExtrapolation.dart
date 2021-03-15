@@ -3,7 +3,6 @@ import 'package:flutter_app/classes/deviceVars.dart';
 
 class DeviceData {
   static List<AppUsageInfo> infosDay = [];
-
   static void getUsageStats() async {
     try {
       DateTime endDate = new DateTime.now();
@@ -12,6 +11,8 @@ class DeviceData {
       infoDayList.sort((a, b) => b.usage.inSeconds.compareTo(a.usage.inSeconds));
 
       infosDay = infoDayList;
+
+      int totalAmount = 0;
 
       for(int x = 0; x < infoDayList.length; x++) {
         if(infoDayList[x].appName == "flutter_app") {
@@ -22,8 +23,13 @@ class DeviceData {
         GlobalData.appsGraphHours[i] = (infoDayList[i].usage.inSeconds/3600).round();
       }
       for(int k = 0; k < infoDayList.length; k++){
+        totalAmount += infoDayList[k].usage.inMinutes;
         GlobalData.applicationList.add((infoDayList[k].usage.inHours).toString() + ':' + (infoDayList[k].usage.inMinutes%60).toString().padLeft(2,'0'));
+        GlobalData.applicationNameList.add(infoDayList[k].appName);
       }
+
+      GlobalData.totalAmountOnPhoneToday = (totalAmount~/60).toString() + ':' + (totalAmount%60).toString().padLeft(2,'0');
+
       var listLen = infoDayList.length;
       switch(listLen) {
         case 0: { GlobalData.app1Name = ""; }
@@ -48,6 +54,35 @@ class DeviceData {
           GlobalData.app3Name = infoDayList[2].appName;
           GlobalData.app3Time = (infoDayList[2].usage.inHours).toString() + ':' + (infoDayList[2].usage.inMinutes%60).toString().padLeft(2,'0');
         }
+      }
+    } on AppUsageException catch (exception) {
+      print(exception);
+    }
+  }
+  static void refreshUsageStats() async {
+    try {
+      DateTime endDate = new DateTime.now();
+      DateTime dailyDate = endDate.subtract(new Duration(days: 1));
+      List<AppUsageInfo> infoDayList = await AppUsage.getAppUsage(
+          dailyDate, endDate);
+      infoDayList.sort((a, b) =>
+          b.usage.inSeconds.compareTo(a.usage.inSeconds));
+
+      infosDay = infoDayList;
+
+      for (int x = 0; x < infoDayList.length; x++) {
+        if (infoDayList[x].appName == "flutter_app") {
+          infoDayList.removeAt(x);
+        }
+      }
+      GlobalData.applicationList = [];
+      GlobalData.applicationNameList = [];
+      for (int k = 0; k < infoDayList.length; k++) {
+        GlobalData.applicationList.add(
+            (infoDayList[k].usage.inHours).toString() + ':' +
+                (infoDayList[k].usage.inMinutes % 60).toString().padLeft(
+                    2, '0'));
+        GlobalData.applicationNameList.add(infoDayList[k].appName);
       }
     } on AppUsageException catch (exception) {
       print(exception);
