@@ -48,7 +48,7 @@ class _LandingPageState extends State<LandingPage> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              IconButton(icon: Icon(Icons.home), onPressed: () {
+              IconButton(icon: Icon(Icons.home, color: Colors.indigo,), onPressed: () {
                 Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(builder: (context) => LandingPage()),

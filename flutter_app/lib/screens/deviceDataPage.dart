@@ -32,7 +32,7 @@ class _DeviceAppsState extends State<DeviceApps> {
               );},
             ),
             SizedBox(width: 20,),
-            IconButton(icon: Icon(Icons.list_alt), onPressed: () {
+            IconButton(icon: Icon(Icons.list_alt, color: Colors.indigo,), onPressed: () {
               Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(builder: (context) => DeviceApps()),

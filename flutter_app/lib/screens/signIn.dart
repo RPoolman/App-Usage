@@ -74,7 +74,7 @@ class _SignInState extends State<SignIn> {
                 validator: (val) => val.length < 6 ? 'Please enter a password that is 6 characters long' : null,
                 obscureText: true,
                 onChanged: (value){
-                  setState(() { password = value;});
+                  setState(() {password = value;});
                 },
               ),
               SizedBox(height: 20.0),

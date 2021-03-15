@@ -42,7 +42,7 @@ class _StatScreenState extends State<StatScreen> {
               );},
             ),
             SizedBox(width: 20,),
-            IconButton(icon: Icon(Icons.person), onPressed: () {
+            IconButton(icon: Icon(Icons.person, color: Colors.indigo,), onPressed: () {
               Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(builder: (context) => StatScreen()),

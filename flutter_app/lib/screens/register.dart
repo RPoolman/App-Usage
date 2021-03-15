@@ -55,6 +55,7 @@ class _RegisterState extends State<Register> {
           child: Form(
             key: _formKey,
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 SizedBox(height: 20.0),
                 Text('Enter your name below:',style: TextStyle(fontSize: 20, color: Colors.white),),
@@ -67,7 +68,13 @@ class _RegisterState extends State<Register> {
                   ),
                   validator: (val) => val.isEmpty ? 'A name is needed' : null,
                   onChanged: (value){
-                    setState(() { GlobalData.userTrackingName = value.toString(); });
+                    setState(() {
+                      for(int x = 0; x < value.length; x++) {
+                        if(x == 0) {
+                          GlobalData.userTrackingName = value[x].toUpperCase().toString();
+                        } else { GlobalData.userTrackingName += value[x].toLowerCase().toString(); }
+                      }
+                    });
                   },
                 ),
                 SizedBox(height: 20.0),
@@ -81,7 +88,13 @@ class _RegisterState extends State<Register> {
                   ),
                   validator: (val) => val.isEmpty ? 'A name is needed' : null,
                   onChanged: (value){
-                    setState(() { GlobalData.userTrackedName = value.toString(); });
+                    setState(() {
+                      for(int x = 0; x < value.length; x++) {
+                        if(x == 0) {
+                          GlobalData.userTrackedName = value[x].toUpperCase().toString();
+                        } else { GlobalData.userTrackedName += value[x].toLowerCase().toString(); }
+                      }
+                    });
                   },
                 ),
                 SizedBox(height: 20.0),
@@ -151,6 +164,7 @@ class _RegisterState extends State<Register> {
                             apptimes.add(apps[i] + " -> " + times[i]);
                           }
                           DatabaseService(uid: GlobalData.loggedInUserID).updateUserData(GlobalData.userTrackingName, GlobalData.userTrackedName, apptimes);
+                          print(GlobalData.userTrackingName);
                           Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => LandingPage()));
                         }
                       }
