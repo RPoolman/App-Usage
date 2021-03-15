@@ -29,6 +29,7 @@ class DeviceData {
       }
 
       GlobalData.totalAmountOnPhoneToday = (totalAmount~/60).toString() + ':' + (totalAmount%60).toString().padLeft(2,'0');
+      GlobalData.totalAmountOnPhoneTodayHours = totalAmount~/60;
 
       var listLen = infoDayList.length;
       switch(listLen) {
