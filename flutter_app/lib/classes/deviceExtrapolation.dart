@@ -12,6 +12,8 @@ class DeviceData {
 
       infosDay = infoDayList;
 
+      int totalAmount = 0;
+
       for(int x = 0; x < infoDayList.length; x++) {
         if(infoDayList[x].appName == "flutter_app") {
           infoDayList.removeAt(x);
@@ -20,13 +22,13 @@ class DeviceData {
       for(int i = 0; i < 5; i++){
         GlobalData.appsGraphHours[i] = (infoDayList[i].usage.inSeconds/3600).round();
       }
-      //the for loop below might not get called, yet the method is called.
-      //printing out from within the loop prints out the line twice with something in between the calls
-      //uid=10136(com.example.flutter_app) 1.ui identical 6 lines -> got printed between them.
       for(int k = 0; k < infoDayList.length; k++){
+        totalAmount += infoDayList[k].usage.inMinutes;
         GlobalData.applicationList.add((infoDayList[k].usage.inHours).toString() + ':' + (infoDayList[k].usage.inMinutes%60).toString().padLeft(2,'0'));
         GlobalData.applicationNameList.add(infoDayList[k].appName);
       }
+
+      GlobalData.totalAmountOnPhoneToday = (totalAmount~/60).toString() + ':' + (totalAmount%60).toString().padLeft(2,'0');
 
       var listLen = infoDayList.length;
       switch(listLen) {

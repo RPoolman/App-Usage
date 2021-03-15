@@ -18,4 +18,6 @@ class GlobalData {
   //below list used to populate extra screen
   static List<String> applicationList = [];
   static List<String> applicationNameList = [];
+
+  static String totalAmountOnPhoneToday;
 }

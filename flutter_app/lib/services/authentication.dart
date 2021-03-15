@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/screens/register.dart';
 import 'package:flutter_app/screens/signIn.dart';
-import 'package:flutter_app/classes/deviceExtrapolation.dart';
 
 class Authentication extends StatefulWidget {
   @override

@@ -19,6 +19,7 @@ class LandingPage extends StatefulWidget {
 }
 class _LandingPageState extends State<LandingPage> {
   final AuthService _auth = AuthService();
+
   @override
   Widget build(BuildContext context) {
     return StreamProvider<QuerySnapshot>.value(
@@ -84,7 +85,7 @@ class _LandingPageState extends State<LandingPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'Tracked: ',
+                  'Tracking: ',
                   style: TextStyle(color: Colors.blueAccent,letterSpacing: 2.0,fontSize: 18.0,),
                 ),
                 SizedBox(height: 4),

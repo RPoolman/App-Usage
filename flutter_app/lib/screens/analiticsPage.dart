@@ -53,7 +53,7 @@ class _StatScreenState extends State<StatScreen> {
         ),
       ),
       body: Padding(
-          padding: EdgeInsets.fromLTRB(30.0, 30.0, 30.0, 0),
+          padding: EdgeInsets.fromLTRB(20.0, 30.0, 20.0, 20.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
@@ -62,15 +62,20 @@ class _StatScreenState extends State<StatScreen> {
               children: [
                 Column(
                   children: <Widget>[
-                    Text(
-                      GlobalData.userTrackedName + '\'s usage thus far:',
-                      style: TextStyle(color: Colors.indigo,letterSpacing: 2.0,fontSize: 22.0,),
-                    ),
-                    SizedBox(height: 20),
                     Icon(
-                      Icons.timer_sharp,
+                      Icons.access_time,
                       color: Colors.redAccent,
                       size: 50,
+                    ),
+                    SizedBox(height: 20),
+                    Text(
+                      'Daily Usage: ',
+                      style: TextStyle(
+                        color: Colors.indigo,
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: 2.0,
+                      ),
                     ),
                   ],
                 ),
@@ -81,28 +86,32 @@ class _StatScreenState extends State<StatScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Text(
-                  'Daily Usage: ',
+                  'Your total amount spent on your phone today is:',
                   style: TextStyle(
                     color: Colors.indigo,
-                    fontSize: 20,
+                    fontSize: 18,
+                    letterSpacing: 1,
+                  ),
+                ),
+                SizedBox(height: 20),
+                Text(
+                  GlobalData.totalAmountOnPhoneToday,
+                  style: TextStyle(
+                    color: Colors.redAccent,
+                    fontSize: 36,
                     fontWeight: FontWeight.bold,
                     letterSpacing: 1,
                   ),
                 ),
-                SizedBox(height: 30,),
+                SizedBox(height: 20),
                 Text(
-                      'Weekly Usage: ',
-                      style: TextStyle(
-                        color: Colors.indigo,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        letterSpacing: 1,
-                      ),
-                    ),
-                Text(
-                    'Trying to populate this correctly.',
-                    style: TextStyle( color: Colors.indigo, fontSize: 16, letterSpacing: 1, ),
+                  'Your total amount spent on your phone today is:',
+                  style: TextStyle(
+                    color: Colors.indigo,
+                    fontSize: 18,
+                    letterSpacing: 1,
                   ),
+                ),
               ],
             ),
           ],

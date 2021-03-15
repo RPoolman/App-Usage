@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:flutter_app/classes/deviceExtrapolation.dart';
-import 'package:flutter_app/classes/deviceVars.dart';
 
 import 'package:flutter_app/screens/homePage.dart';
 
-import 'package:flutter_app/services/database.dart';
 import 'package:flutter_app/services/servicesAuth.dart';
 
 import 'package:flutter_app/shared/loading.dart';
@@ -24,12 +22,18 @@ class _SignInState extends State<SignIn> {
 
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
+  final userCol = FirebaseFirestore.instance.collection('users');
   bool loading = false;
 
   String email = '';
   String password = '';
   String error = '';
 
+  @override
+  void initState() {
+    DeviceData.getUsageStats();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return loading ? Loading() : Scaffold(
@@ -86,7 +90,9 @@ class _SignInState extends State<SignIn> {
                   ),
                   onPressed: () async {
                     if(_formKey.currentState.validate()) {
-                      setState(() => loading = true);
+                      setState(() {
+                        loading = true;
+                      });
                       dynamic result = await _auth.signMeInEmailPassword(email, password);
                       if(result == null) {
                         setState(() {
@@ -94,24 +100,10 @@ class _SignInState extends State<SignIn> {
                           loading = false;
                         });
                       } else {
-                        loading = false;
-                        await DeviceData.getUsageStats();
-                        // return new StreamBuilder<DocumentSnapshot>(
-                        //   stream: FirebaseFirestore.instance
-                        //       .collection('users')
-                        //       .doc(GlobalData.loggedInUserID)
-                        //       .snapshots(),
-                        //   builder: (context, snapshot) {
-                        //   if (!snapshot.hasData) {
-                        //     return new Text("Loading");
-                        //   } else {
-                        //     Map<String, dynamic> documentFields = snapshot.data.data();
-                        //     GlobalData.userTrackedName =  documentFields["username"];
-                        //     GlobalData.userTrackingName = documentFields["usertrackname"];
-                        //     return null;
-                        //   }
-                        // });
-                        }
+                        setState(() {
+                          loading = false;
+                        });
+                      }
                         Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => LandingPage()));
                       }
                     }
