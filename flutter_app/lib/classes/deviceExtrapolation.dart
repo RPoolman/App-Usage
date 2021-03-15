@@ -20,7 +20,7 @@ class DeviceData {
         }
       }
       for(int i = 0; i < 5; i++){
-        GlobalData.appsGraphHours[i] = (infoDayList[i].usage.inSeconds/3600).round();
+        GlobalData.appsGraphHours[i] = (infoDayList[i].usage.inMinutes).round();
       }
       for(int k = 0; k < infoDayList.length; k++){
         totalAmount += infoDayList[k].usage.inMinutes;

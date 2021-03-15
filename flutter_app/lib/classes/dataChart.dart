@@ -16,6 +16,9 @@ class PointsLineChart extends StatelessWidget {
   Widget build(BuildContext context) {
     return new charts.LineChart(seriesList,
         animate: animate,
+        primaryMeasureAxis: new charts.NumericAxisSpec(
+            tickProviderSpec:
+            new charts.BasicNumericTickProviderSpec(desiredTickCount: 5)),
         behaviors: [
           new charts.ChartTitle('Application No.',
               behaviorPosition: charts.BehaviorPosition.bottom,
@@ -26,7 +29,7 @@ class PointsLineChart extends StatelessWidget {
               titleOutsideJustification:
               charts.OutsideJustification.middleDrawArea)
         ],
-        defaultRenderer: new charts.LineRendererConfig(includePoints: true));
+        defaultRenderer: new charts.LineRendererConfig(includePoints: true),);
   }
   static List<charts.Series<LinearApps, int>> createSampleData() {
     final data = [
