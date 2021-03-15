@@ -131,104 +131,106 @@ class _LandingPageState extends State<LandingPage> {
               ],
             ),
             SizedBox(height: 20),
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-               mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Column(
-                    children: [
-                      Text(
-                        GlobalData.app1Name,
-                        style: TextStyle(
-                          color: Colors.redAccent,
-                          fontSize: 18,
-                          letterSpacing: 1,
+            Center(
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                 mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Column(
+                      children: [
+                        Text(
+                          GlobalData.app1Name,
+                          style: TextStyle(
+                            color: Colors.redAccent,
+                            fontSize: 18,
+                            letterSpacing: 1,
+                          ),
                         ),
-                      ),
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.app_blocking,
-                            color: Colors.blueAccent,
-                            size: 30,
-                          ),
-                          SizedBox(width: 10,),
-                          Text(
-                            GlobalData.app1Time,
-                            style: TextStyle(
-                              color: Colors.redAccent,
-                              fontSize: 18,
-                              letterSpacing: 1,
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.app_blocking,
+                              color: Colors.blueAccent,
+                              size: 30,
                             ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  SizedBox(width: 20),
-                  Column(
-                    children: [
-                      Text(
-                        GlobalData.app2Name,
-                        style: TextStyle(
-                          color: Colors.redAccent,
-                          fontSize: 18,
-                          letterSpacing: 1,
+                            SizedBox(width: 10,),
+                            Text(
+                              GlobalData.app1Time,
+                              style: TextStyle(
+                                color: Colors.redAccent,
+                                fontSize: 18,
+                                letterSpacing: 1,
+                              ),
+                            ),
+                          ],
                         ),
-                      ),
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.app_blocking,
-                            color: Colors.blueAccent,
-                            size: 30,
+                      ],
+                    ),
+                    SizedBox(width: 20),
+                    Column(
+                      children: [
+                        Text(
+                          GlobalData.app2Name,
+                          style: TextStyle(
+                            color: Colors.redAccent,
+                            fontSize: 18,
+                            letterSpacing: 1,
                           ),
-                          SizedBox(width: 10,),
-                          Text(
-                            GlobalData.app2Time,
-                            style: TextStyle(
-                              color: Colors.redAccent,
-                              fontSize: 18,
-                              letterSpacing: 1,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  SizedBox(width: 20),
-                  Column(
-                    children: [
-                      Text(
-                        GlobalData.app3Name,
-                        style: TextStyle(
-                          color: Colors.redAccent,
-                          fontSize: 18,
-                          letterSpacing: 1,
                         ),
-                      ),
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.app_blocking,
-                            color: Colors.blueAccent,
-                            size: 30,
-                          ),
-                          SizedBox(width: 10,),
-                          Text(
-                            GlobalData.app3Time,
-                            style: TextStyle(
-                              color: Colors.redAccent,
-                              fontSize: 18,
-                              letterSpacing: 1,
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.app_blocking,
+                              color: Colors.blueAccent,
+                              size: 30,
                             ),
+                            SizedBox(width: 10,),
+                            Text(
+                              GlobalData.app2Time,
+                              style: TextStyle(
+                                color: Colors.redAccent,
+                                fontSize: 18,
+                                letterSpacing: 1,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    SizedBox(width: 20),
+                    Column(
+                      children: [
+                        Text(
+                          GlobalData.app3Name,
+                          style: TextStyle(
+                            color: Colors.redAccent,
+                            fontSize: 18,
+                            letterSpacing: 1,
                           ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ],
+                        ),
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.app_blocking,
+                              color: Colors.blueAccent,
+                              size: 30,
+                            ),
+                            SizedBox(width: 10,),
+                            Text(
+                              GlobalData.app3Time,
+                              style: TextStyle(
+                                color: Colors.redAccent,
+                                fontSize: 18,
+                                letterSpacing: 1,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
             SizedBox(height: 40,),
@@ -238,7 +240,7 @@ class _LandingPageState extends State<LandingPage> {
                 Padding(
                   padding: EdgeInsets.all(10),
                   child: SizedBox(
-                    height:250,
+                    height:300,
                     child: PointsLineChart(
                       PointsLineChart.createSampleData(), animate: false,
                     ),
