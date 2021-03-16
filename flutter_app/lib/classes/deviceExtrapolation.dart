@@ -43,9 +43,9 @@ class DeviceData {
         GlobalData.applicationNameList.add(infoDayList[k].appName);
       }
 
-      UserUsageAssesment.getUserHours();
       GlobalData.totalAmountOnPhoneToday = (totalAmount~/60).toString() + ':' + (totalAmount%60).toString().padLeft(2,'0');
       GlobalData.totalAmountOnPhoneTodayHours = totalAmount~/60;
+      UserUsageAssesment.getUserHours();
 
       var listLen = infoDayList.length;
       switch(listLen) {
