@@ -10,7 +10,6 @@ class Traffic extends StatelessWidget {
 
     final currentUser = Provider.of<UserApptracker>(context);
 
-    print(currentUser);
     if(currentUser == null) {
       return Authentication();
     } else {

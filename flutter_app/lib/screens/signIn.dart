@@ -31,7 +31,6 @@ class _SignInState extends State<SignIn> {
 
   @override
   void initState() {
-    DeviceData.getUsageStats();
     super.initState();
   }
   @override
@@ -89,6 +88,7 @@ class _SignInState extends State<SignIn> {
                     style: TextStyle(color: Colors.white),
                   ),
                   onPressed: () async {
+                    await DeviceData.getUsageStats();
                     if(_formKey.currentState.validate()) {
                       setState(() {
                         loading = true;

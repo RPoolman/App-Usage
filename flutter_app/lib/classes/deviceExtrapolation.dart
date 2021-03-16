@@ -3,7 +3,7 @@ import 'package:flutter_app/classes/deviceVars.dart';
 
 class DeviceData {
   static List<AppUsageInfo> infosDay = [];
-  static void getUsageStats() async {
+  static Future<void> getUsageStats() async {
     try {
       DateTime endDate = new DateTime.now();
       DateTime dailyDate = endDate.subtract(new Duration(days: 1));
@@ -11,7 +11,6 @@ class DeviceData {
       infoDayList.sort((a, b) => b.usage.inSeconds.compareTo(a.usage.inSeconds));
 
       infosDay = infoDayList;
-
       int totalAmount = 0;
 
       for(int x = 0; x < infoDayList.length; x++) {
@@ -19,8 +18,22 @@ class DeviceData {
           infoDayList.removeAt(x);
         }
       }
-      for(int i = 0; i < 5; i++){
-        GlobalData.appsGraphHours[i] = (infoDayList[i].usage.inMinutes).round();
+      if(infoDayList.length >= 5) {
+        for(int i = 0; i < 5; i++){
+          GlobalData.appsGraphHours[i] = (infoDayList[i].usage.inMinutes).round();
+        }
+      } else if(infoDayList.length >= 3) {
+        for(int i = 0; i < infoDayList.length; i++){
+          GlobalData.appsGraphHours[i] = (infoDayList[i].usage.inMinutes).round();
+        }
+      } else if(infoDayList.length >= 1) {
+        for(int i = 0; i < infoDayList.length; i++){
+          GlobalData.appsGraphHours[i] = (infoDayList[i].usage.inMinutes).round();
+        }
+      } else if(infoDayList.length == 0) {
+        for(int i = 0; i < 5; i++){
+          GlobalData.appsGraphHours[i] = 1;
+        }
       }
       for(int k = 0; k < infoDayList.length; k++){
         totalAmount += infoDayList[k].usage.inMinutes;

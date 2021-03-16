@@ -93,6 +93,7 @@ class _StatScreenState extends State<StatScreen> {
               children: <Widget>[
                 Text(
                   'Your total amount spent on your phone today is:',
+                  textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Colors.indigo,
                     fontSize: 18,
