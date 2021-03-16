@@ -4,7 +4,7 @@ import 'package:flutter_app/classes/dataAssesment.dart';
 
 class DeviceData {
   static List<AppUsageInfo> infosDay = [];
-  static Future<void> getUsageStats() async {
+  static void getUsageStats() async {
     try {
       DateTime endDate = new DateTime.now();
       DateTime dailyDate = endDate.subtract(new Duration(days: 1));
