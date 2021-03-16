@@ -1,5 +1,6 @@
 import 'package:app_usage/app_usage.dart';
 import 'package:flutter_app/classes/deviceVars.dart';
+import 'package:flutter_app/classes/dataAssesment.dart';
 
 class DeviceData {
   static List<AppUsageInfo> infosDay = [];
@@ -41,6 +42,7 @@ class DeviceData {
         GlobalData.applicationNameList.add(infoDayList[k].appName);
       }
 
+      UserUsageAssesment.getUserHours();
       GlobalData.totalAmountOnPhoneToday = (totalAmount~/60).toString() + ':' + (totalAmount%60).toString().padLeft(2,'0');
       GlobalData.totalAmountOnPhoneTodayHours = totalAmount~/60;
 
