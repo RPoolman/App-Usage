@@ -19,21 +19,22 @@ class DeviceData {
           infoDayList.removeAt(x);
         }
       }
-      if(infoDayList.length >= 5) {
+
+      if(infoDayList.length == 0) {
         for(int i = 0; i < 5; i++){
+          GlobalData.appsGraphHours[i] = 1;
+        }
+      } else if(infoDayList.length >= 1) {
+        for(int i = 0; i < infoDayList.length; i++){
           GlobalData.appsGraphHours[i] = (infoDayList[i].usage.inMinutes).round();
         }
       } else if(infoDayList.length >= 3) {
         for(int i = 0; i < infoDayList.length; i++){
           GlobalData.appsGraphHours[i] = (infoDayList[i].usage.inMinutes).round();
         }
-      } else if(infoDayList.length >= 1) {
-        for(int i = 0; i < infoDayList.length; i++){
-          GlobalData.appsGraphHours[i] = (infoDayList[i].usage.inMinutes).round();
-        }
-      } else if(infoDayList.length == 0) {
+      } else if(infoDayList.length >= 5) {
         for(int i = 0; i < 5; i++){
-          GlobalData.appsGraphHours[i] = 1;
+          GlobalData.appsGraphHours[i] = (infoDayList[i].usage.inMinutes).round();
         }
       }
       for(int k = 0; k < infoDayList.length; k++){

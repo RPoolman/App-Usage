@@ -58,86 +58,92 @@ class _StatScreenState extends State<StatScreen> {
           ],
         ),
       ),
-      body: Padding(
-          padding: EdgeInsets.fromLTRB(20.0, 30.0, 20.0, 20.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Column(
-                  children: <Widget>[
-                    Icon(
-                      Icons.access_time,
-                      color: Colors.redAccent,
-                      size: 50,
-                    ),
-                    SizedBox(height: 20),
-                    Text(
-                      'Daily Usage: ',
-                      style: TextStyle(
-                        color: Colors.indigo,
-                        fontSize: 22,
-                        fontWeight: FontWeight.bold,
-                        letterSpacing: 2.0,
+      body: 
+      SingleChildScrollView(
+        child: Padding(
+            padding: EdgeInsets.fromLTRB(20.0, 30.0, 20.0, 20.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Column(
+                    children: <Widget>[
+                      Icon(
+                        Icons.access_time,
+                        color: Colors.redAccent,
+                        size: 50,
                       ),
+                      SizedBox(height: 20),
+                      Text(
+                        'Daily Usage: ',
+                        style: TextStyle(
+                          color: Colors.indigo,
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
+                          letterSpacing: 2.0,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              SizedBox(height: 20),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    'Your total amount spent on your phone today is:',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.indigo,
+                      fontSize: 18,
+                      letterSpacing: 1,
                     ),
-                  ],
-                ),
-              ],
-            ),
-            SizedBox(height: 20),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  'Your total amount spent on your phone today is:',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.indigo,
-                    fontSize: 18,
-                    letterSpacing: 1,
                   ),
-                ),
-                SizedBox(height: 20),
-                Text(
-                  GlobalData.totalAmountOnPhoneToday,
-                  style: TextStyle(
-                    color: Colors.redAccent,
-                    fontSize: 36,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 1,
+                  SizedBox(height: 20),
+                  Text(
+                    GlobalData.totalAmountOnPhoneToday,
+                    style: TextStyle(
+                      color: Colors.redAccent,
+                      fontSize: 36,
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 1,
+                    ),
                   ),
-                ),
-                SizedBox(height: 20),
-                Text(
-                  'You fall in the bracket of: ',
-                  style: TextStyle(
-                    color: Colors.indigo,
-                    fontSize: 18,
-                    letterSpacing: 1,
+                  SizedBox(height: 10),
+                  Text(
+                    'You fall in the bracket of: ',
+                    style: TextStyle(
+                      color: Colors.indigo,
+                      fontSize: 18,
+                      letterSpacing: 1,
+                    ),
                   ),
-                ),
-                Text(
-                  UserUsageAssesment.usageResult,
-                  style: TextStyle(
-                    color: Colors.redAccent,
-                    fontSize: 22,
-                    letterSpacing: 1,
+                  SizedBox(height: 10),
+                  Text(
+                    UserUsageAssesment.usageResult,
+                    style: TextStyle(
+                      color: Colors.redAccent,
+                      fontSize: 22,
+                      letterSpacing: 1,
+                    ),
                   ),
-                ),
-                Text(
-                  UserUsageAssesment.resultDescription,
-                  style: TextStyle(
-                    color: Colors.indigo,
-                    fontSize: 18,
-                    letterSpacing: 1,
-                  ),
-                )
-              ],
-            ),
-          ],
+                  SizedBox(height: 10),
+                  Text(
+                    UserUsageAssesment.resultDescription,
+                    textAlign: TextAlign.justify,
+                    style: TextStyle(
+                      color: Colors.indigo,
+                      fontSize: 18,
+                      letterSpacing: 1,
+                    ),
+                  )
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

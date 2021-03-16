@@ -164,7 +164,6 @@ class _RegisterState extends State<Register> {
                             apptimes.add(apps[i] + " -> " + times[i]);
                           }
                           DatabaseService(uid: GlobalData.loggedInUserID).updateUserData(GlobalData.userTrackingName, GlobalData.userTrackedName, apptimes);
-                          print(GlobalData.userTrackingName);
                           Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => LandingPage()));
                         }
                       }

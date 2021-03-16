@@ -37,7 +37,6 @@ class _LandingPageState extends State<LandingPage> {
                   await _auth.signMeOut();
                   if(_auth.signMeOut() != null) {
                     Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=> SignIn()), (route) => false);
-                    //Navigator.push(context, MaterialPageRoute(builder: (context)=> SignIn()));
                   }
                 },
                 icon: Icon(Icons.person, color: Colors.white,),
@@ -76,180 +75,182 @@ class _LandingPageState extends State<LandingPage> {
           ),
         ),
       body:
-      Padding(
-        padding: EdgeInsets.fromLTRB(30.0, 30.0, 30.0, 0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  'Tracking: ',
-                  style: TextStyle(color: Colors.blueAccent,letterSpacing: 2.0,fontSize: 18.0,),
-                ),
-                SizedBox(height: 4),
-                Text(
-                  GlobalData.userTrackedName,
-                  style: TextStyle(color: Colors.redAccent,letterSpacing: 2.0,fontSize: 18.0,),
-                ),
-              ],
-            ),
-            SizedBox(height: 10),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  'Tracked by: ',
-                  style: TextStyle(color: Colors.blueAccent,letterSpacing: 2.0,fontSize: 18.0,),
-                ),
-                SizedBox(height: 4),
-                Text(
-                  GlobalData.userTrackingName,
-                  style: TextStyle(color: Colors.redAccent,letterSpacing: 2.0,fontSize: 18.0,),
-                ),
-              ],
-            ),
-            SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Icon(
-                  Icons.timer_sharp,
-                  color: Colors.blueAccent,
-                  size: 50,
-                ),
-                SizedBox(width: 10,),
-                Text(
-                  'Most Used Apps',
-                  style: TextStyle(
-                    color: Colors.redAccent,
-                    fontSize: 22,
-                    letterSpacing: 1,
+      SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.fromLTRB(30.0, 30.0, 30.0, 0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Tracking: ',
+                    style: TextStyle(color: Colors.blueAccent,letterSpacing: 2.0,fontSize: 18.0,),
                   ),
-                )
-              ],
-            ),
-            SizedBox(height: 20),
-            Center(
-              child: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                 mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Column(
-                      children: [
-                        Text(
-                          GlobalData.app1Name,
-                          style: TextStyle(
-                            color: Colors.redAccent,
-                            fontSize: 18,
-                            letterSpacing: 1,
-                          ),
-                        ),
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.app_blocking,
-                              color: Colors.blueAccent,
-                              size: 30,
-                            ),
-                            SizedBox(width: 10,),
-                            Text(
-                              GlobalData.app1Time,
-                              style: TextStyle(
-                                color: Colors.redAccent,
-                                fontSize: 18,
-                                letterSpacing: 1,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
+                  SizedBox(height: 4),
+                  Text(
+                    GlobalData.userTrackedName,
+                    style: TextStyle(color: Colors.redAccent,letterSpacing: 2.0,fontSize: 18.0,),
+                  ),
+                ],
+              ),
+              SizedBox(height: 10),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Tracked by: ',
+                    style: TextStyle(color: Colors.blueAccent,letterSpacing: 2.0,fontSize: 18.0,),
+                  ),
+                  SizedBox(height: 4),
+                  Text(
+                    GlobalData.userTrackingName,
+                    style: TextStyle(color: Colors.redAccent,letterSpacing: 2.0,fontSize: 18.0,),
+                  ),
+                ],
+              ),
+              SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Icon(
+                    Icons.timer_sharp,
+                    color: Colors.blueAccent,
+                    size: 50,
+                  ),
+                  SizedBox(width: 10,),
+                  Text(
+                    'Most Used Apps',
+                    style: TextStyle(
+                      color: Colors.redAccent,
+                      fontSize: 22,
+                      letterSpacing: 1,
                     ),
-                    SizedBox(width: 20),
-                    Column(
-                      children: [
-                        Text(
-                          GlobalData.app2Name,
-                          style: TextStyle(
-                            color: Colors.redAccent,
-                            fontSize: 18,
-                            letterSpacing: 1,
+                  )
+                ],
+              ),
+              SizedBox(height: 20),
+              Center(
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                   mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Column(
+                        children: [
+                          Text(
+                            GlobalData.app1Name,
+                            style: TextStyle(
+                              color: Colors.redAccent,
+                              fontSize: 18,
+                              letterSpacing: 1,
+                            ),
                           ),
-                        ),
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.app_blocking,
-                              color: Colors.blueAccent,
-                              size: 30,
-                            ),
-                            SizedBox(width: 10,),
-                            Text(
-                              GlobalData.app2Time,
-                              style: TextStyle(
-                                color: Colors.redAccent,
-                                fontSize: 18,
-                                letterSpacing: 1,
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.app_blocking,
+                                color: Colors.blueAccent,
+                                size: 30,
                               ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                    SizedBox(width: 20),
-                    Column(
-                      children: [
-                        Text(
-                          GlobalData.app3Name,
-                          style: TextStyle(
-                            color: Colors.redAccent,
-                            fontSize: 18,
-                            letterSpacing: 1,
+                              SizedBox(width: 10,),
+                              Text(
+                                GlobalData.app1Time,
+                                style: TextStyle(
+                                  color: Colors.redAccent,
+                                  fontSize: 18,
+                                  letterSpacing: 1,
+                                ),
+                              ),
+                            ],
                           ),
-                        ),
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.app_blocking,
-                              color: Colors.blueAccent,
-                              size: 30,
+                        ],
+                      ),
+                      SizedBox(width: 20),
+                      Column(
+                        children: [
+                          Text(
+                            GlobalData.app2Name,
+                            style: TextStyle(
+                              color: Colors.redAccent,
+                              fontSize: 18,
+                              letterSpacing: 1,
                             ),
-                            SizedBox(width: 10,),
-                            Text(
-                              GlobalData.app3Time,
-                              style: TextStyle(
-                                color: Colors.redAccent,
-                                fontSize: 18,
-                                letterSpacing: 1,
+                          ),
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.app_blocking,
+                                color: Colors.blueAccent,
+                                size: 30,
                               ),
+                              SizedBox(width: 10,),
+                              Text(
+                                GlobalData.app2Time,
+                                style: TextStyle(
+                                  color: Colors.redAccent,
+                                  fontSize: 18,
+                                  letterSpacing: 1,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                      SizedBox(width: 20),
+                      Column(
+                        children: [
+                          Text(
+                            GlobalData.app3Name,
+                            style: TextStyle(
+                              color: Colors.redAccent,
+                              fontSize: 18,
+                              letterSpacing: 1,
                             ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ],
+                          ),
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.app_blocking,
+                                color: Colors.blueAccent,
+                                size: 30,
+                              ),
+                              SizedBox(width: 10,),
+                              Text(
+                                GlobalData.app3Time,
+                                style: TextStyle(
+                                  color: Colors.redAccent,
+                                  fontSize: 18,
+                                  letterSpacing: 1,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-            SizedBox(height: 40,),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Padding(
-                  padding: EdgeInsets.all(10),
-                  child: SizedBox(
-                    height:250,
-                    child: PointsLineChart(
-                      PointsLineChart.createSampleData(), animate: false,
+              SizedBox(height: 40,),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Padding(
+                    padding: EdgeInsets.all(10),
+                    child: SizedBox(
+                      height:250,
+                      child: PointsLineChart(
+                        PointsLineChart.createSampleData(), animate: false,
+                      ),
                     ),
-                  ),
-                ),],
-              ),
-            ],
+                  ),],
+                ),
+              ],
+            ),
           ),
-        ),
+      ),
       ),
     );
   }

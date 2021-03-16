@@ -20,6 +20,10 @@ class SignIn extends StatefulWidget {
 
 class _SignInState extends State<SignIn> {
 
+  static void getStats() async {
+    await DeviceData.getUsageStats();
+  }
+
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
   final userCol = FirebaseFirestore.instance.collection('users');
@@ -32,6 +36,7 @@ class _SignInState extends State<SignIn> {
   @override
   void initState() {
     super.initState();
+    getStats();
   }
   @override
   Widget build(BuildContext context) {
@@ -88,7 +93,6 @@ class _SignInState extends State<SignIn> {
                     style: TextStyle(color: Colors.white),
                   ),
                   onPressed: () async {
-                    await DeviceData.getUsageStats();
                     if(_formKey.currentState.validate()) {
                       setState(() {
                         loading = true;

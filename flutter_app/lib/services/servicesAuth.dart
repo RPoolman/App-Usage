@@ -21,7 +21,7 @@ class AuthService {
 
       GlobalData.loggedInUserID = currentUser.uid;
 
-      FirebaseFirestore.instance.collection('users').doc(GlobalData.loggedInUserID).get().then((value) => {
+      await FirebaseFirestore.instance.collection('users').doc(GlobalData.loggedInUserID).get().then((value) => {
         GlobalData.userTrackedName =  value.data()['username'],
         GlobalData.userTrackingName = value.data()['usertrackname']
       });
