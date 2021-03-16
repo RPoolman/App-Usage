@@ -2,11 +2,10 @@ import 'package:flutter_app/classes/deviceVars.dart';
 
 class UserUsageAssesment {
   final int totalhoursday = 24;
-  static int userhours = 0;
   static String usageResult = '';
   static String resultDescription = '';
-  static void getUserHours() {
-    userhours = GlobalData.totalAmountOnPhoneTodayHours;
+  static void getUserHours(int userhours) {
+    print(userhours.toString());
     if(userhours >= 7) {
       usageResult = 'TEEN DAUGHTER';
       resultDescription = 'You are clearly inhuman...';
@@ -19,9 +18,12 @@ class UserUsageAssesment {
     } else if(userhours > 1) {
       usageResult = 'LOW';
       resultDescription = 'Your phone usage is very low, but do not threat as their isn\'t any negative effect as to not using your phone all the time, it just means you have more time to enjoy life.';
-    } else if(userhours < 1) {
+    } else if(userhours <= 1) {
       usageResult = 'VERY LOW';
       resultDescription = 'You might not care at all.';
     }
+    print('******************');
+    print(usageResult);
+    print(resultDescription);
   }
 }

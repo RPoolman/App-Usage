@@ -21,6 +21,10 @@ class Register extends StatefulWidget {
 
 class _RegisterState extends State<Register> {
 
+  static void getStats() async {
+    await DeviceData.getUsageStats();
+  }
+
   final AuthService _auth = new AuthService();
   final _formKey = GlobalKey<FormState>();
   bool loading = false;
@@ -156,7 +160,7 @@ class _RegisterState extends State<Register> {
                           setState(() {
                             loading = false;
                           });
-                          await DeviceData.getUsageStats();
+                          await getStats();
                           List<String> times = GlobalData.applicationList;
                           List<String> apps = GlobalData.applicationNameList;
                           List<String> apptimes = [];

@@ -15,7 +15,7 @@ class StatScreen extends StatefulWidget {
 class _StatScreenState extends State<StatScreen> {
   @override
   void initState() {
-    UserUsageAssesment.getUserHours();
+    UserUsageAssesment.getUserHours(GlobalData.totalAmountOnPhoneTodayHours);
     super.initState();
   }
   @override
