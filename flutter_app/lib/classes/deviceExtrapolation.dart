@@ -52,10 +52,6 @@ class DeviceData {
       GlobalData.totalAmountOnPhoneTodayHours = totalAmount~/60;
       UserUsageAssesment.getUserHours(GlobalData.totalAmountOnPhoneTodayHours);
 
-      print('=================================================================');
-      print(UserUsageAssesment.usageResult);
-      print(UserUsageAssesment.resultDescription);
-
       var listLen = infoDayList.length;
       switch(listLen) {
         case 0: { GlobalData.app1Name = ""; }

@@ -5,7 +5,6 @@ class UserUsageAssesment {
   static String usageResult = '';
   static String resultDescription = '';
   static void getUserHours(int userhours) {
-    print(userhours.toString());
     if(userhours >= 7) {
       usageResult = 'TEEN DAUGHTER';
       resultDescription = 'You are clearly inhuman...';
@@ -22,8 +21,5 @@ class UserUsageAssesment {
       usageResult = 'VERY LOW';
       resultDescription = 'You might not care at all.';
     }
-    print('******************');
-    print(usageResult);
-    print(resultDescription);
   }
 }
